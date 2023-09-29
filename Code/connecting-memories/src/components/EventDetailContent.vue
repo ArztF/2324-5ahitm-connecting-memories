@@ -187,7 +187,6 @@ export default {
     // Function to favourize the specific event
     // When already favourized then it is unfavourized
     favorizeEvent(eventId) {
-      console.log(eventId);
       axios
         .get("http://localhost:3000/user/" + this.userId.user.id)
         .then((response) => {

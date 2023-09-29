@@ -15,7 +15,6 @@
         </div>
       </ion-toolbar>
     </ion-header>
-    <!-- Menu Content -->
     <ion-menu content-id="main-content">
       <ion-header>
         <ion-toolbar>

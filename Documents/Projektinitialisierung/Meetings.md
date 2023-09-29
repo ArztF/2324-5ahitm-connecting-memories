@@ -115,3 +115,12 @@ Verbesserungsvorschläge von Prof. Landvoigt:
 + Favouritisierte Events sollten automatisch Reloaded werden wenn ein Event aus den Favouritisierten Events gelöscht wurde
 + BaseUrls verwenden (Urls als konstanten speichern in einem eigenen File)
 + Befragung (Zielgruppe, Fragestellung)
+
+## 29. Juni 2023 (Prof. Landvoigt, Prof. Reder)
+Documentation <br>
++ funktion die öfters verwendet wird als util auslagern
++ link auf Documentation von JWT bei Verwendung
++ Ursprung des kopierten codes angeben
++ frontend und backend ordner npm i
++ aufschreiben was nächstes jahr gemacht wird
+  

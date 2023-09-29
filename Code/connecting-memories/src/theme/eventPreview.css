@@ -1,0 +1,59 @@
+.event-preview-card-wrapper{
+    overflow: auto;
+    height:fit-content
+}
+
+.event-preview-card-wrapper:last-child {
+    margin-bottom: 9rem;
+}
+.event-preview-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+ion-card-header.ios {
+    display: flex;
+    flex-flow: column-reverse;
+  }
+
+.event-preview-content {
+    display: flex;
+    gap: 1rem;
+    padding-bottom: 2%;
+}
+
+.event-preview-calendar-icon {
+    vertical-align: middle;
+}
+
+.event-preview-text {
+    vertical-align: middle;
+}
+
+.event-preview-content p{
+    font-size: 1rem;
+    align-items: center;
+}
+
+.event-preview-title {
+    color: var(--ion-color-tertiary);
+    font-size: 1.8rem;
+}
+
+.event-preview-name-icon-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-chip-buttons {
+    margin-left:2%;
+    display: flex;
+    justify-content: left;
+}
+
+.preview-card-image {
+    width: 100%;
+    height: 220px;
+}
+

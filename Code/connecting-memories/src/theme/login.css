@@ -1,0 +1,64 @@
+
+.login-content-wrapper {
+    background-image: url("../../public/assets/login1.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    vertical-align: middle;
+    z-index: -1;
+}
+
+#login-back-button > ion-icon{
+    width: 10vw;
+    height: 6vh;
+    margin: 3%;
+    color: var(--ion-black);
+}
+.log-icons{
+    position: relative;
+    top: 30vh;
+    left: 4vw;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+    font-size: 1.2em;
+}
+.custom-toast {
+    --margin-bottom: 20%;
+    z-index: 10;
+}
+
+
+.login{
+    display: flex;
+    flex-direction: column;
+    margin-top: 55%;
+}
+
+.login-input {
+    margin: 5% 5% 5% 5%;
+    padding: 5%;
+    background-color: var(--ion-color-primary);
+    border:var(--ion-color-tertiary) solid 1px;
+    border-radius: 10px;
+    --color: var(--ion-color-tertiary);
+}
+.headline-login{
+    position: absolute;
+    left: 10vw;
+    top: 24vh;
+    font-size: 3rem;
+    font-weight: bolder;
+    color: #ff5400;
+}
+
+.login-submit-button {
+    --padding: 3%;
+    --background: var(--ion-black);
+    --color: var(--ion-white);
+    margin: 3%;   
+}
+.info-register{
+    display: flex;
+}

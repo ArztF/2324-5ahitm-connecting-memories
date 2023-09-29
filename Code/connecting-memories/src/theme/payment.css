@@ -1,0 +1,116 @@
+#headingPayment{
+    color: var(--ion-color-tertiary);
+    text-align: center;
+    margin-top: 8vh;
+}
+#paymentinfo{
+    font-size: 1.3rem;
+    margin-top: 3vh;
+    margin-left: 2vw;
+}
+#abomodel{
+    width: 20vw;
+    margin-left: 3vw;
+}
+.paypal-option1{
+    align-self: center;
+    margin: 2% 2% 2% 2%;
+    padding: 10%;
+    background-image: url("../../public/assets/paypal.png");
+    background-size: contain;
+    border:var(--ion-black) solid 1px;
+    border-radius: 10px;
+    color: var(--ion-black);
+    width: 45vw;
+}
+.applepay-option2{
+    align-self: center;
+    margin: 2% 2% 2% 2%;
+    padding: 10%;
+    background-image: url("../../public/assets/applepay.webp");
+    background-size: 130%;
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    border:var(--ion-black) solid 1px;
+    border-radius: 10px;
+    color: var(--ion-black);
+    width: 45vw;
+}
+.paymentOptions{
+    display: flex;
+    flex-direction:row;
+    margin-top:1vh;
+}
+#contactinfo{
+    font-size: 1.3rem;
+    margin-top: 3vh;
+    margin-left: 2vw;
+}
+
+.contact-input{
+    margin: 4% 2% 2% 2%;
+    width: 45vw;
+    padding: 2%;
+    background-color: var(--ion-black);
+    border:var(--ion-color-tertiary) solid 1px;
+    border-radius: 10px;
+    color: var(--ion-color-tertiary);
+}
+.contact-input:focus {
+    outline: 1px solid var(--ion-color-tertiary);
+}
+.contact-big-input:focus {
+    outline: 1px solid var(--ion-color-tertiary);
+}
+.contact-small-input:focus {
+    outline: 1px solid var(--ion-color-tertiary);
+}
+.contact-mid-input:focus {
+    outline: 1px solid var(--ion-color-tertiary);
+}
+
+.contact-big-input{
+    margin: 4% 2% 2% 2%;
+    width: 94vw;
+    padding: 2%;
+    background-color: var(--ion-black);
+    border:var(--ion-color-tertiary) solid 1px;
+    border-radius: 10px;
+    color: var(--ion-color-tertiary);
+}
+.contact-small-input{
+    margin: 4% 2% 2% 2%;
+    padding: 2%;
+    width: 20vw;
+    background-color: var(--ion-black);
+    border:var(--ion-color-tertiary) solid 1px;
+    border-radius: 10px;
+    color: var(--ion-color-tertiary);
+}
+.contact-mid-input{
+    margin: 4% 2% 2% 2%;
+    padding: 2%;
+    width: 70vw;
+    background-color: var(--ion-black);
+    border:var(--ion-color-tertiary) solid 1px;
+    border-radius: 10px;
+    color: var(--ion-color-tertiary);
+}
+
+.pay-submit-button{
+    --padding: 2vw;
+    --background: var(--ion-black);
+    --color: var(--ion-white);
+    --width: 50vw;
+    
+}
+.paying-box{
+    width: 100vw;
+    height: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10vh;
+}
+

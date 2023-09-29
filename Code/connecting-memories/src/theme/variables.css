@@ -1,0 +1,20 @@
+/* Ionic Variables and Theming. For more info, please see:
+http://ionicframework.com/docs/theming/ */
+
+/** Ionic CSS Variables **/
+:root {
+  /** primary **/
+  --ion-color-primary: #E0E0E0;
+
+  /** secondary **/
+  --ion-color-secondary: white;
+
+  /** tertiary **/
+  --ion-color-tertiary: #ff5400;
+
+  --ion-background-color: #E0E0E0;
+
+  --ion-white: black;
+
+  --ion-black: white;
+}

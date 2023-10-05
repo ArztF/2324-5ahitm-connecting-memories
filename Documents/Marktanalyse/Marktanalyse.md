@@ -13,11 +13,11 @@
 
 
 <div > 
- <img src="./eventhere1.png" alt="Eventhere" width="200">
- <img src="./eventhere2.png" alt="Eventhere" width="200">
- <img src="./eventhere3.png" alt="Eventhere" width="200">
- <img src="./eventhere4.png" alt="Eventhere" width="200">
- <img src="./eventhere5.png" alt="Eventhere" width="200">
+ <img src="./eventhere1.jpeg" alt="Eventhere" width="200">
+ <img src="./eventhere2.jpeg" alt="Eventhere" width="200">
+ <img src="./eventhere3.jpeg" alt="Eventhere" width="200">
+ <img src="./eventhere4.jpeg" alt="Eventhere" width="200">
+ <img src="./eventhere5.jpeg" alt="Eventhere" width="200">
 <div >
 
 ## Eventbrite:

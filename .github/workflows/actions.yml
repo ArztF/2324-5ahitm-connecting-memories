@@ -36,3 +36,4 @@ jobs:
           tag: latest
           overwrite: true
           prerelease: true
+          

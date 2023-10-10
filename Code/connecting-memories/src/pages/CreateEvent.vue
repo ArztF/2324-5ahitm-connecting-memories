@@ -86,6 +86,8 @@ import PageLayout from "../components/PageLayout.vue";
 import axios from "axios";
 import { useIonRouter, IonButton } from "@ionic/vue";
 import PlacesCompletion from '../components/PlacesCompletion.vue';
+import { backendErrorToast } from '@/utils/toast.js'
+import { parseJwt } from '@/utils/parseJwt.js'
 export default {
   components: {
     PageLayout,
@@ -219,7 +221,7 @@ export default {
           })
           .catch((res) => {
             // if some inputs are not valid after the backend validation the errormessage will be displayed
-            this.backendErrorToast(res.response.data.message);
+            backendErrorToast(res.response.data.message);
             // all the values will be reset to nothing, in order to get no errors or wrong inputs
             this.eventName = "";
             this.eventLocation = "";
@@ -233,21 +235,7 @@ export default {
       }
     },
 
-    parseJwt(token) {
-      var base64Url = token.split(".")[1];
-      var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-      var jsonPayload = decodeURIComponent(
-        window
-          .atob(base64)
-          .split("")
-          .map(function (c) {
-            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-          })
-          .join("")
-      );
-
-      return JSON.parse(jsonPayload);
-    },
+    parseJwt,
     
     async presentToast() {
       let errorMessage = "";
@@ -269,15 +257,7 @@ export default {
     },
 
     // if there is a invalid backend validation the following error message will be displayed
-    async backendErrorToast(errMessage) {
-      const toast = await toastController.create({
-        message: errMessage,
-        duration: 3000,
-        cssClass: "custom-toast",
-      });
-
-      await toast.present();
-    },
+    backendErrorToast
   },
 };
 </script>

@@ -70,6 +70,7 @@ import { IonPage, toastController, IonIcon } from "@ionic/vue";
 import axios from "axios";
 import { useIonRouter } from "@ionic/vue";
 import { chevronBackOutline } from "ionicons/icons";
+import { backendErrorToast } from '@/utils/toast.js'
 
 export default {
   components: {
@@ -120,7 +121,7 @@ export default {
             this.router.push("/login", "forward", "replace");
           })
           .catch((res) => {
-            this.backendErrorToast(res.response.data.message);
+            backendErrorToast(res.response.data.message);
           });
       }
       // check if the inputs are valid
@@ -185,15 +186,7 @@ export default {
       this.invalidInputs = [];
     },
 
-    async backendErrorToast(errMessage) {
-      const toast = await toastController.create({
-        message: errMessage,
-        duration: 3000,
-        cssClass: "custom-toast",
-      });
-
-      await toast.present();
-    },
+    backendErrorToast,
   },
 
   setup() {

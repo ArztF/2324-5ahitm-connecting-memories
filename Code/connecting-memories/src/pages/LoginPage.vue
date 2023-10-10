@@ -20,6 +20,7 @@ import { IonButton,toastController, IonPage,IonIcon } from "@ionic/vue";
 import axios from "axios";
 import { chevronBackOutline } from "ionicons/icons";
 import { useIonRouter } from '@ionic/vue';
+import { backendErrorToast } from '@/utils/toast.js'
 
 export default {
   components: {
@@ -62,7 +63,7 @@ export default {
             }
           })
           .catch((res) => {
-            this.backendErrorToast(res.response.data.message);
+            backendErrorToast(res.response.data.message);
           });
       }
       // check if the email is valid
@@ -98,15 +99,9 @@ export default {
       this.invalidInputs = [];
     },
 
-    async backendErrorToast(errMessage) {
-      const toast = await toastController.create({
-        message: errMessage,
-        duration: 3000,
-        cssClass: "custom-toast",
-      });
+    backendErrorToast
 
-      await toast.present();
-    },
+    
   },
 
   setup() {

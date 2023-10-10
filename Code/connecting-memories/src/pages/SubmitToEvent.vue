@@ -18,7 +18,7 @@
 
 <script>
 import PageLayout from "@/components/PageLayout.vue";
-import { IonButton, useIonRouter, toastController } from "@ionic/vue";
+import { IonButton, useIonRouter } from "@ionic/vue";
 import { presentToast } from '@/utils/toast.js';
 import axios from "axios";
 import { parseJwt } from '@/utils/parseJwt.js';

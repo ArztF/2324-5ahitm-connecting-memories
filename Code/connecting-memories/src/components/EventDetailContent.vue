@@ -90,13 +90,11 @@ import { IonCardTitle, IonIcon, IonHeader, IonCardContent } from "@ionic/vue";
 import { IonModal } from "@ionic/vue";
 import SmallMap from "./SmallMap.vue";
 import { useIonRouter } from "@ionic/vue";
-import dayjs from "dayjs";
-import de from "dayjs/locale/de";
 import axios from "axios";
-import Clipboard from "clipboard";
 import { presentToast } from '@/utils/toast.js';
 import { parseJwt } from '@/utils/parseJwt.js';
 import { formatDate } from '@/utils/format.js';
+import { copyTextToClipboard } from '@/utils/copyText.js'
 
 export default {
   components: {
@@ -186,8 +184,8 @@ export default {
       this.router.push("/eventedit/" + this.event._id, "replace");
     },
 
-    // Function to favourize the specific event
-    // When already favourized then it is unfavourized
+    copyTextToClipboard,
+
     favorizeEvent(eventId) {
       axios
         .get("http://localhost:3000/user/" + this.userId.user.id)
@@ -233,27 +231,6 @@ export default {
         });
     },
 
-    // Code to copy the invitation code per click
-    copyTextToClipboard(text) {
-      const clipboard = new Clipboard(".copy-button", {
-        text: () => text,
-      });
-
-      clipboard.on("success", () => {
-        console.log("Text erfolgreich kopiert: " + text);
-        clipboard.destroy();
-        this.presentToast("Text erfolgreich kopiert");
-      });
-
-      clipboard.on("error", (e) => {
-        console.error("Fehler beim Kopieren des Textes: " + e);
-        clipboard.destroy();
-      });
-
-      clipboard.onClick({
-        currentTarget: document.querySelector(".copy-button"),
-      });
-    },
 
     // function to open the map modal
     setOpen(isOpen) {

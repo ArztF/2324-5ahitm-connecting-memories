@@ -96,6 +96,7 @@ import axios from "axios";
 import Clipboard from "clipboard";
 import { presentToast } from '@/utils/toast.js';
 import { parseJwt } from '@/utils/parseJwt.js';
+import { formatDate } from '@/utils/format.js';
 
 export default {
   components: {
@@ -259,21 +260,9 @@ export default {
       this.isOpen = isOpen;
     },
 
-    formatDate(startdate, enddate) {
-      if (enddate == startdate || enddate == null) {
-        dayjs.locale(de);
-        const date = dayjs(startdate);
-        return date.format("dddd, DD. MMMM YYYY");
-      } else {
-        dayjs.locale(de);
-        const start = dayjs(startdate);
-        const end = dayjs(enddate);
-        return start.format("DD.") + " - " + end.format("DD. MMMM YYYY");
-      }
-    },
-
     presentToast,
-    parseJwt
+    parseJwt,
+    formatDate
   },
 };
 </script>

@@ -94,7 +94,8 @@ import dayjs from "dayjs";
 import de from "dayjs/locale/de";
 import axios from "axios";
 import Clipboard from "clipboard";
-import { toastController } from "@ionic/vue";
+import { presentToast } from '@/utils/toast.js';
+import { parseJwt } from '@/utils/parseJwt.js';
 
 export default {
   components: {
@@ -146,7 +147,7 @@ export default {
   // Get the UserToken and then check if it has favorized Events, in order to show it in the Favourized-Events-Page
   async mounted() {
     this.userToken = sessionStorage.getItem("userToken");
-    this.userId = this.parseJwt(this.userToken);
+    this.userId = parseJwt(this.userToken);
     await axios
       .get("http://localhost:3000/user/" + this.userId.user.id)
       .then((response) => {
@@ -207,7 +208,7 @@ export default {
               .then((response) => {
                 console.log(response);
                 this.favorized = true;
-                this.presentToastSuccessfullyAddedToFavourite();
+                presentToast("Sie haben dieses Event zu ihren Favouriten hinzugefügt!")
               });
           } else {
             existingUser.favouriteEvents.splice(
@@ -222,7 +223,7 @@ export default {
               .then((response) => {
                 console.log(response);
                 this.favorized = false;
-                this.presentToastEventDeletedFromFavouriteEvents();
+                presentToast("Sie haben dieses Event aus ihren Favouriten entfernt!")
               });
           }
         })
@@ -240,7 +241,7 @@ export default {
       clipboard.on("success", () => {
         console.log("Text erfolgreich kopiert: " + text);
         clipboard.destroy();
-        this.presentToast();
+        this.presentToast("Text erfolgreich kopiert");
       });
 
       clipboard.on("error", (e) => {
@@ -271,50 +272,8 @@ export default {
       }
     },
 
-    async presentToast() {
-      const toast = await toastController.create({
-        message: "Der Einladungscode wurde kopiert!",
-        duration: 3000,
-        cssClass: "custom-toast",
-      });
-
-      await toast.present();
-    },
-
-    async presentToastSuccessfullyAddedToFavourite() {
-      const toast = await toastController.create({
-        message: "Sie haben dieses Event zu ihren Favouriten hinzugefügt!",
-        duration: 3000,
-        cssClass: "custom-toast",
-      });
-
-      await toast.present();
-    },
-
-    async presentToastEventDeletedFromFavouriteEvents() {
-      const toast = await toastController.create({
-        message: "Sie haben dieses Event aus ihren Favouriten entfernt!",
-        duration: 3000,
-        cssClass: "custom-toast",
-      });
-
-      await toast.present();
-    },
-
-    parseJwt(token) {
-      var base64Url = token.split(".")[1];
-      var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-      var jsonPayload = decodeURIComponent(
-        window
-          .atob(base64)
-          .split("")
-          .map(function (c) {
-            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-          })
-          .join("")
-      );
-      return JSON.parse(jsonPayload);
-    },
+    presentToast,
+    parseJwt
   },
 };
 </script>

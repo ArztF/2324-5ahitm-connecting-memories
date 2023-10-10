@@ -57,6 +57,7 @@ import {
   IonToolbar,
 } from "@ionic/vue";
 import { menuOutline, arrowBackOutline } from "ionicons/icons";
+import { parseJwt } from '@/utils/parseJwt.js';
 
 export default {
   components: {
@@ -102,22 +103,7 @@ export default {
       this.router.push("/", "replace");
     },
 
-    parseJwt(token) {
-      var base64Url = token.split(".")[1];
-      var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-      var jsonPayload = decodeURIComponent(
-        window
-          .atob(base64)
-          .split("")
-          .map(function (c) {
-            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-          })
-          .join("")
-      );
-
-      return JSON.parse(jsonPayload);
-    },
-
+    parseJwt,
     // function to check if you are logged in, if not it saves the page where you want to go, but redirects you to the
     // login page, after you have logged in you get to the page you wanted to go to
     onRedirectClicked(redirectLink) {

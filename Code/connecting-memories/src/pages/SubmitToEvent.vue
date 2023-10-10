@@ -19,7 +19,9 @@
 <script>
 import PageLayout from "@/components/PageLayout.vue";
 import { IonButton, useIonRouter, toastController } from "@ionic/vue";
+import { presentToast } from '@/utils/toast.js';
 import axios from "axios";
+import { parseJwt } from '@/utils/parseJwt.js';
 
 export default {
   components: { PageLayout, IonButton },
@@ -76,62 +78,19 @@ export default {
                 this.existingEvent
               )
               .then(() => {
-                this.presentToastSuccess();
-                //this.router.push("/registeredEvents", 'replace')
+                presentToast("Sie haben sich erfolgreich für dieses Event registriert!")
               });
               // display the error if he is already subscribed
           } else {
-            this.presentToastAlreadySubscribed();
+            presentToast("Sie haben sich bereits für dieses Event angemeldet!")
           }
         }).catch(() => {
-          this.presentToastError();
+          presentToast("Dieses Event gibt es nicht!")
         })
     },
 
-    parseJwt(token) {
-      var base64Url = token.split(".")[1];
-      var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-      var jsonPayload = decodeURIComponent(
-        window
-          .atob(base64)
-          .split("")
-          .map(function (c) {
-            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-          })
-          .join("")
-      );
-      return JSON.parse(jsonPayload);
-    },
-
-    async presentToastError() {
-      const toast = await toastController.create({
-        message: "Dieses Event gibt es nicht!",
-        duration: 3000,
-        cssClass: "custom-toast",
-      });
-
-      await toast.present();
-    },
-
-    async presentToastSuccess() {
-      const toast = await toastController.create({
-        message: "Sie haben sich erfolgreich für dieses Event registriert!",
-        duration: 3000,
-        cssClass: "custom-toast",
-      });
-
-      await toast.present();
-    },
-
-    async presentToastAlreadySubscribed() {
-      const toast = await toastController.create({
-        message: "Sie haben sich bereits für dieses Event angemeldet!",
-        duration: 3000,
-        cssClass: "custom-toast",
-      });
-
-      await toast.present();
-    },
+    parseJwt,
+    presentToast,
   },
 };
 </script>

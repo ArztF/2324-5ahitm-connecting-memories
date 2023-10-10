@@ -9,6 +9,7 @@
 </template>
 <script>
 import PageLayout from "../components/PageLayout.vue";
+import { parseJwt } from '@/utils/parseJwt.js';
 import EventPreviewCard from "../components/EventPreviewCard.vue";
 import axios from "axios";
 export default {
@@ -37,20 +38,7 @@ export default {
   },
 
   methods: {
-    parseJwt(token) {
-      var base64Url = token.split(".")[1];
-      var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-      var jsonPayload = decodeURIComponent(
-        window
-          .atob(base64)
-          .split("")
-          .map(function (c) {
-            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-          })
-          .join("")
-      );
-      return JSON.parse(jsonPayload);
-    },
+    parseJwt,
 
     // check if the user which is logged in is the owner of the event
     filteredList() {

@@ -40,6 +40,7 @@
 <script>
 import PageLayout from "@/components/PageLayout.vue";
 import { useRouter } from "vue-router";
+import { parseJwt } from '@/utils/parseJwt.js';
 import axios from "axios";
 import { toastController } from "@ionic/vue";
 
@@ -78,20 +79,7 @@ export default {
   },
 
   methods: {
-    parseJwt(token) {
-      var base64Url = token.split(".")[1];
-      var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-      var jsonPayload = decodeURIComponent(
-        window
-          .atob(base64)
-          .split("")
-          .map(function (c) {
-            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-          })
-          .join("")
-      );
-      return JSON.parse(jsonPayload);
-    },
+    parseJwt,
 
     async onSubmitClicked() {
       let updateUser;

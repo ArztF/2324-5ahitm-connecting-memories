@@ -3,4 +3,4 @@ ifndef::imagesdir[:imagesdir: images]
 
 image::img.png[]
 
-<<slides/demo.adoc#,Smart Link to page 2>>
+<<slides/sprint-review.adoc#,Smart Link to page 2>>

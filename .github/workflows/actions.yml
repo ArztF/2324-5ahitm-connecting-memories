@@ -10,6 +10,7 @@ env:
 
 jobs:
   release: 
+        permissions: write-all
         runs-on: ubuntu-latest
         steps:
         - name: Checkout repository
@@ -43,6 +44,7 @@ jobs:
         run: docker push farzt/connecting-memories-backend:latest     
 
   electron:
+      permissions: write-all
       runs-on: ${{ matrix.os }}
   
       strategy:

@@ -19,7 +19,7 @@ jobs:
           uses: svenstaro/upload-release-action@v2
           with:
             repo_token: ${{ secrets.GITHUB_TOKEN }}
-            file: code/connecting-memories-server/connecting-memories.yml
+            file: Code/connecting-memories-server/connecting-memories.yml
             tag: latest
             release_name: Release ${{ github.run_number }}
             overwrite: true 
@@ -32,7 +32,7 @@ jobs:
 
       - name: Build
         run: |
-          cd code/connecting-memories-server
+          cd Code/connecting-memories-server
           docker build -t farzt/connecting-memories-backend .
 
       - name: Login into Docker
@@ -60,7 +60,7 @@ jobs:
         - name: Run electron on windows  
           if: startsWith(matrix.os, 'windows-latest')
           run: |
-              cd code/connecting-memories
+              cd Code/connecting-memories
               npm i
               npm run build
               npm run electron:make-windows
@@ -70,7 +70,7 @@ jobs:
           uses: svenstaro/upload-release-action@v2
           with:
             repo_token: ${{ secrets.GITHUB_TOKEN }}
-            file: code/connecting-memories/out/make/squirrel.windows/x64/ionic-app-base-darwin-arm64-0.1.0.exe
+            file: Code/connecting-memories/out/make/squirrel.windows/x64/ionic-app-base-darwin-arm64-0.1.0.exe
             tag: latest
             asset_name: connecting-memories-windows-setup.exe
             overwrite: true
@@ -79,7 +79,7 @@ jobs:
         - name: Run electron on mac  
           if: startsWith(matrix.os, 'macos-latest')
           run: |
-              cd code/connecting-memories
+              cd Code/connecting-memories
               npm i
               npm run build
               npm run electron:make-mac
@@ -89,7 +89,7 @@ jobs:
           uses: svenstaro/upload-release-action@v2
           with:
             repo_token: ${{ secrets.GITHUB_TOKEN }}
-            file: code/connecting-memories/out/make/zip/darwin/arm64/ionic-app-base-darwin-arm64-0.1.0.zip
+            file: Code/connecting-memories/out/make/zip/darwin/arm64/ionic-app-base-darwin-arm64-0.1.0.zip
             tag: latest
             asset_name: connecting-memories-mac.zip
             overwrite: true

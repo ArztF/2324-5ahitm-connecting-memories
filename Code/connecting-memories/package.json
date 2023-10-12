@@ -5,6 +5,8 @@
   "main": "main.js",
   "author": "Felix Arzt",
   "scripts": {
+    "electron:make-windows": "electron-forge make --arch=x64 --platform=win32",
+    "electron:make-mac": "electron-forge make --platform=darwin --arch=arm64",
     "ionic:build": "npm run build",
     "ionic:serve": "npm run serve",
     "start": "npm run build && electron .",

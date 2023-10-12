@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from '@ionic/vue-router';
+import { createRouter, createWebHashHistory } from '@ionic/vue-router';
 
 import EventPreview from '../pages/EventPreview.vue'
 import EventDetail from '../pages/EventDetail.vue'
@@ -93,8 +93,8 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
+  history: createWebHashHistory(process.env.BASE_URL),
+  routes,
 })
 
 export default router

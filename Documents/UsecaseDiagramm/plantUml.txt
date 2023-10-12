@@ -1,0 +1,40 @@
+@startuml
+left to right direction
+actor "Organizer" as o1
+actor "User" as u1
+rectangle Connecting_Memories_now {
+  usecase "Create public or private events and manage them" as UC1
+  usecase "Get an overview of events nearby" as UC2
+  usecase "Add events to favorites" as UC3
+  usecase "See which events you have attended" as UC4
+  usecase "Enter events" as UC5
+  
+}
+o1 --> UC1
+u1 --> UC2
+u1 --> UC3
+u1 --> UC4
+u1 --> UC5
+
+@enduml
+
+@startuml
+left to right direction
+actor "Organizer" as o2
+actor "User" as u2
+rectangle Connecting_Memories_planed {
+  usecase "Create public or private events and manage them" as C1
+  usecase "Get an overview of events nearby" as C2
+  usecase "Add events to favorites" as C3
+  usecase "Enter events" as C4
+  usecase "See which events you have attended" as C5
+  usecase "Share you pictures of the attended event" as C6
+}
+o2 --> C1
+u2 --> C2
+u2 --> C3
+u2 --> C4
+u2 --> C5
+u2 --> C6
+
+@enduml

@@ -1,99 +1,99 @@
-# name: Deployment
+name: Deployment
 
-# on:
-#   push:
-#     branches:
-#       - 'main'
+on:
+  push:
+    branches:
+      - 'main'
 
-# env:
-#   IMAGE_NAME: farzt/connecting-memories-backend
+env:
+  IMAGE_NAME: farzt/connecting-memories-backend
 
-# jobs:
-#   release: 
-#         permissions: write-all
-#         runs-on: ubuntu-latest
-#         steps:
-#         - name: Checkout repository
-#           uses: actions/checkout@v3
+jobs:
+  release: 
+        permissions: write-all
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout repository
+          uses: actions/checkout@v3
 
-#         - name: Create Release
-#           uses: svenstaro/upload-release-action@v2
-#           with:
-#             repo_token: ${{ secrets.GITHUB_TOKEN }}
-#             file: Code/connecting-memories-server/connecting-memories.yml
-#             tag: latest
-#             release_name: Release ${{ github.run_number }}
-#             overwrite: true 
+        - name: Create Release
+          uses: svenstaro/upload-release-action@v2
+          with:
+            repo_token: ${{ secrets.GITHUB_TOKEN }}
+            file: Code/connecting-memories-server/connecting-memories.yml
+            tag: latest
+            release_name: Release ${{ github.event.repository.updated_at }}
+            overwrite: true 
 
-#   build-push:
-#     permissions: write-all
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout Repo
-#         uses: actions/checkout@v3
+  build-push:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
 
-#       - name: Build
-#         run: |
-#           cd Code/connecting-memories-server
-#           docker build -t farzt/connecting-memories-backend .
+      - name: Build
+        run: |
+          cd Code/connecting-memories-server
+          docker build -t farzt/connecting-memories-backend .
 
-#       - name: Login into Docker
-#         run: docker login -u farzt -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Login into Docker
+        run: docker login -u farzt -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-#       - name: Push latest to Docker
-#         run: docker push farzt/connecting-memories-backend:latest     
+      - name: Push latest to Docker
+        run: docker push farzt/connecting-memories-backend:latest     
 
-#   electron:
-#       permissions: write-all
-#       runs-on: ${{ matrix.os }}
+  electron:
+      permissions: write-all
+      runs-on: ${{ matrix.os }}
   
-#       strategy:
-#         matrix:
-#           os: [windows-latest, macos-latest] 
+      strategy:
+        matrix:
+          os: [windows-latest, macos-latest] 
         
-#       steps:
-#         - name: Checkout Repo
-#           uses: actions/checkout@v3
+      steps:
+        - name: Checkout Repo
+          uses: actions/checkout@v3
   
-#         - name: Use Node.js
-#           uses: actions/setup-node@v3
-#           with:
-#             node-version: 20
+        - name: Use Node.js
+          uses: actions/setup-node@v3
+          with:
+            node-version: 20
           
-#         - name: Run electron on windows  
-#           if: startsWith(matrix.os, 'windows-latest')
-#           run: |
-#               cd Code/connecting-memories
-#               npm i
-#               npm run build
-#               npm run electron:make-windows
+        - name: Run electron on windows  
+          if: startsWith(matrix.os, 'windows-latest')
+          run: |
+              cd Code/connecting-memories
+              npm i
+              npm run build
+              npm run electron:make-windows
 
-#         - name: Upload Windows file
-#           if: startsWith(matrix.os, 'windows-latest')
-#           uses: svenstaro/upload-release-action@v2
-#           with:
-#             repo_token: ${{ secrets.GITHUB_TOKEN }}
-#             file: Code/connecting-memories/out/make/squirrel.windows/x64/ionic-app-base-0.1.0 Setup.exe
-#             tag: latest
-#             asset_name: connecting-memories-windows-setup.exe
-#             overwrite: true
-#             prerelease: true
+        - name: Upload Windows file
+          if: startsWith(matrix.os, 'windows-latest')
+          uses: svenstaro/upload-release-action@v2
+          with:
+            repo_token: ${{ secrets.GITHUB_TOKEN }}
+            file: Code/connecting-memories/out/make/squirrel.windows/x64/ionic-app-base-0.1.0 Setup.exe
+            tag: latest
+            asset_name: connecting-memories-windows-setup.exe
+            overwrite: true
+            prerelease: true
 
-#         - name: Run electron on mac  
-#           if: startsWith(matrix.os, 'macos-latest')
-#           run: |
-#               cd Code/connecting-memories
-#               npm i
-#               npm run build
-#               npm run electron:make-mac
+        - name: Run electron on mac  
+          if: startsWith(matrix.os, 'macos-latest')
+          run: |
+              cd Code/connecting-memories
+              npm i
+              npm run build
+              npm run electron:make-mac
 
-#         - name: Upload Mac file
-#           if: startsWith(matrix.os, 'macos-latest')
-#           uses: svenstaro/upload-release-action@v2
-#           with:
-#             repo_token: ${{ secrets.GITHUB_TOKEN }}
-#             file: Code/connecting-memories/out/make/zip/darwin/arm64/ionic-app-base-darwin-arm64-0.1.0.zip
-#             tag: latest
-#             asset_name: connecting-memories-mac.zip
-#             overwrite: true
-#             prerelease: true
+        - name: Upload Mac file
+          if: startsWith(matrix.os, 'macos-latest')
+          uses: svenstaro/upload-release-action@v2
+          with:
+            repo_token: ${{ secrets.GITHUB_TOKEN }}
+            file: Code/connecting-memories/out/make/zip/darwin/arm64/ionic-app-base-darwin-arm64-0.1.0.zip
+            tag: latest
+            asset_name: connecting-memories-mac.zip
+            overwrite: true
+            prerelease: true

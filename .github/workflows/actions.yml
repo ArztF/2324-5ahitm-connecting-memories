@@ -10,6 +10,10 @@ env:
 
 jobs:
   release: 
+        needs: [
+          electron,
+          build-push
+        ]
         runs-on: ubuntu-latest
         steps:
         - name: Checkout repository
@@ -42,10 +46,6 @@ jobs:
         run: docker push farzt/connecting-memories-backend:latest     
 
   electron:
-      needs: [
-        release,
-        build-push
-      ]
       runs-on: ${{ matrix.os }}
   
       strategy:

@@ -25,6 +25,7 @@ jobs:
             overwrite: true 
 
   build-push:
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo

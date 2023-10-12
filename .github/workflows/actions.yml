@@ -10,10 +10,6 @@ env:
 
 jobs:
   release: 
-        needs: [
-          electron,
-          build-push
-        ]
         runs-on: ubuntu-latest
         steps:
         - name: Checkout repository

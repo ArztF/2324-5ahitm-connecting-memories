@@ -1,4 +1,4 @@
-= Some Slide
+= Connecting Memories
 ifndef::imagesdir[:imagesdir: ../images]
 
 image::img.png[]

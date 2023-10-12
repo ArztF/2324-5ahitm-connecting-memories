@@ -1,4 +1,6 @@
-= Index page
+= Connecting Memories
 ifndef::imagesdir[:imagesdir: images]
 
 image::img.png[]
+
+<<slides/demo.adoc#,Smart Link to page 2>>

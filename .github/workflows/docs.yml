@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     name: asciidoctor -D docs --backend=html5 -o index.html -a toc2 docs/index.adoc 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    - name: build asciidoctor action
+      uses: tonynv/asciidoctor-action@v2
     - name: Get build container
       id: adocbuild
       uses: tonynv/asciidoctor-action@master

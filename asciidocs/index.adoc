@@ -1,6 +1,10 @@
 = Connecting Memories
 ifndef::imagesdir[:imagesdir: images]
 
+* Events finden
+* Events promoten
+* Momente teilen
+
 = Use Case Diagramm
 image::usecaseDiagram.png[]
 

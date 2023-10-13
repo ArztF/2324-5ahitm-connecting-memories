@@ -22,7 +22,7 @@ u1 --> UC5
 left to right direction
 actor "Organizer" as o2
 actor "User" as u2
-rectangle Connecting_Memories_planed {
+rectangle Connecting_Memories_planned {
   usecase "Create public or private events and manage them" as C1
   usecase "Get an overview of events nearby" as C2
   usecase "Add events to favorites" as C3

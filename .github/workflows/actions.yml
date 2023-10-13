@@ -10,10 +10,7 @@ env:
 
 jobs:
   release: 
-        needs: [
-          electron,
-          build-push
-        ]
+        permissions: write-all
         runs-on: ubuntu-latest
         steps:
         - name: Checkout repository
@@ -25,10 +22,11 @@ jobs:
             repo_token: ${{ secrets.GITHUB_TOKEN }}
             file: Code/connecting-memories-server/connecting-memories.yml
             tag: latest
-            release_name: Release ${{ github.run_number }}
+            release_name: Release ${{ github.event.repository.updated_at }}
             overwrite: true 
 
   build-push:
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -46,6 +44,7 @@ jobs:
         run: docker push farzt/connecting-memories-backend:latest     
 
   electron:
+      permissions: write-all
       runs-on: ${{ matrix.os }}
   
       strategy:
@@ -74,7 +73,7 @@ jobs:
           uses: svenstaro/upload-release-action@v2
           with:
             repo_token: ${{ secrets.GITHUB_TOKEN }}
-            file: Code/connecting-memories/out/make/squirrel.windows/x64/ionic-app-base-darwin-arm64-0.1.0.exe
+            file: Code/connecting-memories/out/make/squirrel.windows/x64/ionic-app-base-0.1.0 Setup.exe
             tag: latest
             asset_name: connecting-memories-windows-setup.exe
             overwrite: true

@@ -1,0 +1,17 @@
+@startuml
+left to right direction
+
+actor "Person" as User
+rectangle "Frontend"{
+[Mobile App]
+}
+rectangle "Backend"{
+[NestJS]
+}
+rectangle "Datenbank"{
+[MongoDB]
+}
+[Mobile App] <- [User]
+[Mobile App] <--> [NestJS]
+[NestJS] <--> [MongoDB]
+@enduml

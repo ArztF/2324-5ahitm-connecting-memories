@@ -1,0 +1,27 @@
+= Sample ASCIIDoctor Document
+GeekMustHave <geek. musthave@phoenixworkgroup.com>
+V2.16,3/8/19:Example 
+:toc: left
+
+This is the preamble and will display or print slightly larger.
+
+This is a regular paragraph.
+Write one sentence per line to make it easier to read.
+The sentences will all be included in a single paragraph
+
+== Introduction
+Welcome to ASCIIDoctor
+
+* Use your favorite text editor
+* Add some formatting commands 
+* Use the ASCIIDoctor to generate HTML 
+* Use the ASCIIDoctor-pdf to generate PDF
+
+NOTE: The cycle is Edit, ASCIIDoctor, Review, rinse and repeat.
+
+== Follow up
+
+Nice tutorial https://www.vogella.com/tutorials/AsciiDoc/article.html[]
+Visit GeekMustHave at https://GeekMustHave.com[]
+
+Learn the *ASCIIDoctor* syntax gradually.

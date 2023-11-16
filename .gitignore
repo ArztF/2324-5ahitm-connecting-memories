@@ -33,5 +33,11 @@ Temporary Items
 
 # End of https://www.toptal.com/developers/gitignore/api/macos
 
-docs/slides/revealjs
-.idea/
+dist
+db/
+target/
+gh-pages
+/.idea/
+/asciidocs/slides/revealjs/
+/build-slides-revealjs/
+/build-docs-pdf/

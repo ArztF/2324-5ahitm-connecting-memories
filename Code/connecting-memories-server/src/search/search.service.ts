@@ -1,30 +1,59 @@
-import { Inject, Injectable, Logger } from '@nestjs/common';
-import { DataSet, DeleteInput, searchCharacterByKeyword } from './series.dto';
+import { HttpException, Injectable } from '@nestjs/common';
+// Import the OpenSearch client here
+import { Client, events } from '@opensearch-project/opensearch';
+import { DataSet, DeleteInput, searchByKeyword } from './search.dto';
+import { EventService } from 'src/event/event.service';
 
 @Injectable()
 export class SearchService {
-  private openSearchClient: any;
-  logger: Logger;
+  private readonly openSearchClient: Client;
 
-  constructor(@Inject('Open_Search_JS_Client') openSearchClient) {
-    this.openSearchClient = openSearchClient.instance;
-    this.logger = new Logger();
+  constructor(private readonly eventService: EventService) {
+    // Initialize the OpenSearch client with your configuration
+    this.openSearchClient = new Client({
+      node: 'https://localhost:9200',
+      ssl: {
+        rejectUnauthorized: false,
+      },
+      auth: {
+        username: 'admin',
+        password: 'admin',
+      },
+    });
+
+    this.loadDataIntoIndex();
+  }
+
+  async loadDataIntoIndex() {
+    await this.openSearchClient.deleteByQuery({
+      index: 'search_index',
+      body: {
+        query: {
+          match_all: {},
+        },
+      },
+    });
+
+    const res = await this.eventService.findAllRestaurantsWithMeals();
+    if (res.length == 0) {
+      return;
+    }
+
+    await this.bulkDataIngestion({
+      indexName: 'search_index',
+      events: res,
+    });
   }
 
   async bulkDataIngestion(input: DataSet): Promise<any> {
-    this.logger.log(
-      `Inside bulkUpload() Method | Ingesting Bulk data of length ${input.characters.length} having index ${input.indexName}`,
-    );
-
-    const body = input.characters.flatMap((doc) => {
+    const body = input.events.flatMap((doc) => {
       return [{ index: { _index: input.indexName, _id: doc.id } }, doc];
     });
 
     try {
-      let res = await this.openSearchClient.bulk({ body });
+      const res = await this.openSearchClient.bulk({ body });
       return res.body;
     } catch (err) {
-      this.logger.error(`Exception occurred : ${err})`);
       return {
         httpCode: 500,
         error: err,
@@ -33,25 +62,19 @@ export class SearchService {
   }
 
   async singleDataIngestion(input: DataSet): Promise<any> {
-    this.logger.log(
-      `Inside singleUpload() Method | Ingesting single data with index ${input.indexName} `,
-    );
-
-    const character = input.characters[0];
+    const events = input.events[0];
 
     try {
       const res = await this.openSearchClient.index({
-        id: character.id,
+        id: events.id,
         index: input.indexName,
         body: {
-          id: character.id,
-          name: character.name,
-          quote: character.quote,
+          id: events.id,
+          name: events.eventname,
         },
       });
       return res.body;
     } catch (err) {
-      this.logger.error(`Exception occurred : ${err})`);
       return {
         httpCode: 500,
         error: err,
@@ -59,23 +82,79 @@ export class SearchService {
     }
   }
 
-  async searchCharaterByKeyword(input: searchCharacterByKeyword): Promise<any> {
-    this.logger.log(`Inside searchByKeyword() Method`);
+  async searchByKeyword(input: searchByKeyword): Promise<any> {
+    // body = {
+    //     query: {
+    //         multi_match: {
+    //             query: input.keyword,
+    //             fields: ["restaurantName", "location.city", "location.plz", "location.street", "menu.title", "menu.description", "description"],
+    //             slop: 1
+    //         }
+    //     }
+    // };
 
-    this.logger.log(
-      `Searching for Keyword: ${input.keyword} in the index : ${input.indexName} `,
-    );
     const body = {
       query: {
-        multi_match: {
-          query: input.keyword,
+        bool: {
+          should: [
+            {
+              multi_match: {
+                query: input.keyword,
+                fields: ['restaurantName'],
+                slop: 1,
+              },
+            },
+            {
+              multi_match: {
+                query: input.keyword,
+                fields: ['description'],
+                slop: 1,
+              },
+            },
+            {
+              multi_match: {
+                query: input.keyword,
+                fields: ['location.city'],
+                slop: 1,
+              },
+            },
+            {
+              multi_match: {
+                query: input.keyword,
+                fields: ['location.plz'],
+                slop: 1,
+              },
+            },
+            {
+              multi_match: {
+                query: input.keyword,
+                fields: ['location.street'],
+                slop: 1,
+              },
+            },
+            {
+              multi_match: {
+                query: input.keyword,
+                fields: ['menu.title'],
+                slop: 1,
+              },
+            },
+            {
+              multi_match: {
+                query: input.keyword,
+                fields: ['menu.description'],
+                slop: 1,
+              },
+            },
+          ],
+          minimum_should_match: 2,
         },
       },
     };
 
     try {
       const res = await this.openSearchClient.search({
-        index: input.indexName,
+        index: 'search_index',
         body,
       });
       if (res.body.hits.total.value == 0) {
@@ -88,17 +167,12 @@ export class SearchService {
       const result = res.body.hits.hits.map((item) => {
         return {
           _id: item._id,
-          data: item._source,
+          restaurant: item._source,
         };
       });
 
-      return {
-        httpCode: 200,
-        data: result,
-        message: `Data fetched successfully based on Keyword: ${input.keyword}`,
-      };
+      return result;
     } catch (error) {
-      this.logger.error(`Exception occurred while doing : ${error})`);
       return {
         httpCode: 500,
         data: [],
@@ -108,40 +182,25 @@ export class SearchService {
   }
 
   async purgeIndex(input: DeleteInput): Promise<any> {
-    this.logger.log(`Inside purgeIndex() Method`);
     try {
-      this.logger.log(`Deleting all records having index: ${input.indexName}`);
-
       await this.openSearchClient.indices.delete({
         index: input.indexName,
       });
 
-      return {
-        httpCode: 200,
-        message: `Record deleted having index: ${input.indexName}, characterId: ${input.id}`,
-      };
+      return true;
     } catch (error) {
-      this.logger.error(`Exception occurred while doing : ${error})`);
-      return {
-        httpCode: 500,
-        error: error,
-      };
+      return false;
     }
   }
 
   async purgeDocumentById(input: DeleteInput): Promise<any> {
-    this.logger.log(`Inside purgeDocumentById() Method : ${input}`);
     try {
       if (input.id != null && input.indexName != null) {
-        this.logger.log(
-          `Deleting record having index: ${input.indexName}, id: ${input.id}`,
-        );
         await this.openSearchClient.delete({
           index: input.indexName,
           id: input.id,
         });
       } else {
-        this.logger.log(`indexName or document id is missing`);
         return {
           httpCode: 200,
           message: `indexName or document id is missing`,
@@ -153,9 +212,6 @@ export class SearchService {
         message: `Record deleted having index: ${input.indexName}, id: ${input.id}`,
       };
     } catch (error) {
-      this.logger.error(
-        `Exception occurred while doing purgeDocumentById : ${error})`,
-      );
       return {
         httpCode: 500,
         message: error,

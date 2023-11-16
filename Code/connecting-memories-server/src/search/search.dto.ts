@@ -1,12 +1,17 @@
+import { IEvent } from 'src/interface/event.interface';
+
 export class DataSet {
   indexName: string;
-  characters: Charaters[];
+  events: IEvent[];
 }
 
-export class Charaters {
+export class EventDto {
   id: string;
-  name: string;
-  quote: string;
+  eventName: string;
+  description: string;
+  startdate: Date;
+  enddate: Date;
+  location: Location;
 }
 
 export class DeleteInput {
@@ -14,7 +19,6 @@ export class DeleteInput {
   id?: string;
 }
 
-export class searchCharacterByKeyword {
-  indexName: string;
+export class searchByKeyword {
   keyword: string;
 }

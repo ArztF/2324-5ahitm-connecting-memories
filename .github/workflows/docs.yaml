@@ -12,7 +12,7 @@ jobs:
     name: Build & Publish 🚀
     runs-on: ubuntu-latest
     env:
-      INPUTPATH: asciidocs
+      INPUTPATH: asciidocs-slides
       OUTPUTPATH: dist
       SLIDES: true
       BRANCH: gh-pages

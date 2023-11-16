@@ -138,14 +138,4 @@ export class EventService {
 
     return existingEvent;
   }
-
-  async findAllRestaurantsWithMeals(): Promise<IEvent[]> {
-    const existingEvent = await this.eventModel
-      .find()
-      .populate('owner', '', this.userModel)
-      .populate('participants', '', this.userModel)
-      .exec();
-
-    return existingEvent;
-  }
 }

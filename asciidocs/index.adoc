@@ -1,8 +1,0 @@
-= Index page
-ifndef::imagesdir[:imagesdir: images]
-
-image::img.png[]
-
-test123
-ich bins
-penis

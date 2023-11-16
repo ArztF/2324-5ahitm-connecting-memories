@@ -30,6 +30,15 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
+      - name: Cache Node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Build
         run: |
           cd Code/connecting-memories-server
@@ -58,6 +67,15 @@ jobs:
           node-version: 14
           cache: 'npm'
           
+      - name: Cache Node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            Code/connecting-memories/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('Code/connecting-memories/**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Run electron on windows  
         if: startsWith(matrix.os, 'windows-latest')
         run: |

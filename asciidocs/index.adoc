@@ -1,4 +1,4 @@
-= 23/24 5bhitm sew - Lecture Notes
+= Connecting Memories
 ifndef::imagesdir[:imagesdir: images]
 :icons: font
 :experimental:

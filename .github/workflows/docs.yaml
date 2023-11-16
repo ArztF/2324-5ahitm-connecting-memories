@@ -1,5 +1,4 @@
 name: Docs
-
 on:
   push:
     branches:
@@ -13,8 +12,8 @@ jobs:
     name: Build & Publish 🚀
     runs-on: ubuntu-latest
     env:
-      INPUTPATH: asciidocs-slides
-      OUTPUTPATH: asciidocs-slides
+      INPUTPATH: asciidocs
+      OUTPUTPATH: dist
       SLIDES: true
       BRANCH: gh-pages
     steps:
@@ -31,3 +30,4 @@ jobs:
           GITHUB_TOKEN: ${{ github.TOKEN }}
           BRANCH: ${{ env.BRANCH }}
           FOLDER: ${{ env.OUTPUTPATH }}
+

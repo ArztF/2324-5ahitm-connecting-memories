@@ -9,7 +9,7 @@ ifndef::backend[:backend: html5]
 == First Slide
 
 * hans zimmer
-* bbb
+* günther steiner
 * ccc [red]#red text#
 
 === Second Slide

@@ -19,12 +19,12 @@ export class EventController {
 
   // Request to push the event
   @Post()
-  async createEvent(@Res() response, @Body() createEventDto: CreateEventDto) { 
-      // send the event which comes from the backend to the service   
-      const newEvent = await this.eventService.createEvent(createEventDto);
-      return response.status(HttpStatus.CREATED).json({
-        newEvent,
-      });
+  async createEvent(@Res() response, @Body() createEventDto: CreateEventDto) {
+    // send the event which comes from the backend to the service
+    const newEvent = await this.eventService.createEvent(createEventDto);
+    return response.status(HttpStatus.CREATED).json({
+      newEvent,
+    });
   }
 
   // request to get all the events

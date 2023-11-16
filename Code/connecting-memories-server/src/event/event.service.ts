@@ -10,6 +10,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { IEvent } from './../interface/event.interface';
 import { Model } from 'mongoose';
 import { IUser } from 'src/interface/user.interface';
+import { EventDto } from 'src/search/search.dto';
 @Injectable()
 export class EventService {
   constructor(
@@ -139,13 +140,26 @@ export class EventService {
     return existingEvent;
   }
 
-  async findAllRestaurantsWithMeals(): Promise<IEvent[]> {
-    const existingEvent = await this.eventModel
-      .find()
-      .populate('owner', '', this.userModel)
-      .populate('participants', '', this.userModel)
-      .exec();
+  async findAllRestaurantsWithMeals(): Promise<EventDto[]> {
+    const existingEvent = await this.eventModel.find().exec();
 
-    return existingEvent;
+    const rest: EventDto[] = [];
+
+    existingEvent.forEach((element) => {
+      rest.push(this._getEventDetails(element));
+    });
+
+    return rest;
+  }
+
+  _getEventDetails(event: IEvent): EventDto {
+    return {
+      id: event._id,
+      eventname: event.eventname,
+      location: event.location,
+      startdate: event.startdate,
+      enddate: event.enddate,
+      category: event.kategorie,
+    };
   }
 }

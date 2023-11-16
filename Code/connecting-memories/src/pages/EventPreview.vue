@@ -35,63 +35,85 @@ export default {
   },
 
   methods: {
-    // function to search for the input
+    
     filteredList() {
-      // get all events from the db and then check if they are public --> if they are public push them to the new array
-      this.publicEvents = this.events?.filter((el) => el.isPublic === true);
-      // check if the input in the searchbar is not empty
-      if (this.input.length > 0) {
-        // convert the eventname to lower case and then check if it is included in the eventname
-        if (
-          this.publicEvents.filter((el) =>
-            el.eventname.toLowerCase().includes(this.input.toLowerCase())
-          ).length
-        ) {
-          // return the event which maches the criterium 
-          return this.publicEvents.filter((el) =>
-            el.eventname.toLowerCase().includes(this.input.toLowerCase())
-          );
-          // do the same with location
-        } else if (
-          this.publicEvents.filter((el) =>
-            el.location.toLowerCase().includes(this.input.toLowerCase())
-          ).length
-        ) {
-          // return the location if it matches
-          return this.publicEvents.filter((el) =>
-            el.location.toLowerCase().includes(this.input.toLowerCase())
-          );
-          // startdate
-        } else if (
-          this.publicEvents.filter((el) =>
-            el.startdate.toLowerCase().includes(this.input.toLowerCase())
-          ).length
-        ) {
-          // return the startdate if it matches
-          return this.publicEvents.filter((el) =>
-            el.startdate.toLowerCase().includes(this.input.toLowerCase())
-          );
-          //enddate
-        } else if (
-          this.publicEvents.filter((el) =>
-            el.enddate.toLowerCase().includes(this.input.toLowerCase())
-          ).length
-        ) {
-          // return the enddate if it matches
-          return this.publicEvents.filter((el) =>
-            el.enddate.toLowerCase().includes(this.input.toLowerCase())
-          );
-        } 
-        // if no events are found then set the variable to true in order to show it on the display
-         else {
-          this.noEventsFound = true;
-        }
-      } else {
-        // sort the events startdate
-        return this.publicEvents?.sort((a, b) => {
-          return new Date(a.startdate) - new Date(b.startdate);
-        });
-      }
+    if(this.input.toLocaleLowerCase() !== '') {
+      console.log('test');
+      axios.post("http://localhost:3000/search/searchByKeword", { keyword: this.eventname })
+      .then((response) => {
+              console.log(response);
+      })
+    } else {
+      axios
+      .get("http://localhost:3000/event")
+      .then((response) => {
+        this.events = response.data.eventData
+        this.publicEvents = response.data.eventData
+        return this.publicEvents.length
+      })
+      .catch(() => {
+        console.log("error");
+      });
+    }
+      
+     return this.publicEvents?.sort((a, b) => {
+           return new Date(a.startdate) - new Date(b.startdate);
+    });
+
+      // this.publicEvents = this.events?.filter((el) => el.isPublic === true);
+    
+      // if (this.input.length > 0) {
+    
+      //   if (
+      //     this.publicEvents.filter((el) =>
+      //       el.eventname.toLowerCase().includes(this.input.toLowerCase())
+      //     ).length
+      //   ) {
+    
+      //     return this.publicEvents.filter((el) =>
+      //       el.eventname.toLowerCase().includes(this.input.toLowerCase())
+      //     );
+    
+      //   } else if (
+      //     this.publicEvents.filter((el) =>
+      //       el.location.toLowerCase().includes(this.input.toLowerCase())
+      //     ).length
+      //   ) {
+    
+      //     return this.publicEvents.filter((el) =>
+      //       el.location.toLowerCase().includes(this.input.toLowerCase())
+      //     );
+    
+      //   } else if (
+      //     this.publicEvents.filter((el) =>
+      //       el.startdate.toLowerCase().includes(this.input.toLowerCase())
+      //     ).length
+      //   ) {
+    
+      //     return this.publicEvents.filter((el) =>
+      //       el.startdate.toLowerCase().includes(this.input.toLowerCase())
+      //     );
+    
+      //   } else if (
+      //     this.publicEvents.filter((el) =>
+      //       el.enddate.toLowerCase().includes(this.input.toLowerCase())
+      //     ).length
+      //   ) {
+    
+      //     return this.publicEvents.filter((el) =>
+      //       el.enddate.toLowerCase().includes(this.input.toLowerCase())
+      //     );
+      //   } 
+    
+      //    else {
+      //     this.noEventsFound = true;
+      //   }
+      // } else {
+    
+      //   return this.publicEvents?.sort((a, b) => {
+      //     return new Date(a.startdate) - new Date(b.startdate);
+      //   });
+      // }
     },
 
     onClickChangeFilter(id) {

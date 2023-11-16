@@ -1,17 +1,15 @@
-import { IEvent } from 'src/interface/event.interface';
-
 export class DataSet {
   indexName: string;
-  events: IEvent[];
+  events: EventDto[];
 }
 
 export class EventDto {
   id: string;
-  eventName: string;
-  description: string;
+  eventname: string;
+  category: string;
   startdate: Date;
   enddate: Date;
-  location: Location;
+  location: string;
 }
 
 export class DeleteInput {

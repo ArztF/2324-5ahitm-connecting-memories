@@ -1,8 +1,9 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 // Import the OpenSearch client here
-import { Client, events } from '@opensearch-project/opensearch';
+import { Client } from '@opensearch-project/opensearch';
 import { DataSet, DeleteInput, searchByKeyword } from './search.dto';
 import { EventService } from 'src/event/event.service';
+import { log } from 'console';
 
 @Injectable()
 export class SearchService {
@@ -38,6 +39,7 @@ export class SearchService {
     if (res.length == 0) {
       return;
     }
+    console.log('test');
 
     await this.bulkDataIngestion({
       indexName: 'search_index',
@@ -100,49 +102,35 @@ export class SearchService {
             {
               multi_match: {
                 query: input.keyword,
-                fields: ['restaurantName'],
+                fields: ['eventname'],
                 slop: 1,
               },
             },
             {
               multi_match: {
                 query: input.keyword,
-                fields: ['description'],
+                fields: ['startdate'],
                 slop: 1,
               },
             },
             {
               multi_match: {
                 query: input.keyword,
-                fields: ['location.city'],
+                fields: ['enddate'],
                 slop: 1,
               },
             },
             {
               multi_match: {
                 query: input.keyword,
-                fields: ['location.plz'],
+                fields: ['category'],
                 slop: 1,
               },
             },
             {
               multi_match: {
                 query: input.keyword,
-                fields: ['location.street'],
-                slop: 1,
-              },
-            },
-            {
-              multi_match: {
-                query: input.keyword,
-                fields: ['menu.title'],
-                slop: 1,
-              },
-            },
-            {
-              multi_match: {
-                query: input.keyword,
-                fields: ['menu.description'],
+                fields: ['location'],
                 slop: 1,
               },
             },

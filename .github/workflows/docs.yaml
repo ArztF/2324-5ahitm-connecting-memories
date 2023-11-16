@@ -16,7 +16,7 @@ jobs:
       INPUTPATH: asciidocs
       OUTPUTPATH: dist
       SLIDES: true
-      BRANCH: gh-pages
+      BRANCH: test-gh-pages
     steps:
       - uses: actions/checkout@v4
       - name: Build

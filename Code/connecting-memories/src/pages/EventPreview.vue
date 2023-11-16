@@ -47,65 +47,6 @@ export default {
 
   methods: {
 
-    filteredList() {
-    
-
-      // this.publicEvents = this.events?.filter((el) => el.isPublic === true);
-    
-      // if (this.input.length > 0) {
-    
-      //   if (
-      //     this.publicEvents.filter((el) =>
-      //       el.eventname.toLowerCase().includes(this.input.toLowerCase())
-      //     ).length
-      //   ) {
-    
-      //     return this.publicEvents.filter((el) =>
-      //       el.eventname.toLowerCase().includes(this.input.toLowerCase())
-      //     );
-    
-      //   } else if (
-      //     this.publicEvents.filter((el) =>
-      //       el.location.toLowerCase().includes(this.input.toLowerCase())
-      //     ).length
-      //   ) {
-    
-      //     return this.publicEvents.filter((el) =>
-      //       el.location.toLowerCase().includes(this.input.toLowerCase())
-      //     );
-    
-      //   } else if (
-      //     this.publicEvents.filter((el) =>
-      //       el.startdate.toLowerCase().includes(this.input.toLowerCase())
-      //     ).length
-      //   ) {
-    
-      //     return this.publicEvents.filter((el) =>
-      //       el.startdate.toLowerCase().includes(this.input.toLowerCase())
-      //     );
-    
-      //   } else if (
-      //     this.publicEvents.filter((el) =>
-      //       el.enddate.toLowerCase().includes(this.input.toLowerCase())
-      //     ).length
-      //   ) {
-    
-      //     return this.publicEvents.filter((el) =>
-      //       el.enddate.toLowerCase().includes(this.input.toLowerCase())
-      //     );
-      //   } 
-    
-      //    else {
-      //     this.noEventsFound = true;
-      //   }
-      // } else {
-    
-      //   return this.publicEvents?.sort((a, b) => {
-      //     return new Date(a.startdate) - new Date(b.startdate);
-      //   });
-      // }
-    },
-
     onClickChangeFilter(id) {
       let chipid = document.getElementById(id);
       chipid.style.background = "#ff5400";
@@ -120,7 +61,7 @@ export default {
         timeout = setTimeout(async () => {
           fnc()
           axios.post("http://localhost:3000/search/searchByKeword", { keyword: this.eventname })
-      .then((response) => {
+               .then((response) => {
               console.log(response);
       })
         }, 500)
@@ -133,15 +74,10 @@ export default {
       .get("http://localhost:3000/event")
       .then((response) => {
         this.events = response.data.eventData
-        return this.events?.sort((a, b) => {
-           return new Date(a.startdate) - new Date(b.startdate);
-      })
+    })
       .catch(() => {
         console.log("error");
-      });
-      
-     
-    });
+      }); 
   },
 };
 </script>

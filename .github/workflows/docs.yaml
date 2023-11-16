@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       INPUTPATH: asciidocs
-      OUTPUTPATH: testout
+      OUTPUTPATH: dist
       SLIDES: true
       BRANCH: test-gh-pages
     steps:

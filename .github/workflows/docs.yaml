@@ -1,4 +1,5 @@
 name: Docs
+
 on:
   push:
     branches:
@@ -15,7 +16,7 @@ jobs:
       INPUTPATH: asciidocs-slides
       OUTPUTPATH: asciidocs-slides
       SLIDES: true
-      BRANCH: ascii-doctor-setup
+      BRANCH: gh-pages
     steps:
       - uses: actions/checkout@v4
       - name: Build

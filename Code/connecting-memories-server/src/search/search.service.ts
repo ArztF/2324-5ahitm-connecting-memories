@@ -94,7 +94,8 @@ export class SearchService {
     //         }
     //     }
     // };
-
+    console.log(input.keyword);
+    
     const body = {
       query: {
         bool: {
@@ -135,7 +136,7 @@ export class SearchService {
               },
             },
           ],
-          minimum_should_match: 2,
+          minimum_should_match: 1,
         },
       },
     };

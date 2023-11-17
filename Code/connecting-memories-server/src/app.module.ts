@@ -8,6 +8,7 @@ import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ImageModule } from './image/image.module';
+import { SearchModule } from './search/search.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ImageModule } from './image/image.module';
     UserModule,
     JwtModule,
     AuthModule,
+    SearchModule
   ],
   controllers: [AppController],
   providers: [AppService, AuthService],

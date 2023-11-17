@@ -4,12 +4,14 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import moment from 'moment';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { IEvent } from './../interface/event.interface';
 import { Model } from 'mongoose';
 import { IUser } from 'src/interface/user.interface';
+import { EventDto } from 'src/search/search.dto';
 @Injectable()
 export class EventService {
   constructor(
@@ -137,5 +139,40 @@ export class EventService {
     }
 
     return existingEvent;
+  }
+
+  async findAllRestaurantsWithMeals(): Promise<EventDto[]> {
+    const existingEvent = await this.eventModel.find().exec();
+
+    const rest: EventDto[] = [];
+
+    existingEvent.forEach((element) => {
+      rest.push(this._getEventDetails(element));
+    });
+
+    return rest;
+  }
+
+  formatDate(date) {
+    let d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [day, month, year].join('.');
+  }
+
+  _getEventDetails(event: IEvent): EventDto {
+    return {
+      id: event._id,
+      eventname: event.eventname,
+      location: event.location,
+      startdate: this.formatDate(event.startdate),
+      enddate: this.formatDate(event.enddate),
+      category: event.kategorie,
+    };
   }
 }

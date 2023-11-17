@@ -1,0 +1,96 @@
+= Connecting Memories
+ifndef::imagesdir[:imagesdir: images]
+:icons: font
+:experimental:
+:sectnums:
+:toc:
+ifdef::backend-html5[]
+
+// https://fontawesome.com/v4.7.0/icons/
+icon:file-text-o[link=https://github.com/2324-5bhitm-sew/2324-5bhitm-itp-lecture-notes/main/asciidocs/{docname}.adoc] ‏ ‏ ‎
+icon:github-square[link=https://github.com/2324-5bhitm-sew/2324-5bhitm-itp-lecture-notes] ‏ ‏ ‎
+icon:home[link=http://edufs.edu.htl-leonding.ac.at/~t.stuetz/hugo/2021/01/lecture-notes/]
+endif::backend-html5[]
+
+== 2023-09-21
+
+* Frage: wie kann man auf einen REST-Serv ice zugreifen
+** GET-Requests über Browser, für POST-Requests wird ein html-Formular oder dgl. benötigt
+** man kann auch plugins im browser installieren
+** Terminal: curl, httpie, wget, ...
+** eigene Programme wie postman und insomnia
+** in ide gibt es oft eigene clients
+
+
+== 2023-09-28
+
+* Weiterarbeiten am Wiederholungsbeispiel Airways
++
+https://edufs.edu.htl-leonding.ac.at/moodle/course/view.php?id=4117#[Link zum Classroom^]
+
+
+
+
+== 2023-10-05
+
+=== Persistieren einer Tabelle
+
+=== Übung
+
+* Erstellen eines UC-Diagramms in README.adoc im Root des Projekts
+** mindestens 3 UCs
+* Erstellen von mehreren Tabellen (max. 4) und persistieren in der Datenbank
+* Beachten Sie das die Assoziationen korrekt sind
+* Erstellen der Unit-Tests
+* Dokumentieren Sie das Continuous Testing
+
+
+== 2023-10-12
+
+=== Fachbegriffe
+
+[%autowidth]
+|===
+|Begriff |(vereinfachte) Erläuterung
+
+|Apache Kafka
+|Message Broker, transaktionsfähig, mit Datenbank, für (Echtzeit-)Datenströme
+
+|Flyway, Liquibase
+|Versionierungslibrary für relationale Datenbanken (Datenstruktur)
+
+|grpc
+|vglbar. mir REST und graphQL, allerdings binäre Datenübertragung
+
+|RBAC
+|Role-based access control, vgl auch UBAC, time based access control, ...
+
+|tenancy
+|Mandantenfähigkeit
+
+|LDAP
+|Lightweight Directory Access Protocol, Namensdienst, wird zur Authentifizierung und Authorising in Organisationen verwendet. AD (Active Directory) basiert auf LDAP mit proprietären Erweiterungen.
+
+|proprietär
+|firmenspezifisch, kein Standard, wird meist nur von einer Firma verwendet
+
+|WebSocket
+|ermöglicht eine bidirektionale Kommunikation zwischen Server und Client im zustandslosen TCP/IP.
+
+|SSE
+|Server-sent-events, vglbar mit Websocket, aller dings nur für kurze Textnachrichten und keinen binären Datenaustausch
+
+|validieren
+|auf Gültigkeit prüfen
+
+|
+|
+
+|===
+
+
+
+
+
+
+

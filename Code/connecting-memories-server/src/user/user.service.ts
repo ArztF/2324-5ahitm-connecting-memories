@@ -86,10 +86,6 @@ export class UserService {
     return existingUser;
   }
 
-  async findAll() {
-    return this.userModel.find().exec();
-  }
-
   _getUserDetails(user: UserDokument): userDetails {
     return {
       id: user._id,

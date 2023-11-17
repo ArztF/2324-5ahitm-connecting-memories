@@ -94,8 +94,7 @@ export class SearchService {
     //         }
     //     }
     // };
-    console.log(input.keyword);
-    
+
     const body = {
       query: {
         bool: {
@@ -154,10 +153,7 @@ export class SearchService {
         };
       }
       const result = res.body.hits.hits.map((item) => {
-        return {
-          _id: item._id,
-          restaurant: item._source,
-        };
+        return item._source;
       });
 
       return result;

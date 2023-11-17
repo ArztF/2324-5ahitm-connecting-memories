@@ -68,6 +68,7 @@ export default {
       axios
       .get("http://localhost:3000/event")
       .then((response) => {
+        console.log(response.data.eventData);
         this.events = response.data.eventData
     })
       .catch(() => {

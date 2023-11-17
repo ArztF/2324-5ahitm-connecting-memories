@@ -4,6 +4,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import moment from 'moment';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -152,13 +153,25 @@ export class EventService {
     return rest;
   }
 
+  formatDate(date) {
+    let d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [day, month, year].join('.');
+  }
+
   _getEventDetails(event: IEvent): EventDto {
     return {
       id: event._id,
       eventname: event.eventname,
       location: event.location,
-      startdate: event.startdate,
-      enddate: event.enddate,
+      startdate: this.formatDate(event.startdate),
+      enddate: this.formatDate(event.enddate),
       category: event.kategorie,
     };
   }

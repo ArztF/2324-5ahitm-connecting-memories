@@ -7,8 +7,8 @@ export class EventDto {
   id: string;
   eventname: string;
   category: string;
-  startdate: Date;
-  enddate: Date;
+  startdate: string;
+  enddate: string;
   location: string;
 }
 

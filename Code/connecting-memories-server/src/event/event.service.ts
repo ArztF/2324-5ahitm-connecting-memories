@@ -141,7 +141,7 @@ export class EventService {
     return existingEvent;
   }
 
-  async findAllRestaurantsWithMeals(): Promise<EventDto[]> {
+  async findAllEvents(): Promise<EventDto[]> {
     const existingEvent = await this.eventModel.find().exec();
 
     const rest: EventDto[] = [];

@@ -33,7 +33,7 @@ export class SearchService {
       },
     });
 
-    const res = await this.eventService.findAllRestaurantsWithMeals();
+    const res = await this.eventService.findAllEvents();
     if (res.length == 0) {
       return;
     }
@@ -83,16 +83,6 @@ export class SearchService {
   }
 
   async searchByKeyword(input: searchByKeyword): Promise<any> {
-    // body = {
-    //     query: {
-    //         multi_match: {
-    //             query: input.keyword,
-    //             fields: ["restaurantName", "location.city", "location.plz", "location.street", "menu.title", "menu.description", "description"],
-    //             slop: 1
-    //         }
-    //     }
-    // };
-
     const body = {
       query: {
         bool: {

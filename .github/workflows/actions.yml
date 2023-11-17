@@ -41,16 +41,6 @@ jobs:
       - name: Push latest to Docker
         run: docker push farzt/connecting-memories-backend:latest   
 
-      - name: Cache Node modules
-        uses: actions/cache@v2
-        with:
-          path: |
-            node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-
   electron:
     runs-on: ubuntu-latest
     

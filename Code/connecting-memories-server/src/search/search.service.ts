@@ -1,9 +1,7 @@
 import { Injectable } from '@nestjs/common';
-// Import the OpenSearch client here
 import { Client } from '@opensearch-project/opensearch';
 import { DataSet, DeleteInput, searchByKeyword } from './search.dto';
 import { EventService } from 'src/event/event.service';
-import { log } from 'console';
 
 @Injectable()
 export class SearchService {

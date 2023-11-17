@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- TODO: Image Source Should be a prop too -->
     <img
       alt="Silhouette of mountains"
       :src="'http://localhost:3000/image/' + event?.bannerimg"
@@ -146,7 +145,9 @@ export default {
   // Get the UserToken and then check if it has favorized Events, in order to show it in the Favourized-Events-Page
   async mounted() {
     this.userToken = sessionStorage.getItem("userToken");
+    console.log(this.userToken);
     this.userId = parseJwt(this.userToken);
+    console.log(this.userId);
     await axios
       .get("http://localhost:3000/user/" + this.userId.user.id)
       .then((response) => {
@@ -163,7 +164,6 @@ export default {
   },
 
   watch: {
-    // Get the Locatoins Coordinates in order to display them on the map
     event() {
       let url =
         "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" +
@@ -231,8 +231,6 @@ export default {
         });
     },
 
-
-    // function to open the map modal
     setOpen(isOpen) {
       this.isOpen = isOpen;
     },

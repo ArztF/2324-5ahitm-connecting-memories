@@ -39,12 +39,6 @@ export default {
     };
   },
 
-  watch: {
-    input() {
-      
-    }
-  },
-
   methods: {
 
     onClickChangeFilter(id) {
@@ -62,7 +56,7 @@ export default {
           fnc()
           axios.post("http://localhost:3000/search/searchByKeword", { keyword: this.eventname })
                .then((response) => {
-              console.log(response);
+               console.log(response);
       })
         }, 500)
       }

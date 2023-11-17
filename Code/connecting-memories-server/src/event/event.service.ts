@@ -173,6 +173,7 @@ export class EventService {
       startdate: this.formatDate(event.startdate),
       enddate: this.formatDate(event.enddate),
       category: event.kategorie,
+      
     };
   }
 }

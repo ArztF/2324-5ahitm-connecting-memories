@@ -3,7 +3,7 @@ name: Deployment
 on:
   push:
     branches:
-      - 'main'
+      - 'cachen'
 
 env:
   IMAGE_NAME: farzt/connecting-memories-backend
@@ -65,14 +65,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 14
-          cache: 'npm'
           
       - name: Cache Node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3.3.2
         with:
           path: |
             Code/connecting-memories/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('Code/connecting-memories/**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 

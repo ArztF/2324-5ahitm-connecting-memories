@@ -3,7 +3,7 @@ name: Deployment
 on:
   push:
     branches:
-      - 'cachen'
+      - 'main'
 
 env:
   IMAGE_NAME: farzt/connecting-memories-backend

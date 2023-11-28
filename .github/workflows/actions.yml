@@ -3,7 +3,7 @@ name: Deployment
 on:
   push:
     branches:
-      - 'main'
+      - 'new-backend'
 
 env:
   IMAGE_NAME: farzt/connecting-memories-backend
@@ -67,6 +67,27 @@ jobs:
           node-version: 14
           cache: 'npm'
           cache-dependency-path: Code/connecting-memories/package-lock.json
+      
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      - name: Change to Maven project directory
+        run: cd Code/connecting-memories/backend/backend
+
+      - name: Build with Maven
+        run: mvn clean install -B
 
 
       - name: Run electron on windows  

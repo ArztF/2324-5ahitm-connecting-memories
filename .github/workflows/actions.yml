@@ -68,12 +68,15 @@ jobs:
           cache: 'npm'
           cache-dependency-path: Code/connecting-memories/package-lock.json
 
+      - name: Change to Maven project directory
+        run: cd Code/connecting-memories/backend/backend
+      
       - name: Cache Maven dependencies
         uses: actions/cache@v3
         with:
           path: |
             ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('backend/pom.xml') }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
 

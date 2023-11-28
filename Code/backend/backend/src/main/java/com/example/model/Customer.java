@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "app_user")
 public class Customer extends PanacheEntity {
     public String vorname;
     public String nachname;

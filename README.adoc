@@ -1,9 +1,9 @@
-# Connecting Memories
+= Connecting Memories
 
-## UML
+== UML
 
-![UML Diagramm](https://github.com/ArztF/2324-5ahitm-connecting-memories/blob/main/Documents/UML-Diagramm/uml-diagramm.png)
+image::/img/uml-diagramm.png[]
 
-## Usecase Diagramm
+== Usecase Diagramm
 
-![Usecase Diagramm](https://github.com/ArztF/2324-5ahitm-connecting-memories/blob/main/Documents/UsecaseDiagramm/usecaseDiagram.png)
+image::/img/usecaseDiagram.png[]

@@ -1,33 +1,24 @@
-= Demo-Presentation1
-Thomas W. Stütz
-1.0, 2020-08-22
-ifndef::sourcedir[:sourcedir: ../src/main/java]
-ifndef::imagesdir[:imagesdir: images]
-ifndef::backend[:backend: html5]
+= Connecting Memories
+
+
+ifndef::imagesdir[:imagesdir: ./images]
 :icons: font
+:stylesheet: style.css
+:stylesdir: style
 
-== First Slide
+image::./connecting-background.jpeg[background,size=cover]
+== Was ist Connecting Memories?
 
-* bitte geh
-* bbb
-* ccc [red]#red text#
+Ein Tool zum Finden, Organisieren und Promoten von öffentlichen und privaten Veranstaltungen
 
-=== Second Slide
+== Problem
 
-[plantuml,cld,png]
-----
-@startuml
-class Person {
-brand: String
-type: String
-}
-@enduml
-----
+* Man möchte auf eine Veranstaltung gehen, weiß allerdings nicht welche in seiner Nähe sind
+* Möchte eine private Feier veranstalten, braucht um alle Eingeladenen zu erreichen verschiedene Apps
+* Werbung machen für Veranstaltungen ist teuer und aufwendig
 
-== Third Slide
+== Wie funktioniert Connecting Memories?
 
-image:https://images.pexels.com/photos/3966425/pexels-photo-3966425.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940[VW]
+image::./uml-diagramm.png[background, size=contain]
 
-== Fourth Slide
-
-IMPORTANT: Something very important
+== Vielen Dank für Ihre Aufmerksamkeit

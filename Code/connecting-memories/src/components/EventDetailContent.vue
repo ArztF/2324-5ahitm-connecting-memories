@@ -145,12 +145,11 @@ export default {
   // Get the UserToken and then check if it has favorized Events, in order to show it in the Favourized-Events-Page
   async mounted() {
     this.userToken = sessionStorage.getItem("userToken");
-    console.log(this.userToken);
     this.userId = parseJwt(this.userToken);
-    console.log(this.userId);
     await axios
       .get("http://localhost:8080/api/user/" + this.userId.user.id)
       .then((response) => {
+        console.log(response.data);
         let existingUser = response.data.existingUser;
         for (let favEvents of existingUser.favouriteEvents) {
           if (favEvents._id == this.event?._id) {

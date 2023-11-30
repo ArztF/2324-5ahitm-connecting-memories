@@ -11,7 +11,8 @@ public class Event extends PanacheEntity {
     public String eventname;
     public String location;
     public String locationcords;
-    public String bannerimg;
+    @OneToOne
+    public Image bannerimg;
     public Date startdate;
     public Date enddate;
     public String beschreibung;

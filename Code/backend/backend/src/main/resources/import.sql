@@ -23,3 +23,6 @@ create sequence customer_seq start with 100;
 
 drop sequence event_seq RESTRICT ;
 create sequence event_seq start with 100;
+
+drop sequence participants_seq RESTRICT ;
+create sequence participants_seq start with 100;

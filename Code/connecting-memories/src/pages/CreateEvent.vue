@@ -192,7 +192,7 @@ export default {
         let imageId;
         // first the image will be POSTED in the image Collection
         await axios
-          .post("http://localhost:3000/image", formData)
+          .post("http://localhost:8080/image", formData)
           .then((response) => {
             imageId = response.data._id;
           })

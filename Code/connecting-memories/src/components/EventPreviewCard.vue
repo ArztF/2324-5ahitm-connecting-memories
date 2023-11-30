@@ -7,7 +7,7 @@
     <img
       alt="Silhouette of mountains"
       class="preview-card-image"
-      :src="'http://localhost:3000/image/'+event?.bannerimg"
+      :src="'http://localhost:8080/image/'+event?.bannerimg"
     />
     <ion-card-header class="event-preview-header">
       <div class="event-preview-name-icon-wrapper">

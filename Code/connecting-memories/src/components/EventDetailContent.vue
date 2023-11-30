@@ -2,7 +2,7 @@
   <div>
     <img
       alt="Silhouette of mountains"
-      :src="'http://localhost:3000/image/' + event?.bannerimg"
+      :src="'http://localhost:8080/image/' + event?.bannerimg"
     />
     <ion-card-title class="eventDetailHeadline"
       >{{ event?.eventname }}

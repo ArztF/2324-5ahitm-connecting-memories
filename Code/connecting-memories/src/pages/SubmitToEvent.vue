@@ -21,7 +21,6 @@ import PageLayout from "@/components/PageLayout.vue";
 import { IonButton, useIonRouter } from "@ionic/vue";
 import { presentToast } from '@/utils/toast.js';
 import axios from "axios";
-import { parseJwt } from '@/utils/parseJwt.js';
 
 export default {
   components: { PageLayout, IonButton },
@@ -60,8 +59,7 @@ export default {
         .then((response) => {
           // save the event in a global variable
           this.existingEvent = response.data.existingEvent;
-          let userToken = sessionStorage.getItem("userToken");
-          this.userId = this.parseJwt(userToken);
+          this.userId = sessionStorage.getItem("userToken");
           // iterate the all the participants from the event
           for(let participants of this.existingEvent.participants) {
             // if the user is already in the array set the boolean to true
@@ -89,7 +87,6 @@ export default {
         })
     },
 
-    parseJwt,
     presentToast,
   },
 };

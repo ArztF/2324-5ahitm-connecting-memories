@@ -10,6 +10,7 @@ import jakarta.persistence.TypedQuery;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import com.example.dtos.LoginUserDto;
+import org.bouncycastle.util.encoders.Hex;
 
 @ApplicationScoped
 public class CustomerRepository implements PanacheRepository<Customer> {

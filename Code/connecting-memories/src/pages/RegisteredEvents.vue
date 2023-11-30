@@ -14,7 +14,6 @@
 import PageLayout from "@/components/PageLayout.vue";
 import EventPreviewCardVue from "../components/EventPreviewCard.vue";
 import axios from "axios";
-import { parseJwt } from '@/utils/parseJwt.js';
 export default {
   components: {
     PageLayout,
@@ -39,7 +38,6 @@ export default {
         this.events = response.data.eventData;
         // get the userToken, parse it and save it in a global variable
         let userToken = sessionStorage.getItem("userToken");
-        userToken = this.parseJwt(userToken);
         this.userId = userToken.user.id;
         // itarate all the events
         for (let item of this.events) {
@@ -65,7 +63,6 @@ export default {
     filteredList() {
       // get the userToken from the sessionStorage, parse it and save it to the global variable
       let userToken = sessionStorage.getItem("userToken");
-      userToken = this.parseJwt(userToken);
       this.userId = userToken.user.id;
       // iterate all the events
       for (let item of this.events) {
@@ -81,8 +78,6 @@ export default {
       // return the array which is displayed
       return this.filteredEvents;
     },
-
-    parseJwt,
   },
 };
 </script>

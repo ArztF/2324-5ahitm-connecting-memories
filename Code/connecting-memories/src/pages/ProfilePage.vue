@@ -40,7 +40,6 @@
 <script>
 import PageLayout from "@/components/PageLayout.vue";
 import { useRouter } from "vue-router";
-import { parseJwt } from '@/utils/parseJwt.js';
 import axios from "axios";
 import { toastController } from "@ionic/vue";
 
@@ -79,7 +78,6 @@ export default {
   },
 
   methods: {
-    parseJwt,
 
     async onSubmitClicked() {
       let updateUser;

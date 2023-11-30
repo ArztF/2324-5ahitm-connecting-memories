@@ -114,7 +114,7 @@ export default {
         };
         // post the user in the db
         axios
-          .post("http://localhost:3000/auth/register", user)
+          .post("http://localhost:8080/api/user/register", user)
           .then((response) => {
             console.log(response);
             // forward the user

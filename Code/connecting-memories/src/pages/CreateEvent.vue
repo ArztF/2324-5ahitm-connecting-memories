@@ -87,7 +87,6 @@ import axios from "axios";
 import { useIonRouter, IonButton } from "@ionic/vue";
 import PlacesCompletion from '../components/PlacesCompletion.vue';
 import { backendErrorToast } from '@/utils/toast.js'
-import { parseJwt } from '@/utils/parseJwt.js'
 export default {
   components: {
     PageLayout,
@@ -186,8 +185,7 @@ export default {
         this.ticketPrice = "";
         this.isPublicEvent = null;
       } else {
-        let user = sessionStorage.getItem("userToken");
-        let userDetails = this.parseJwt(user);
+        let userDetails = sessionStorage.getItem("userToken");
         if (this.endDate.length == 0) {
           this.endDate = this.startDate;
         }
@@ -234,8 +232,6 @@ export default {
           });
       }
     },
-
-    parseJwt,
     
     async presentToast() {
       let errorMessage = "";

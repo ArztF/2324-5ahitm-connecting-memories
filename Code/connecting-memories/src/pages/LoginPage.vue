@@ -44,15 +44,15 @@ export default {
       if (!this.email.length == 0 && !this.password.length == 0) {
         // send a post to check in the backend if the user exists
         await axios
-          .post("http://localhost:3000/auth/login/", {
+          .post("http://localhost:8080/api/user/login", {
             email: this.email,
             password: this.password,
           })
           .then((response) => {
-            // if there is no error then set the userToken in the sessionStorage
+            
             if (response.data.status != 403) {
-              sessionStorage.setItem("userToken", response.data.token);
-              // if the user got to the login page in order by trying to access a page where he only can get when he is logged in he will get to the page where he wanted to go
+              console.log(response.data);
+              sessionStorage.setItem("userToken", response.data);
               let comeFromWhichPage = sessionStorage.getItem("comeFromWhichPage");
               if(comeFromWhichPage == "createEvent") {
                 this.router.push('createevent', 'replace')

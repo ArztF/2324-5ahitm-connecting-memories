@@ -13,7 +13,6 @@
   <script>
 import PageLayout from "@/components/PageLayout.vue";
 import EventPreviewCardVue from "../components/EventPreviewCard.vue";
-import { parseJwt } from '@/utils/parseJwt.js';
 import axios from "axios";
 export default {
   components: {
@@ -31,10 +30,7 @@ export default {
   },
 
   async mounted() {
-    // get the userToken from the sessionStorage and then parse them
     let userToken = sessionStorage.getItem("userToken");
-    userToken = this.parseJwt(userToken).user.id;
-    // get the logged in user from the db
     await axios
       .get("http://localhost:8080/api/user/" + userToken)
       .then((response) => {
@@ -56,7 +52,6 @@ export default {
     filteredList() {
       // get the userToken from the session storage and parse it
       let userToken = sessionStorage.getItem("userToken");
-      userToken = this.parseJwt(userToken);
       this.userId = userToken.user.id;
       // iterate all the events
       for (let item of this.events) {
@@ -72,8 +67,6 @@ export default {
       // return
       return this.filteredEvents;
     },
-
-    parseJwt
   },
 };
 </script>

@@ -9,7 +9,6 @@
 </template>
 <script>
 import PageLayout from "../components/PageLayout.vue";
-import { parseJwt } from '@/utils/parseJwt.js';
 import EventPreviewCard from "../components/EventPreviewCard.vue";
 import axios from "axios";
 export default {
@@ -33,12 +32,10 @@ export default {
       });
 
     this.userId = sessionStorage.getItem("userToken");
-    this.userId = this.parseJwt(this.userId);
-    this.userId = this.userId.user.id;
+
   },
 
   methods: {
-    parseJwt,
 
     // check if the user which is logged in is the owner of the event
     filteredList() {

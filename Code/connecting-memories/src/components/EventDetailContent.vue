@@ -91,7 +91,6 @@ import SmallMap from "./SmallMap.vue";
 import { useIonRouter } from "@ionic/vue";
 import axios from "axios";
 import { presentToast } from '@/utils/toast.js';
-import { parseJwt } from '@/utils/parseJwt.js';
 import { formatDate } from '@/utils/format.js';
 import { copyTextToClipboard } from '@/utils/copyText.js'
 
@@ -144,8 +143,7 @@ export default {
 
   // Get the UserToken and then check if it has favorized Events, in order to show it in the Favourized-Events-Page
   async mounted() {
-    this.userToken = sessionStorage.getItem("userToken");
-    this.userId = parseJwt(this.userToken);
+    this.userId = sessionStorage.getItem("userToken");
     await axios
       .get("http://localhost:8080/api/user/" + this.userId.user.id)
       .then((response) => {
@@ -235,7 +233,6 @@ export default {
     },
 
     presentToast,
-    parseJwt,
     formatDate
   },
 };

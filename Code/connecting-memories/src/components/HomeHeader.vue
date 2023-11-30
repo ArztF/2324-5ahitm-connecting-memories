@@ -57,7 +57,6 @@ import {
   IonToolbar,
 } from "@ionic/vue";
 import { menuOutline, arrowBackOutline } from "ionicons/icons";
-import { parseJwt } from '@/utils/parseJwt.js';
 
 export default {
   components: {
@@ -86,9 +85,9 @@ export default {
   },
   mounted() {
     let user = sessionStorage.getItem("userToken");
+    console.log(user);
     if (user != null) {
-      let userDetails = this.parseJwt(user);
-      this.userId = userDetails.user.id;
+      this.userId = user;
     }
   },
   data() {
@@ -103,9 +102,7 @@ export default {
       this.router.push("/", "replace");
     },
 
-    parseJwt,
-    // function to check if you are logged in, if not it saves the page where you want to go, but redirects you to the
-    // login page, after you have logged in you get to the page you wanted to go to
+
     onRedirectClicked(redirectLink) {
       let userToken = sessionStorage.getItem("userToken")
       if(userToken == null) {

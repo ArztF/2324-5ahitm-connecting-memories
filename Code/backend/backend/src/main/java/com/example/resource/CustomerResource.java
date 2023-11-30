@@ -5,6 +5,7 @@ import com.example.repository.CustomerRepository;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class CustomerResource {
     CustomerRepository customerRepository;
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Customer> getCustomers() {
         return customerRepository.listAll();
     }
@@ -25,7 +27,7 @@ public class CustomerResource {
     }
 
     @GET
-    @Path("/{email}")
+    @Path("/email/{email}")
     public Customer getCustomerByEmail(@PathParam("email") String email) {
         return customerRepository.findByEmail(email);
     }

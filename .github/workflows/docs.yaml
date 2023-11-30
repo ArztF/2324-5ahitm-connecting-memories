@@ -3,7 +3,7 @@ name: Docs
 on:
   push:
     branches:
-      - 'ascii-doctor-v2'
+      - 'main'
     paths:
       - asciidocs/**
   workflow_dispatch:

@@ -1,0 +1,62 @@
+= HowTo - Franklyn 3 im Development Starten
+Franklyn 3 Dev-Team
+2023/24: franklyn-quarkus
+ifndef::imagesdir[:imagesdir: images]
+:sourcedir: ../src/main/java
+:icons: font
+:sectnums:    // Nummerierung der Überschriften / section numbering
+:toc: left
+
+== Vorraussetzungen
+
+=== Technologien
+
+* Der Node-Package-Manager -npm muss installiert sein
+* Java muss installiert sein
+
+=== Hardware
+
+* Aktuell kann es noch zu Problemen bei Linux und Windows Geräten kommen
+* Es wird an einer Lösung mit Docker gearbeitet
+
+== Repository Klonen
+
+[source,shell]
+----
+git clone https://github.com/htl-leonding-project/franklyn-quarkus
+----
+
+== Starten des Frontends
+
+* Öffnen Sie ein Terminalfenster im `franklyn-frontend`-Projektordner und führen Sie Folgendes aus:
+
+[source, shell]
+----
+npm i --force
+ng serve --open
+----
+
+.Probleme aufgetreten?
+[%collapsible]
+====
+Falls es probleme gibt, kann es sein das Angular nicht installiert ist. In diesem Fall installieren Sie einfach Angular.
+
+[source,bash]
+----
+npm install @angular/cli
+----
+====
+
+== Starten des Screenshot-Clients
+
+* Laden Sie den das aktuellste *.jar* von unseren link:https://github.com/htl-leonding-project/franklyn-quarkus/releases[Releases] herunter
+
+.Ausführen des .jar Files
+[source,shell]
+----
+java -jar franklyn3-client-prealpha.jar
+----
+
+* In dem Ordner, wo Sie sich befinden sollten jetzt 2 Ordner mit Alpha- bzw. Beta-Frames erscheinen.
+
+

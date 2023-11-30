@@ -1,0 +1,28 @@
+== Meeting 2023-09-15
+
+=== Aktuell vorhanden:
+
+- Ein Schüler-Client, der Screenshots aufnehmen kann.
+- Differnzen Rechnung.
+- Zusammenlegung von Frames
+- Anzeigen der Frames auf Teacher-Client.
+- Aufzeichnen von Tests
+
+=== Bugs, Probleme und Fragen:
+
+- Mp4 wird auf dem Examinee-Client erstellt und nicht am Streaming-Server
+- Linux muss auf xorg-Linux laufen sonst funktionieren die Screenshots nicht
+
+
+=== Besprochene Themen:
+-
+
+=== Ziele:
+
+*bis 22.09.2023:*
+
+- Vortragsqualität verbessern
+- Plantuml oder eine doc as code Technologie für die Diagramme verwenden +
+- Meilensteine festlegen +
+- Qualität von Protokollen verbessern +
+- Doku für den technischen Teil schreiben

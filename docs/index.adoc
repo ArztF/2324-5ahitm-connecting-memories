@@ -1,0 +1,60 @@
+= Franklyn3
+Franklyn 3 Dev-Team
+2023/24
+ifndef::imagesdir[:imagesdir: images]
+:sourcedir: ../src/main/java
+:icons: font
+:sectnums:    // Nummerierung der Überschriften / section numbering
+:toc: left
+
+//Need this blank line after ifdef, don't know why...
+ifdef::backend-html5[]
+
+// print the toc here (not at the default position)
+//toc::[]
+
+== Generelle Information
+
+<<./asciidocs/general-information.adoc#, Generelle Informationen über Franklyn>>
+
+== Starten im Development
+
+<<./asciidocs/HowTo.adoc#, How-To Start for Development>>
+
+== System Specification
+
+<<./asciidocs/technology-architecture/frame-types.adoc#, Frame Management >> +
+<<./asciidocs/technology-architecture/system-specification.adoc#, System Specification (Franklyn 3 Relaunch)>>
+
+NOTE: Folgendes wurde von der vorherigen Generation übernommen.
+
+<<./asciidocs/system-specification.adoc#, System Specification>>
+
+
+<<./asciidocs/technology-architecture/deployment-tutorial.adoc#, deployment tutorial>>
+
+== Benutzung des Franklyn3
+
+IMPORTANT: Aktuell noch nicht möglich
+
+//<<./asciidocs/startfranklyn3.adoc#, How-To Start Franklyn3>>
+
+== Protocol
+
+<<./asciidocs/minutes-of-meeting-legacy.adoc#, Minutes of Meeting - 2023/24>>
+
+<<./asciidocs/minutes-of-meeting-legacy.adoc#, Minutes of Meeting - Lagacy & 4. Klasse>>
+
+== Franklyn2 maintenance
+
+NOTE: Übernommen von vorheriger Generation
+
+<<./asciidocs/stop-restart-franklyn.adoc#, How to stop and restart Franklyn>>
+
+
+== Slides
+
+https://htl-leonding-project.github.io/franklyn-quarkus/slides/#/[Adoc-Slides für Franklyn-3]
+
+
+

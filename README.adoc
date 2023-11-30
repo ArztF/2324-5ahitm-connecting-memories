@@ -1,9 +1,69 @@
 = Connecting Memories
 
-== UML
 
-image::/img/uml-diagramm.png[]
+////
 
-== Usecase Diagramm
 
-image::/img/usecaseDiagram.png[]
+[plantuml, bar1, svg]
+----
+include::docs/asciidocs/plantuml/todoGantt-alpha.puml[]
+----
+
+[plantuml, bar2, svg]
+----
+include::docs/asciidocs/plantuml/todoGantt-beta.puml[]
+----
+
+[plantuml, bar3, svg]
+----
+include::docs/asciidocs/plantuml/todoGantt-final.puml[]
+----
+////
+
+
+
+== Neuimplementierung von Connecting Memories
+
+Connecting Memories ist eine Applikation, welches das Finden, Promoten und Organisieren von öffentlichen als auch privaten Veranstaltungen vereinfacht.
+
+Egal ob man eine private Geburtstagsfeier oder eine große Firmenfeier organisieren möchte, ein Festival in seiner Nähe finden möchte, oder als Veranstalter sein Event promoten möchte. Connecting Memories vereinfacht diesen Prozess um ein Vielfaches. 
+
+== Wie starte ich den Franklyn (Dev)
+
+=== Instructor Client
+
+[source,shell]
+----
+git clone https://github.com/ArztF/2324-5ahitm-connecting-memories.git<1>
+cd 2324-5ahitm-connecting-memories <2>
+cd Code <2>
+cd connecting-memories <2>
+npm i --force
+npm run dev <3>
+----
+
+<1> Klone das Connecting Memories Repo
+<2> wechsel in das `Frontend`-Verzeichnis
+<3> Starten des Server und Frontends
+
+=== Überprüfen
+
+Gehen Sie auf http://localhost:8080/ um das laufende Programm zu sehen.
+
+== Technologien
+* Nest.js
+* VueJS
+* MongoDB
+
+== Team
+* Felix Arzt
+* Nico Obermair
+* Philip Kirchmayr
+
+== Links
+
+link:https://github.com/ArztF/2324-5ahitm-connecting-memories[Franklyn 3]
+
+link:https://arztf.github.io/2324-5ahitm-connecting-memories/[Dokumentation]
+
+Ein Projekt der link:https://www.htl-leonding.at/[HTL Leonding]

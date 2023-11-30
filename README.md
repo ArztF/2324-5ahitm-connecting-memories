@@ -1,86 +1,36 @@
-# Asciidoctor Github Pages Template
+# franklyn-quarkus
+Neuimplementierung von Franklyn mit Quarkus
 
-## Converting
+Franklyn ist eine Applikation, welche Schülern eine der Berufswelt entsprechende Arbeitsumgebung während Leistungsfeststellungen bietet.
 
-![](./img/conver_strategy.jpg)
+Lehrkräfte bekommen die Möglichkeit, Testsitzungen zu erstellen. Schüler können sich zu einer Sitzung mit einem PIN und dem Vor- und Nachnamen anmelden. 
+Der Schülerclient sendet dabei in einem regelmäßigen Intervall Screenshots, welche sich die Lehrkraft ansehen kann. 
 
-1. will be converted into asciidoc format
-2. will be converted into asciidocs slides
+# Wie starte ich den Franklyn
+* Lehrer
+  * Mit WebUntis-Credentials auf der Website anmelden
+  * Neuen Test erstellen
+* Schüler
+  * Den Client auf der Startseite herunterladen; .jar-Button
+  * Den Zip-Ordner "entzippen"
+  * Den Ordner (franklyn3-client) im Terminal öffnen
+  * Im Terminal **java -jar franklyn3-client.jar** eingeben und ausführen
 
-## Action
+# Technologien
+* Quarkus
+* Angular
+* PostgreSQl
 
-GitHub Actions will automatically convert the `.adoc` files into html document. You can configure the input and 
-output path with the environmental variables at the top of the actions.
+## Team
+* Tamara Melcher
+* Michael Tran
 
-> Note: This will not change the configuration for the scripts
+## Links
 
-```yaml
-jobs:
-  build:
-    name: Build & Publish 🚀
-    runs-on: ubuntu-latest
-    env:
-      INPUTPATH: docs
-      OUTPUTPATH: dist
-      SLIDES: true
-      BRANCH: gh-pages
-```
+[Franklyn 3](https://student.cloud.htl-leonding.ac.at/t.melcher/franklyn/start)
 
-|              | INPUTPATH | OUTPUTPATH | SLIDES         | BRANCH  |
-|--------------|-----------|------------|----------------|---------|
-| type         | string    | string     | boolean        | string  |
+[Dokumentation](https://htl-leonding-project.github.io/franklyn-quarkus/)
 
-## Directory Trigger
+[YouTrack - Agile Board](https://vm81.htl-leonding.ac.at/agiles/99-313/current)
 
-After changing the input path make sure to also change the directory trigger at the top of the file.
-
-```yaml
-on:
-  push:
-    branches:
-      - 'main'
-    paths:
-      - docs/**
-```
-
-Just change docs to the prefered input directory.
-
-## Scripts
-
-Sometimes it is useful to just convert or push it locally for a quick update. In the root directory are two scripts
-
-### Convert
-
-This script will just convert it into the ouput directory. See table below for the parameters..
-
-```shell
-./local-convert.sh <input-dir> <output-dir> <slides-convert>
-```
-
-### Publish
-This script will convert the documents and publish them to the gh-pages branch. See table below for the parameters.
-
-```shell
-./publish.sh <input-dir> <output-dir> <slides-convert>
-```
-
-### Config
-
-You can configure the inut and output dir in the `config.sh` file. 
-
-|              | input-dir | output-dir | slides-convert |
-|--------------|-----------|------------|----------------|
-| isOptional   | true      | true       | true           |
-| defaultValue | input     | output     | true           |
-| type         | string    | string     | boolean        |
-
-
-## Config github repo
-
-![permissions-for-asciidoc.png](img%2Fpermissions-for-asciidoc.png)
-
-![permissions-for-asciidoc.png](img%2Fpermissions-for-asciidoc-2.png)
-
-
-
-
+Ein Projekt der [HTL Leonding](https://www.htl-leonding.at/)

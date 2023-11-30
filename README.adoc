@@ -29,9 +29,9 @@ Connecting Memories ist eine Applikation, welches das Finden, Promoten und Organ
 
 Egal ob man eine private Geburtstagsfeier oder eine große Firmenfeier organisieren möchte, ein Festival in seiner Nähe finden möchte, oder als Veranstalter sein Event promoten möchte. Connecting Memories vereinfacht diesen Prozess um ein Vielfaches. 
 
-== Wie starte ich den Franklyn (Dev)
+== Wie starte ich Connecting Memories (Dev)
 
-=== Instructor Client
+=== Client
 
 [source,shell]
 ----
@@ -45,7 +45,20 @@ npm run dev <3>
 
 <1> Klone das Connecting Memories Repo
 <2> wechsel in das `Frontend`-Verzeichnis
-<3> Starten des Server und Frontends
+<3> Starten des Frontends
+
+=== Server
+
+[source,shell]
+----
+cd .. <1>
+cd connecting-memories-server <1>
+npm i --force
+npm start <2> 
+----
+
+<1> wechsel in das `Backend`-Verzeichnis
+<2> Starten des Servers
 
 === Überprüfen
 

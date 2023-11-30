@@ -22,3 +22,4 @@ Ein Tool zum Finden, Organisieren und Promoten von öffentlichen und privaten Ve
 image::./uml-diagramm.png[background, size=contain]
 
 == Vielen Dank für Ihre Aufmerksamkeit
+

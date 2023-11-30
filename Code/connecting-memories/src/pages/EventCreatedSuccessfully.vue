@@ -78,7 +78,7 @@ export default {
     // second option is to delete the event if you are not satisfied
     deleteEvent() {
       axios
-        .delete("http://localhost:3000/event/" + this.eventId)
+        .delete("http://localhost:8080/api/event/" + this.eventId)
         .then((response) => (this.event = response.data.existingEvent));
 
       this.router.push("/", "replace");
@@ -100,7 +100,7 @@ export default {
   mounted() {
     this.eventId = sessionStorage.getItem("addedEvent");
     axios
-      .get("http://localhost:3000/event/" + this.eventId)
+      .get("http://localhost:8080/api/event/" + this.eventId)
       .then((response) => (this.event = response.data.existingEvent))
       .catch(() => {
         console.log("error");

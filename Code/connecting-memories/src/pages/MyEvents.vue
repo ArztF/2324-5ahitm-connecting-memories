@@ -26,7 +26,7 @@ export default {
   // get all events after every reload
   mounted() {
     axios
-      .get("http://localhost:3000/event")
+      .get("http://localhost:8080/api/event")
       .then((response) => (this.events = response.data.eventData))
       .catch(() => {
         console.log("error");

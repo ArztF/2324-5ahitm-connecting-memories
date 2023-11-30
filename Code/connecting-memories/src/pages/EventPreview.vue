@@ -66,10 +66,10 @@ export default {
 
   mounted() {
       axios
-      .get("http://localhost:3000/event")
+      .get("http://localhost:8080/api/event")
       .then((response) => {
-        console.log(response.data.eventData);
-        this.events = response.data.eventData
+        console.log(response.data);
+        this.events = response.data
     })
       .catch(() => {
         console.log("error");

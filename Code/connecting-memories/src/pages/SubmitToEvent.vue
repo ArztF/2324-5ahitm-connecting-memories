@@ -56,7 +56,7 @@ export default {
     onClickSubmit() {
       // get the event with the eventLink which is put in
       axios
-        .get("http://localhost:3000/event/" + this.eventLink)
+        .get("http://localhost:8080/api/event/" + this.eventLink)
         .then((response) => {
           // save the event in a global variable
           this.existingEvent = response.data.existingEvent;
@@ -74,7 +74,7 @@ export default {
             this.existingEvent.participants.push(this.userId.user.id);
             axios
               .put(
-                "http://localhost:3000/event/" + this.eventLink,
+                "http://localhost:8080/api/event/" + this.eventLink,
                 this.existingEvent
               )
               .then(() => {

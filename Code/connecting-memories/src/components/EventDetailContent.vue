@@ -149,7 +149,7 @@ export default {
     this.userId = parseJwt(this.userToken);
     console.log(this.userId);
     await axios
-      .get("http://localhost:3000/user/" + this.userId.user.id)
+      .get("http://localhost:8080/api/user/" + this.userId.user.id)
       .then((response) => {
         let existingUser = response.data.existingUser;
         for (let favEvents of existingUser.favouriteEvents) {
@@ -188,7 +188,7 @@ export default {
 
     favorizeEvent(eventId) {
       axios
-        .get("http://localhost:3000/user/" + this.userId.user.id)
+        .get("http://localhost:8080/api/user/" + this.userId.user.id)
         .then((response) => {
           let existingUser = response.data.existingUser;
           for (let favEvents of existingUser.favouriteEvents) {
@@ -201,7 +201,7 @@ export default {
             existingUser.favouriteEvents.push(eventId);
             axios
               .put(
-                "http://localhost:3000/user/" + this.userId.user.id,
+                "http://localhost:8080/api/user/" + this.userId.user.id,
                 existingUser
               )
               .then((response) => {
@@ -216,7 +216,7 @@ export default {
             );
             axios
               .put(
-                "http://localhost:3000/user/" + this.userId.user.id,
+                "http://localhost:8080/api/user/" + this.userId.user.id,
                 existingUser
               )
               .then((response) => {

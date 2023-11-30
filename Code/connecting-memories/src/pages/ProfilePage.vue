@@ -68,7 +68,7 @@ export default {
 
   // get the user by the id which is given in the url
   mounted() {
-    axios.get("http://localhost:3000/user/" + this.id).then((response) => {
+    axios.get("http://localhost:8080/api/user/" + this.id).then((response) => {
       // save the informations in the following global variables
       this.user = response.data.existingUser;
       this.vorname = this.user.vorname;
@@ -104,7 +104,7 @@ export default {
         };
         // create a put request to update the user
         await axios
-          .put("http://localhost:3000/user/" + this.id, updateUser)
+          .put("http://localhost:8080/api/user/" + this.id, updateUser)
           .then((response) => {
             console.log(response);
           });

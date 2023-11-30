@@ -33,7 +33,7 @@ export default {
   // get all events after every reload
   async mounted() {
     await axios
-      .get("http://localhost:3000/event")
+      .get("http://localhost:8080/api/event")
       .then((response) => {
         // save all events in a global variable
         this.events = response.data.eventData;

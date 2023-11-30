@@ -36,7 +36,7 @@ export default {
     userToken = this.parseJwt(userToken).user.id;
     // get the logged in user from the db
     await axios
-      .get("http://localhost:3000/user/" + userToken)
+      .get("http://localhost:8080/api/user/" + userToken)
       .then((response) => {
         // save the user
         this.users = response.data.existingUser;

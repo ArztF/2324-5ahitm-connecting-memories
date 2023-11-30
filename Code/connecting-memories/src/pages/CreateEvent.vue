@@ -201,7 +201,7 @@ export default {
 
         // then the event with the image id will be POSTED
         await axios
-          .post("http://localhost:3000/event", {
+          .post("http://localhost:8080/event", {
             eventname: this.eventName,
             location: this.typedInLocation,
             locationcords: "HTL Leonding",

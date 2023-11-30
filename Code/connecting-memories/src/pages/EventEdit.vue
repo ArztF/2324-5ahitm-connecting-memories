@@ -77,7 +77,7 @@ export default {
   // with every reload of the page it will get all events from the db an will be saved in the global variable event
   mounted() {
     axios
-      .get("http://localhost:3000/event/" + this.eventId)
+      .get("http://localhost:8080/api/event/" + this.eventId)
       .then((response) => {
         this.event = response.data.existingEvent;
         this.currentEventName = this.event?.eventname;
@@ -129,7 +129,7 @@ export default {
     // function to update the event
     async onClickSubmit() {
       await axios
-        .put("http://localhost:3000/event/" + this.eventId, this.updateValues)
+        .put("http://localhost:8080/api/event/" + this.eventId, this.updateValues)
         .then((response) => {
           console.log(response);
           this.router.push("/event", "replace");

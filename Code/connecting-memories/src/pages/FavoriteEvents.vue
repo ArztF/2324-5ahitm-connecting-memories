@@ -34,11 +34,11 @@ export default {
     await axios
       .get("http://localhost:8080/api/user/" + userToken)
       .then((response) => {
-        // save the user
+        
         this.users = response.data.existingUser;
-        // save the userId
+        
         this.userId = response.data.existingUser._id;
-        // iterate the favouriteEvents entity and push them to the global variable
+        
         for (let item of this.users.favouriteEvents) {
           this.filteredEvents.push(item);
         }
@@ -50,21 +50,21 @@ export default {
 
   methods: {
     filteredList() {
-      // get the userToken from the session storage and parse it
+      
       let userToken = sessionStorage.getItem("userToken");
       this.userId = userToken.user.id;
-      // iterate all the events
+      
       for (let item of this.events) {
-        // iterate the participants entity from the event
+        
         for (let participants of item.participants) {
-          // check if the userId and the participants match
+        
           if (this.userId == participants) {
-            // then push it to the array
+        
             this.filteredEvents.push(item);
           }
         }
       }
-      // return
+      
       return this.filteredEvents;
     },
   },

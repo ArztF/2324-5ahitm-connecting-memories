@@ -196,10 +196,18 @@ export default {
           .then((response) => {
             imageId = response.data._id;
           })
+        let user
+        await axios
+            .get("http://localhost:8080/api/user/" + userDetails)  
+            .then((response) => {
+              user = response.data
+            })
+
+            console.log(user);
 
         // then the event with the image id will be POSTED
         await axios
-          .post("http://localhost:8080/event", {
+          .post("http://localhost:8080/api/event", {
             eventname: this.eventName,
             location: this.typedInLocation,
             locationcords: "HTL Leonding",
@@ -211,16 +219,15 @@ export default {
             veranstalter: "HTL Leonding",
             ticketpreis: this.ticketPrice,
             isPublic: this.isPublicEvent,
-            owner: userDetails.user.id,
+            owner: user,
           })
           .then((response) => {
-            sessionStorage.setItem("addedEvent", response.data.newEvent._id)
-            this.router.push("/eventadded", "replace");
+            console.log("respoonse" + response);
+            sessionStorage.setItem("addedEvent", response.data)
+            this.router.push("/event", "replace");
           })
           .catch((res) => {
-            // if some inputs are not valid after the backend validation the errormessage will be displayed
-            backendErrorToast(res.response.data.message);
-            // all the values will be reset to nothing, in order to get no errors or wrong inputs
+            backendErrorToast(res.response.data);
             this.eventName = "";
             this.eventLocation = "";
             this.startDate = "";
@@ -251,8 +258,6 @@ export default {
       await toast.present();
       this.invalidInputs = [];
     },
-
-    // if there is a invalid backend validation the following error message will be displayed
     backendErrorToast
   },
 };

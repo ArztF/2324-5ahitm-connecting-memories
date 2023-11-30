@@ -141,7 +141,7 @@ export default {
     },
   },
 
-  // Get the UserToken and then check if it has favorized Events, in order to show it in the Favourized-Events-Page
+  
   async mounted() {
     this.userId = sessionStorage.getItem("userToken");
     await axios

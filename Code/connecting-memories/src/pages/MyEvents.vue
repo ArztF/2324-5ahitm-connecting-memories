@@ -22,7 +22,7 @@ export default {
     };
   },
 
-  // get all events after every reload
+  
   mounted() {
     axios
       .get("http://localhost:8080/api/event")
@@ -37,12 +37,12 @@ export default {
 
   methods: {
 
-    // check if the user which is logged in is the owner of the event
+  
     filteredList() {
       this.myEvents = this.events?.filter(
         (el) => el.owner?._id === this.userId
       );
-      // return the event which he created
+      
       return this.myEvents;
     },
   },

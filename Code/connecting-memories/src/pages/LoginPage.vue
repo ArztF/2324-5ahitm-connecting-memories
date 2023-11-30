@@ -40,9 +40,7 @@ export default {
 
   methods: {
     async submitClicked() {
-      // check if the email and password input is empty
       if (!this.email.length == 0 && !this.password.length == 0) {
-        // send a post to check in the backend if the user exists
         await axios
           .post("http://localhost:8080/api/user/login", {
             email: this.email,
@@ -66,15 +64,12 @@ export default {
             backendErrorToast(res.response.data.message);
           });
       }
-      // check if the email is valid
       if(this.email.length == 0 && !this.email.includes('@') ){
         this.invalidInputs.push("Etwas Stimmt nicht mit deiner Email");
       }
-      // check if the password is valid
       if(this.password.length == 0 && this.password.length < 8){
         this.invalidInputs.push("Dein Passwort ist zu kurz");
       }
-      // if there is an invalid input display the error
       if (this.invalidInputs.length != 0) {
         this.presentToast();
       }
@@ -100,8 +95,6 @@ export default {
     },
 
     backendErrorToast
-
-    
   },
 
   setup() {

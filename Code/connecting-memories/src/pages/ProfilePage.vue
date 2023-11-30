@@ -65,10 +65,10 @@ export default {
     };
   },
 
-  // get the user by the id which is given in the url
+  
   mounted() {
     axios.get("http://localhost:8080/api/user/" + this.id).then((response) => {
-      // save the informations in the following global variables
+  
       this.user = response.data.existingUser;
       this.vorname = this.user.vorname;
       this.nachname = this.user.nachname;
@@ -81,18 +81,18 @@ export default {
 
     async onSubmitClicked() {
       let updateUser;
-      // check if the inputs in the fields are valid
+  
       if (
         this.vorname.length < 3 &&
         this.nachname.length < 3 &&
         this.username.length < 3 &&
         this.email.includes("@")
       ) {
-        // if not display the error
+  
         this.invalidInputs.push("Ihre Eingaben sind leider nicht valid!");
         this.presentToast(this.invalidInputs);
       }
-      // if the input is empty create a json to update the users data
+  
       if (this.invalidInputs.length == 0) {
         updateUser = {
           vorname: this.vorname,
@@ -100,7 +100,7 @@ export default {
           username: this.username,
           email: this.email,
         };
-        // create a put request to update the user
+  
         await axios
           .put("http://localhost:8080/api/user/" + this.id, updateUser)
           .then((response) => {

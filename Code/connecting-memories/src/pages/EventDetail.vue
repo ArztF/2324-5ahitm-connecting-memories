@@ -34,7 +34,7 @@ export default {
       event: null
     };
   },
-  // with every reload of the page it will get all events from the db an will be saved in the global variable event
+  
   mounted () {
     axios
         .get("http://localhost:8080/api/event/" + this.eventId)

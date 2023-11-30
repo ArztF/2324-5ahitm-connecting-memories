@@ -3,7 +3,7 @@
     class="ion-card-container"
     @click="onClickDetailView"
   >
-    <!-- TODO: Image Source Should be a prop too -->
+   
     <img
       alt="Silhouette of mountains"
       class="preview-card-image"
@@ -89,7 +89,7 @@ export default {
   methods: {
     formatDate,
 
-    // Click Event to get to the Detailview Page
+    
     onClickDetailView() {
       if(this.isClickable) {
         this.router.push("/eventdetail/" + this.event._id, "replace");

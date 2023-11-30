@@ -85,7 +85,6 @@ export default {
   },
   mounted() {
     let user = sessionStorage.getItem("userToken");
-    console.log(user);
     if (user != null) {
       this.userId = user;
     }

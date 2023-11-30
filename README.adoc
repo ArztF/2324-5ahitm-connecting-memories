@@ -62,7 +62,7 @@ Gehen Sie auf http://localhost:8080/ um das laufende Programm zu sehen.
 
 == Links
 
-link:https://github.com/ArztF/2324-5ahitm-connecting-memories[Franklyn 3]
+link:https://github.com/ArztF/2324-5ahitm-connecting-memories[Connecting Memories]
 
 link:https://arztf.github.io/2324-5ahitm-connecting-memories/[Dokumentation]
 

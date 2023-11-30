@@ -6,19 +6,19 @@ ifndef::imagesdir[:imagesdir: ../images]
 :stylesheet: style.css
 :stylesdir: style
 
-image::../images/franklyn.png[background,size=cover]
+image::../images/connecting-background.jpeg[background,size=cover]
 == Was ist Connecting Memories?
 
 Ein Tool zum Finden, Organisieren und Promoten von öffentlichen und privaten Veranstaltungen
 
 == Problem
 
-* Man möchte auf eine Veranstaltung gehen, weiß allerdings nicht welche in seiner nähe sind
+* Man möchte auf eine Veranstaltung gehen, weiß allerdings nicht welche in seiner Nähe sind
 * Möchte eine private Feier veranstalten, braucht um alle Eingeladenen zu erreichen verschiedene Apps
 * Werbung machen für Veranstaltungen ist teuer und aufwendig
 
 == Wie funktioniert Connecting Memories?
 
-image::../images/slides-bg-title.jpg[background, size=cover]
+image::../images/uml-diagramm.png[background, size=cover]
 
 == Vielen Dank für Ihre Aufmerksamkeit

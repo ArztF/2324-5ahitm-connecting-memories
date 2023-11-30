@@ -83,11 +83,10 @@ jobs:
           distribution: 'adopt'
           java-version: '11'
 
-      - name: Change to Maven directory
-        run: cd Code/backend/backend
-
       - name: Build with Maven
-        run: mvn clean install -B
+        run: |
+          cd Code/backend/backend
+          mvn clean install -B
 
       - name: Run electron on windows  
         if: startsWith(matrix.os, 'windows-latest')

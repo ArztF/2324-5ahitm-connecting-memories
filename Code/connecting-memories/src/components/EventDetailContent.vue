@@ -2,7 +2,7 @@
   <div>
     <img
       alt="Silhouette of mountains"
-      :src="'http://localhost:3000/image/' + event?.bannerimg"
+      :src="'http://localhost:8080/image/' + event.bannerimg.id"
     />
     <ion-card-title class="eventDetailHeadline"
       >{{ event?.eventname }}
@@ -91,7 +91,6 @@ import SmallMap from "./SmallMap.vue";
 import { useIonRouter } from "@ionic/vue";
 import axios from "axios";
 import { presentToast } from '@/utils/toast.js';
-import { parseJwt } from '@/utils/parseJwt.js';
 import { formatDate } from '@/utils/format.js';
 import { copyTextToClipboard } from '@/utils/copyText.js'
 
@@ -142,12 +141,12 @@ export default {
     },
   },
 
-  // Get the UserToken and then check if it has favorized Events, in order to show it in the Favourized-Events-Page
+  
   async mounted() {
-    this.userToken = sessionStorage.getItem("userToken");
-    this.userId = parseJwt(this.userToken);
+    console.log(this.event);
+    this.userId = sessionStorage.getItem("userToken");
     await axios
-      .get("http://localhost:8080/api/user/" + this.userId.user.id)
+      .get("http://localhost:8080/api/user/" + this.userId)
       .then((response) => {
         console.log(response.data);
         let existingUser = response.data.existingUser;
@@ -235,7 +234,6 @@ export default {
     },
 
     presentToast,
-    parseJwt,
     formatDate
   },
 };

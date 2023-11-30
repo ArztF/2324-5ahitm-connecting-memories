@@ -87,7 +87,6 @@ import axios from "axios";
 import { useIonRouter, IonButton } from "@ionic/vue";
 import PlacesCompletion from '../components/PlacesCompletion.vue';
 import { backendErrorToast } from '@/utils/toast.js'
-import { parseJwt } from '@/utils/parseJwt.js'
 export default {
   components: {
     PageLayout,
@@ -186,26 +185,33 @@ export default {
         this.ticketPrice = "";
         this.isPublicEvent = null;
       } else {
-        let user = sessionStorage.getItem("userToken");
-        let userDetails = this.parseJwt(user);
+        let userDetails = sessionStorage.getItem("userToken");
         if (this.endDate.length == 0) {
           this.endDate = this.startDate;
         }
         let imageId;
         // first the image will be POSTED in the image Collection
         await axios
-          .post("http://localhost:3000/image", formData)
+          .post("http://localhost:8080/image", formData)
           .then((response) => {
-            imageId = response.data._id;
+            imageId = response.data;
           })
+        let user
+        await axios
+            .get("http://localhost:8080/api/user/" + userDetails)  
+            .then((response) => {
+              user = response.data
+            })
+
+            console.log(user);
 
         // then the event with the image id will be POSTED
         await axios
-          .post("http://localhost:8080/event", {
+          .post("http://localhost:8080/api/event", {
             eventname: this.eventName,
             location: this.typedInLocation,
             locationcords: "HTL Leonding",
-            bannerimg: imageId,
+            bannerimg: {id: imageId},
             startdate: this.startDate,
             enddate: this.endDate,
             beschreibung: this.description,
@@ -213,16 +219,15 @@ export default {
             veranstalter: "HTL Leonding",
             ticketpreis: this.ticketPrice,
             isPublic: this.isPublicEvent,
-            owner: userDetails.user.id,
+            owner: {id: user.id},
           })
           .then((response) => {
-            sessionStorage.setItem("addedEvent", response.data.newEvent._id)
-            this.router.push("/eventadded", "replace");
+            console.log("respoonse" + response);
+            sessionStorage.setItem("addedEvent", response.data)
+            this.router.push("/event", "replace");
           })
           .catch((res) => {
-            // if some inputs are not valid after the backend validation the errormessage will be displayed
-            backendErrorToast(res.response.data.message);
-            // all the values will be reset to nothing, in order to get no errors or wrong inputs
+            backendErrorToast(res.response.data);
             this.eventName = "";
             this.eventLocation = "";
             this.startDate = "";
@@ -234,8 +239,6 @@ export default {
           });
       }
     },
-
-    parseJwt,
     
     async presentToast() {
       let errorMessage = "";
@@ -255,8 +258,6 @@ export default {
       await toast.present();
       this.invalidInputs = [];
     },
-
-    // if there is a invalid backend validation the following error message will be displayed
     backendErrorToast
   },
 };

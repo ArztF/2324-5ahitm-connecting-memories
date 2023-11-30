@@ -9,7 +9,6 @@
 </template>
 <script>
 import PageLayout from "../components/PageLayout.vue";
-import { parseJwt } from '@/utils/parseJwt.js';
 import EventPreviewCard from "../components/EventPreviewCard.vue";
 import axios from "axios";
 export default {
@@ -23,7 +22,7 @@ export default {
     };
   },
 
-  // get all events after every reload
+  
   mounted() {
     axios
       .get("http://localhost:8080/api/event")
@@ -33,19 +32,17 @@ export default {
       });
 
     this.userId = sessionStorage.getItem("userToken");
-    this.userId = this.parseJwt(this.userId);
-    this.userId = this.userId.user.id;
+
   },
 
   methods: {
-    parseJwt,
 
-    // check if the user which is logged in is the owner of the event
+  
     filteredList() {
       this.myEvents = this.events?.filter(
         (el) => el.owner?._id === this.userId
       );
-      // return the event which he created
+      
       return this.myEvents;
     },
   },

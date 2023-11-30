@@ -63,11 +63,8 @@ export default {
   },
 
   methods: {
-    // after you submited you inputs of the createevent you will get to this page and then you have 2 options
-
-    // first option is to publish the event
     publishEvent() {
-      console.log(this.event.isPublic);
+      console.log(this.event);
       if (!this.event.isPublic) {
         this.publishedEvent = false;
       } else {
@@ -75,7 +72,6 @@ export default {
       }
     },
 
-    // second option is to delete the event if you are not satisfied
     deleteEvent() {
       axios
         .delete("http://localhost:8080/api/event/" + this.eventId)
@@ -84,7 +80,6 @@ export default {
       this.router.push("/", "replace");
     },
 
-    // if you have created a private event you will get to another page where you can copy your invitation link
     publishedPrivateEvent() {
       this.router.push("/myevents", "replace");
     },

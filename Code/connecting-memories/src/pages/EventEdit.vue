@@ -126,7 +126,6 @@ export default {
   },
 
   methods: {
-    // function to update the event
     async onClickSubmit() {
       await axios
         .put("http://localhost:8080/api/event/" + this.eventId, this.updateValues)
@@ -136,14 +135,12 @@ export default {
         });
     },
 
-    // format the date in the following format YYYY-MM-DD
     formatDate(inDate) {
       dayjs.locale(de);
       const date = dayjs(inDate);
       return date.format("YYYY-MM-DD");
     },
 
-    // if there are invalid inputs the following message will be displayed
     async presentToast() {
       let errorMessage = "";
       for (let i = 0; i < this.invalidInputs.length; i++) {

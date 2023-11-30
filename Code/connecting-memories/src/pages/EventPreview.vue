@@ -68,7 +68,6 @@ export default {
       axios
       .get("http://localhost:8080/api/event")
       .then((response) => {
-        console.log(response.data);
         this.events = response.data
     })
       .catch(() => {

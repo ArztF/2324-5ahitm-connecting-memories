@@ -3,11 +3,11 @@
     class="ion-card-container"
     @click="onClickDetailView"
   >
-   
+  
     <img
       alt="Silhouette of mountains"
       class="preview-card-image"
-      :src="'http://localhost:8080/image/'+event?.bannerimg"
+      :src="'http://localhost:8080/image/' + event.bannerimg.id"
     />
     <ion-card-header class="event-preview-header">
       <div class="event-preview-name-icon-wrapper">
@@ -86,13 +86,17 @@ export default {
     }
   },
 
+  mounted(){
+    console.log(this.event);
+  },
+
   methods: {
     formatDate,
 
     
     onClickDetailView() {
       if(this.isClickable) {
-        this.router.push("/eventdetail/" + this.event._id, "replace");
+        this.router.push("/eventdetail/" + this.event.id, "replace");
       } else {
         console.log('error');
       }

@@ -194,7 +194,7 @@ export default {
         await axios
           .post("http://localhost:8080/image", formData)
           .then((response) => {
-            imageId = response.data._id;
+            imageId = response.data;
           })
         let user
         await axios
@@ -211,7 +211,7 @@ export default {
             eventname: this.eventName,
             location: this.typedInLocation,
             locationcords: "HTL Leonding",
-            bannerimg: imageId,
+            bannerimg: {id: imageId},
             startdate: this.startDate,
             enddate: this.endDate,
             beschreibung: this.description,
@@ -219,7 +219,7 @@ export default {
             veranstalter: "HTL Leonding",
             ticketpreis: this.ticketPrice,
             isPublic: this.isPublicEvent,
-            owner: user,
+            owner: {id: user.id},
           })
           .then((response) => {
             console.log("respoonse" + response);

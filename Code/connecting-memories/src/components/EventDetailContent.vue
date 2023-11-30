@@ -2,7 +2,7 @@
   <div>
     <img
       alt="Silhouette of mountains"
-      :src="'http://localhost:8080/image/' + event?.bannerimg"
+      :src="'http://localhost:8080/image/' + event.bannerimg.id"
     />
     <ion-card-title class="eventDetailHeadline"
       >{{ event?.eventname }}
@@ -143,9 +143,10 @@ export default {
 
   
   async mounted() {
+    console.log(this.event);
     this.userId = sessionStorage.getItem("userToken");
     await axios
-      .get("http://localhost:8080/api/user/" + this.userId.user.id)
+      .get("http://localhost:8080/api/user/" + this.userId)
       .then((response) => {
         console.log(response.data);
         let existingUser = response.data.existingUser;

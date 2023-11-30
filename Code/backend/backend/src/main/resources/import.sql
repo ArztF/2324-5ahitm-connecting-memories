@@ -8,7 +8,7 @@ insert into CUSTOMER (ID, vorname, nachname, username, email, password, geburtsd
 insert into CUSTOMER (ID, vorname, nachname, username, email, password, geburtsdatum, isVeranstalter) VALUES (6, 'Simon', 'Elmecker', 'elmeckerNich', 'elmeckerS.@gmail.com', '307fd56085a6ed891cfb2c38276d7853b122968754378f1153e0127f3a764a0f', '2005-08-10', true);
 
 
-
+/*
 insert into EVENT (ID, eventname, location, locationcords, startdate, enddate, beschreibung, kategorie, veranstalter, ticketpreis, isPublic) VALUES
                                                                                                                                                        (1, 'Test', 'test', 'test', '2023-10-12 00:00:00', '2023-10-12 00:00:00', 'test', 'test', 'test', 10, true);
 
@@ -16,7 +16,7 @@ insert into EVENT (ID, eventname, location, locationcords, startdate, enddate, b
     (2, 'Test2', 'test2', 'test2', '2023-10-12 00:00:00', '2023-10-12 00:00:00', 'test', 'test', 'test', 10, true);
 insert into EVENT (ID, eventname, location, locationcords, startdate, enddate, beschreibung, kategorie, veranstalter, ticketpreis, isPublic) VALUES
     (3, 'Test3', 'test3', 'test3', '2023-10-12 00:00:00', '2023-10-12 00:00:00', 'test', 'test', 'test', 10, true);
-
+*/
 
 
 drop sequence customer_seq RESTRICT ;

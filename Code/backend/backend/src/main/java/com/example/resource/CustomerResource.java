@@ -24,6 +24,12 @@ public class CustomerResource {
         return customerRepository.findById(id);
     }
 
+    @GET
+    @Path("/{email}")
+    public Customer getCustomerByEmail(@PathParam("email") String email) {
+        return customerRepository.findByEmail(email);
+    }
+
     @POST
     @Transactional
     public Customer createCustomer(Customer customer) {

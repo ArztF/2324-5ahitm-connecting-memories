@@ -38,7 +38,6 @@ public class EventResource {
     public Event updateEvent(@PathParam("id") Long id, Event updatedEvent) {
         Event event = eventRepository.findById(id);
         if (event != null) {
-            // Update event fields as needed
             event.eventname = updatedEvent.eventname;
             event.location = updatedEvent.location;
             event.bannerimg = updatedEvent.bannerimg;
@@ -52,8 +51,6 @@ public class EventResource {
             event.startdate = updatedEvent.startdate;
             event.ticketpreis = updatedEvent.ticketpreis;
             event.veranstalter = updatedEvent.veranstalter;
-
-
             eventRepository.persist(event);
         }
         return event;

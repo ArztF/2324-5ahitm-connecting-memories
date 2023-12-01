@@ -9,7 +9,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
+import org.jboss.resteasy.reactive.MultipartForm;
 
 @Path("/image")
 public class ImageRessource {

@@ -131,7 +131,7 @@ export default {
         .put("http://localhost:8080/api/event/" + this.eventId, this.updateValues)
         .then((response) => {
           console.log(response);
-          this.router.push("/event", "replace");
+          this.router.push("/event");
         });
     },
 

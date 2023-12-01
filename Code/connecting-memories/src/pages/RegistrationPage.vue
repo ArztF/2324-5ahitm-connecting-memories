@@ -4,7 +4,7 @@
       <div id="register-back-button">
         <ion-icon
           :icon="chevronBackOutline"
-          @click="() => router.push('/login', 'back', 'replace')"
+          @click="() => router.push('/login', 'back')"
         />
       </div>
       <div class="register">
@@ -117,7 +117,7 @@ export default {
           .then((response) => {
             console.log(response);
             
-            this.router.push("/login", "forward", "replace");
+            this.router.push("/login", "forward");
           })
           .catch((res) => {
             backendErrorToast(res.response.data.message);

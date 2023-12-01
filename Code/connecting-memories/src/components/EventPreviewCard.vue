@@ -86,17 +86,13 @@ export default {
     }
   },
 
-  mounted(){
-    console.log(this.event);
-  },
-
   methods: {
     formatDate,
 
     
     onClickDetailView() {
       if(this.isClickable) {
-        this.router.push("/eventdetail/" + this.event.id, "replace");
+        this.router.push("/eventdetail/" + this.event.id);
       } else {
         console.log('error');
       }

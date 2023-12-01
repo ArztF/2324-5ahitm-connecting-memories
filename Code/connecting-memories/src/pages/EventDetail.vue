@@ -36,11 +36,10 @@ export default {
   },
 
   mounted () {
-    
+
     axios
         .get("http://localhost:8080/api/event/" + this.eventId)
         .then((response) => {
-          console.log(response.data)
           this.event = response.data
         ;})
         .catch(() => {

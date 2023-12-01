@@ -224,7 +224,7 @@ export default {
           .then((response) => {
             console.log("respoonse" + response);
             sessionStorage.setItem("addedEvent", response.data)
-            this.router.push("/event", "replace");
+            this.router.push("/event");
           })
           .catch((res) => {
             backendErrorToast(res.response.data);

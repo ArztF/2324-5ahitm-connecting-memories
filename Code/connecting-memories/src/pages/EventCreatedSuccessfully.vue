@@ -68,7 +68,7 @@ export default {
       if (!this.event.isPublic) {
         this.publishedEvent = false;
       } else {
-        this.router.push("/", "replace");
+        this.router.push("/");
       }
     },
 
@@ -77,11 +77,11 @@ export default {
         .delete("http://localhost:8080/api/event/" + this.eventId)
         .then((response) => (this.event = response.data.existingEvent));
 
-      this.router.push("/", "replace");
+      this.router.push("/");
     },
 
     publishedPrivateEvent() {
-      this.router.push("/myevents", "replace");
+      this.router.push("/myevents");
     },
   },
 

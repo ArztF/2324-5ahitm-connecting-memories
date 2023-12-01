@@ -2,9 +2,8 @@
   <div>
     <img
       alt="Silhouette of mountains"
-      :src="'http://localhost:8080/image/' + event?.bannerimg?.id"
+      :src="'http://localhost:8080/image/' + this.event?.bannerimg?.id"
     />
-    
     <ion-card-title class="eventDetailHeadline"
       >{{ event?.eventname }}
     </ion-card-title>
@@ -132,6 +131,7 @@ export default {
       checkIfAlreadyFavourized: false,
       userToken: null,
       userId: null,
+      imgSrc: null,
     };
   },
 
@@ -144,11 +144,12 @@ export default {
 
   
   async mounted() {
+    
     this.userId = sessionStorage.getItem("userToken");
     await axios
       .get("http://localhost:8080/api/user/" + this.userId)
       .then((response) => {
-        let existingUser = response.data.existingUser;
+        let existingUser = response.data;
         for (let favEvents of existingUser.favouriteEvents) {
           if (favEvents._id == this.event?._id) {
             this.favorized = true;
@@ -178,7 +179,7 @@ export default {
 
   methods: {
     editEvent() {
-      this.router.push("/eventedit/" + this.event._id, "replace");
+      this.router.push("/eventedit/" + this.event._id);
     },
 
     copyTextToClipboard,

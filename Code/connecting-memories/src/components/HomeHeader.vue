@@ -4,7 +4,7 @@
       <ion-toolbar>
         <div class="header-wrapper">
           <img
-            @click="() => router.push('/', 'back', 'replace')"
+            @click="() => router.push('/', 'back')"
             class="logo"
             alt="Silhouette of mountains"
             src="../../public/assets/Logo-Nico.svg"
@@ -98,7 +98,7 @@ export default {
     // logout function
     onClickLogout() {
       sessionStorage.removeItem("userToken");
-      this.router.push("/", "replace");
+      this.router.push("/");
     },
 
 
@@ -106,9 +106,9 @@ export default {
       let userToken = sessionStorage.getItem("userToken")
       if(userToken == null) {
         sessionStorage.setItem("comeFromWhichPage", "submitToEvent")
-        this.router.push('/login', 'replace')
+        this.router.push('/login')
       } else {
-        this.router.push('/' + redirectLink, 'replace')
+        this.router.push('/' + redirectLink)
       }
     }
   },

@@ -13,7 +13,7 @@
     "start": "npm run build && electron .",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "dev": "(npm run serve) & (cd ../connecting-memories-server; npm start --watch)",
+    "dev": "(npm run serve)",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",

@@ -91,6 +91,8 @@ export default {
         groupAdmin: {id: user.id},
         image: {id: imageId}
       })
+
+       this.router.push('/')
     },
   },
 };

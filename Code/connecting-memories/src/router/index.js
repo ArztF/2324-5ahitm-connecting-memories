@@ -15,11 +15,17 @@ import RegisteredEvent from '../pages/RegisteredEvents.vue';
 import EventEdit from '../pages/EventEdit.vue'
 import FavoriteEvents from '../pages/FavoriteEvents.vue'
 import CreateGroup from '../pages/CreateGroup.vue'
+import GroupPreview from "@/pages/GroupPreview.vue";
 
 const routes = [
   {
     path: '/',
-    redirect: '/event'
+    redirect: '/group'
+  },
+  {
+    path: '/group',
+    name: 'GroupPreview',
+    component: GroupPreview
   },
   {
     path: '/event',

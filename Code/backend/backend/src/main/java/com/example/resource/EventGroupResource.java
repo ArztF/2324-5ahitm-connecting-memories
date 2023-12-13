@@ -3,6 +3,7 @@ package com.example.resource;
 import com.example.model.EventGroup;
 import com.example.repository.EventGroupRepository;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
@@ -21,6 +22,7 @@ public class EventGroupResource {
     }
 
     @POST
+    @Transactional
     @Path("addEventGroup")
     @Consumes(MediaType.APPLICATION_JSON)
     public EventGroup persistGroup(EventGroup eventGroup) {

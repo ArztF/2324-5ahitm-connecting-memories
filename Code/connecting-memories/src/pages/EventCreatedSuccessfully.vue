@@ -81,7 +81,7 @@ export default {
     },
 
     publishedPrivateEvent() {
-      this.router.push("/myevents");
+      this.router.push("/mygroups");
     },
   },
 

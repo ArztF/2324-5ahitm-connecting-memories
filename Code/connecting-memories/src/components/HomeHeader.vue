@@ -22,7 +22,7 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <div class="menu-buttons" @click="onRedirectClicked('myevents')">Meine erstellten Events</div><br>
+        <div class="menu-buttons" @click="onRedirectClicked('mygroups')">Von mir erstellte Gruppen</div><br>
 
 
         <div

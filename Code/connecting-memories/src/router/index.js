@@ -9,11 +9,11 @@ import LoginPage from '../pages/LoginPage.vue'
 import RegistrationPage from '../pages/RegistrationPage.vue'
 import EventCreatedSuccessfully from '../pages/EventCreatedSuccessfully.vue'
 import ProfilePage from '../pages/ProfilePage.vue';
-import MyEvents from '../pages/MyEvents.vue';
 import PaymentPage from '../pages/PaymentPage.vue';
 import EventEdit from '../pages/EventEdit.vue'
 import CreateGroup from '../pages/CreateGroup.vue'
 import GroupPreview from "@/pages/GroupPreview.vue";
+import MyGroups from "@/pages/MyGroups.vue";
 
 const routes = [
   {
@@ -76,9 +76,9 @@ const routes = [
     component: ProfilePage
   },
   {
-    path: '/myevents',
-    name: 'MyEvents',
-    component: MyEvents
+    path: '/mygroups',
+    name: 'MyGroups',
+    component: MyGroups
   },
   {
     path: '/payment',

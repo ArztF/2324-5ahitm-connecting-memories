@@ -34,6 +34,6 @@ public class EventGroupResource {
     @Path("byOwnerId/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<EventGroup> getEventGroupByOwnerId(@PathParam("id") long id) {
-        return eventGroupRepository.find("id", id).stream().toList();
+        return eventGroupRepository.find("groupAdmin.id", id).stream().toList();
     }
 }

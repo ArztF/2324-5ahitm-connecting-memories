@@ -63,7 +63,8 @@ export default {
 
     methods: {
         showEventsInGroup() {
-                this.router.push("/event/" + this.group.id);
+            sessionStorage.setItem("groupId", this.group.id);
+            this.router.push("/event/" + this.group.id);
         }
     },
 };

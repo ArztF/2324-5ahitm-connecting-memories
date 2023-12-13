@@ -26,6 +26,12 @@ public class EventResource {
         return eventRepository.findById(id);
     }
 
+    @GET
+    @Path("/getByGroupId/{id}")
+    public List<Event> getEventsByGroupId(@PathParam("id") Long id) {
+        return eventRepository.find("eventGroup.id", id).stream().toList();
+    }
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional

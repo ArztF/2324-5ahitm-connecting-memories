@@ -65,8 +65,9 @@ export default {
   },
 
   mounted() {
+      let id = sessionStorage.getItem("groupId")
       axios
-      .get("http://localhost:8080/api/event")
+      .get("http://localhost:8080/api/event/getByGroupId/" + id)
       .then((response) => {
         this.events = response.data
     })

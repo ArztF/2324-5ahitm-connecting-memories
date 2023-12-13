@@ -69,7 +69,7 @@ export default {
   mounted() {
     axios.get("http://localhost:8080/api/user/" + this.id).then((response) => {
   
-      this.user = response.data.existingUser;
+      this.user = response.data;
       this.vorname = this.user.vorname;
       this.nachname = this.user.nachname;
       this.username = this.user.username;

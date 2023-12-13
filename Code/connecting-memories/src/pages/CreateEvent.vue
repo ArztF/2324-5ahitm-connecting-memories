@@ -74,9 +74,7 @@
           value="Gruppen Id"
         >
           <option value="" selected disabled hidden>Gruppen Id</option>
-          <div v-for="(group, index) in groups">
-            <option :value="group.id">{{ group.groupName }}</option>
-          </div>
+            <option v-for="(group, index) in groups" :key="index" :value="group.id">{{ group.groupName }}</option>
         </select>
       </div>
       <br />
@@ -137,8 +135,10 @@ export default {
     } else {
       this.router.push("/createevent");
       this.userDetails = sessionStorage.getItem("userToken");
-      await axios.get('http://localhost:8080/api/eventgroup/byOwnerId' + this.userDetails).then((response) => {
+      console.log(typeof this.userDetails);
+      await axios.get('http://localhost:8080/api/eventgroup/byOwnerId/' + this.userDetails).then((response) => {
         this.groups = response.data
+        console.log(this.groups);
       })
     }
   },
@@ -172,6 +172,9 @@ export default {
       }
       if (this.endDate < this.startDate && this.endDate.length > 0) {
         this.invalidInputs.push("Enddatum darf nicht vor Startdatum sein");
+      }
+      if(this.groupId == '') {
+        this.invalidInputs.push('Gruppe')
       }
       if (this.isPublicEvent != "true" && this.isPublicEvent != "false") {
         this.invalidInputs.push("Public oder Private");
@@ -219,8 +222,6 @@ export default {
               user = response.data
             })
 
-            console.log(user);
-
         // then the event with the image id will be POSTED
         await axios
           .post("http://localhost:8080/api/event", {
@@ -236,7 +237,7 @@ export default {
             ticketpreis: this.ticketPrice,
             isPublic: this.isPublicEvent,
             owner: {id: user.id},
-            isInGroup: false
+            eventGroup: {id: this.groupId}
           })
           .then((response) => {
             console.log("respoonse" + response);

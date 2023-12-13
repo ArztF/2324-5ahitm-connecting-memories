@@ -6,6 +6,7 @@ import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class EventResource {
     }
 
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
     public Event createEvent(Event event) {
         eventRepository.persist(event);

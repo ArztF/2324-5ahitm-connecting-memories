@@ -18,7 +18,4 @@ public class EventGroup extends PanacheEntity {
 
     @OneToMany(mappedBy = "eventGroup")
     public List<GroupParticipant> participants;
-
-    @OneToMany(mappedBy = "eventGroupId")
-    public List<EventOfGroup> eventOfGroup;
 }

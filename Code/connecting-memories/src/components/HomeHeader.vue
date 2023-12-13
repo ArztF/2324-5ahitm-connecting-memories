@@ -37,6 +37,13 @@
           Mein Profil
         </div>
         <br />
+        <div
+          @click="onRedirectClicked('createGroup')"
+          class="menu-buttons"
+        >
+          Gruppe erstellen
+        </div>
+        <br />
         <div class="menu-buttons" @click="onRedirectClicked('favoriteEvents')">Favorisierte Events</div>
         <br />
         <div class="menu-buttons" @click="onClickLogout()">Abmelden</div>

@@ -14,6 +14,7 @@ import PaymentPage from '../pages/PaymentPage.vue';
 import RegisteredEvent from '../pages/RegisteredEvents.vue';
 import EventEdit from '../pages/EventEdit.vue'
 import FavoriteEvents from '../pages/FavoriteEvents.vue'
+import CreateGroup from '../pages/CreateGroup.vue'
 
 const routes = [
   {
@@ -89,6 +90,11 @@ const routes = [
     path: '/favoriteEvents',
     name: 'Favoritisierte Events',
     component: FavoriteEvents
+  },
+  {
+    path: '/creategroup',
+    name: 'Create Group',
+    component: CreateGroup
   }
 ]
 

@@ -220,6 +220,7 @@ export default {
             ticketpreis: this.ticketPrice,
             isPublic: this.isPublicEvent,
             owner: {id: user.id},
+            isInGroup: false
           })
           .then((response) => {
             console.log("respoonse" + response);

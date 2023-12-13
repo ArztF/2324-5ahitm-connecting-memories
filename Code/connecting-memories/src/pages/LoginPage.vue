@@ -47,7 +47,6 @@ export default {
             password: this.password,
           })
           .then((response) => {
-            
             if (response.data.status != 403) {
               console.log(response.data);
               sessionStorage.setItem("userToken", response.data);

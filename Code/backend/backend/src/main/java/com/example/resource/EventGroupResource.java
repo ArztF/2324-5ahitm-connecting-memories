@@ -29,4 +29,11 @@ public class EventGroupResource {
         eventGroupRepository.persist(eventGroup);
         return eventGroup;
     }
+
+    @GET
+    @Path("byOwnerId/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<EventGroup> getEventGroupByOwnerId(@PathParam("id") long id) {
+        return eventGroupRepository.find("id", id).stream().toList();
+    }
 }

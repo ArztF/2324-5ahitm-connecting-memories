@@ -23,26 +23,21 @@
       </ion-header>
       <ion-content class="ion-padding">
         <div class="menu-buttons" @click="onRedirectClicked('myevents')">Meine erstellten Events</div><br>
-        <div
-          class="menu-buttons"
-          @click="onRedirectClicked('registeredEvents')"
-        >
-          Registrierte Events
-        </div>
-        <br />
-        <div
-          @click="onRedirectClicked('profile/' + this.userId)"
-          class="menu-buttons"
-        >
-          Mein Profil
-        </div>
-        <br />
+
+
         <div
           @click="onRedirectClicked('createGroup')"
           class="menu-buttons"
         >
           Gruppe erstellen
         </div>
+          <br />
+          <div
+            @click="onRedirectClicked('profile/' + this.userId)"
+            class="menu-buttons"
+          >
+              Mein Profil
+          </div>
         <br />
         <div class="menu-buttons" @click="onClickLogout()">Abmelden</div>
       </ion-content>

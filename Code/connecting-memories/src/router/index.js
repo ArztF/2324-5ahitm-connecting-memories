@@ -11,7 +11,6 @@ import EventCreatedSuccessfully from '../pages/EventCreatedSuccessfully.vue'
 import ProfilePage from '../pages/ProfilePage.vue';
 import MyEvents from '../pages/MyEvents.vue';
 import PaymentPage from '../pages/PaymentPage.vue';
-import RegisteredEvent from '../pages/RegisteredEvents.vue';
 import EventEdit from '../pages/EventEdit.vue'
 import CreateGroup from '../pages/CreateGroup.vue'
 import GroupPreview from "@/pages/GroupPreview.vue";
@@ -85,11 +84,6 @@ const routes = [
     path: '/payment',
     name: 'Payment',
     component: PaymentPage
-  },
-  {
-    path: '/registeredEvents',
-    name: 'Registrierte Events',
-    component: RegisteredEvent
   },
   {
     path: '/creategroup',

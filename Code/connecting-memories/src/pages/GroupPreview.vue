@@ -1,5 +1,5 @@
 <template>
-    <page-layout title="Connecting Memories">
+    <page-layout title="Gruppen">
         <ion-searchbar class="header-searchbar" v-model="input" @input="
           debounce(() => {
             input = $event.target.value;

@@ -47,7 +47,8 @@ export default {
             password: this.password,
           })
           .then((response) => {
-            if (response.data.status != 403) {
+            console.log(response.status)
+            if (response.status == 200) {
               console.log(response.data);
               sessionStorage.setItem("userToken", response.data);
               let comeFromWhichPage = sessionStorage.getItem("comeFromWhichPage");
@@ -57,11 +58,10 @@ export default {
                 this.router.push('/')
               }
               sessionStorage.setItem("comeFromWhichPage", "")
+            } else {
+                backendErrorToast("Login war nicht erfolgreich");
             }
           })
-          .catch((res) => {
-            backendErrorToast(res.response.data.message);
-          });
       }
       if(this.email.length == 0 && !this.email.includes('@') ){
         this.invalidInputs.push("Etwas Stimmt nicht mit deiner Email");

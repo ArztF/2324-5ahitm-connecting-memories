@@ -8,6 +8,7 @@ import java.util.List;
 @Entity
 public class EventGroup extends PanacheEntity {
     public String groupName;
+    public String description;
     @ManyToOne
     @JoinColumn(name = "owner_id")
     public Customer groupAdmin;

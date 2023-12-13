@@ -24,8 +24,8 @@ public class EventOfGroupResource {
     @Transactional
     @Path("addEventToGroup")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addEventToGroup(Event event, EventOfGroup eventOfGroup) {
+    public void addEventToGroup(Event event) {
         eventRepository.persist(event);
-        eventOfGroupRepository.persist(eventOfGroup);
+        // eventOfGroupRepository.persist(eventOfGroup);
     }
 }

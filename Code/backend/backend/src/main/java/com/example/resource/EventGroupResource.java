@@ -25,7 +25,7 @@ public class EventGroupResource {
     @Transactional
     @Path("addEventGroup")
     @Consumes(MediaType.APPLICATION_JSON)
-    public EventGroup persistGroup(EventGroup eventGroup) {
+    public EventGroup createGroup(EventGroup eventGroup) {
         eventGroupRepository.persist(eventGroup);
         return eventGroup;
     }

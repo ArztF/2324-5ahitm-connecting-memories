@@ -25,6 +25,10 @@ public class Event extends PanacheEntity {
     @JoinColumn(name = "owner_id")
     public Customer owner;
 
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    public EventGroup eventGroup;
+
     @OneToMany(mappedBy = "event")
     public List<Participants> participantsList;
 }

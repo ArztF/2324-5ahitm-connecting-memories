@@ -22,22 +22,22 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <div class="menu-buttons" @click="onRedirectClicked('myevents')">Meine erstellten Events</div><br>
+        <div class="menu-buttons" @click="onRedirectClicked('mygroups')">Von mir erstellte Gruppen</div><br>
+
+
         <div
-          class="menu-buttons"
-          @click="onRedirectClicked('registeredEvents')"
-        >
-          Registrierte Events
-        </div>
-        <br />
-        <div
-          @click="onRedirectClicked('profile/' + this.userId)"
+          @click="onRedirectClicked('createGroup')"
           class="menu-buttons"
         >
-          Mein Profil
+          Gruppe erstellen
         </div>
-        <br />
-        <div class="menu-buttons" @click="onRedirectClicked('favoriteEvents')">Favorisierte Events</div>
+          <br />
+          <div
+            @click="onRedirectClicked('profile/' + this.userId)"
+            class="menu-buttons"
+          >
+              Mein Profil
+          </div>
         <br />
         <div class="menu-buttons" @click="onClickLogout()">Abmelden</div>
       </ion-content>

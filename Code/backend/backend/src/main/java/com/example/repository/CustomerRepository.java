@@ -41,7 +41,7 @@ public class CustomerRepository implements PanacheRepository<Customer> {
 
             if (customer.password.equals(hashedPassword)){
                 return customer.id;
-            }else {
+            } else {
                 return null;
             }
 

@@ -1,5 +1,5 @@
 <template>
-  <page-layout title="Connecting Memories">
+  <page-layout title="Events">
     <ion-searchbar class="header-searchbar" v-model="input" @input="
           debounce(() => {
             input = $event.target.value;
@@ -65,8 +65,9 @@ export default {
   },
 
   mounted() {
+      let id = sessionStorage.getItem("groupId")
       axios
-      .get("http://localhost:8080/api/event")
+      .get("http://localhost:8080/api/event/getByGroupId/" + id)
       .then((response) => {
         this.events = response.data
     })

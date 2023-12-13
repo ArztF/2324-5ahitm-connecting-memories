@@ -68,6 +68,14 @@
           placeholder="Ticketpreis ab"
           v-model="ticketPrice"
         />
+         <select
+          class="create-event-input"
+          v-model="groupId"
+          value="Gruppen Id"
+        >
+          <option value="" selected disabled hidden>Gruppen Id</option>
+            <option v-for="(group, index) in groups" :key="index" :value="group.id">{{ group.groupName }}</option>
+        </select>
       </div>
       <br />
       <ion-button
@@ -112,17 +120,26 @@ export default {
       ticketPrice: "",
       isPublicEvent: Boolean,
       invalidInputs: [],
-      typedInLocation: ""
+      typedInLocation: "",
+      groupId: 0,
+      groups: [],
+      userDetails: 0
     };
   },
 
-  mounted() {
+  async mounted() {
     // dont let the user access this page if he isnt logged in
     let userToken = sessionStorage.getItem("userToken");
     if (userToken == null) {
       this.router.push("/login");
     } else {
       this.router.push("/createevent");
+      this.userDetails = sessionStorage.getItem("userToken");
+      console.log(typeof this.userDetails);
+      await axios.get('http://localhost:8080/api/eventgroup/byOwnerId/' + this.userDetails).then((response) => {
+        this.groups = response.data
+        console.log(this.groups);
+      })
     }
   },
 
@@ -156,6 +173,9 @@ export default {
       if (this.endDate < this.startDate && this.endDate.length > 0) {
         this.invalidInputs.push("Enddatum darf nicht vor Startdatum sein");
       }
+      if(this.groupId == '') {
+        this.invalidInputs.push('Gruppe')
+      }
       if (this.isPublicEvent != "true" && this.isPublicEvent != "false") {
         this.invalidInputs.push("Public oder Private");
       } else {
@@ -185,7 +205,6 @@ export default {
         this.ticketPrice = "";
         this.isPublicEvent = null;
       } else {
-        let userDetails = sessionStorage.getItem("userToken");
         if (this.endDate.length == 0) {
           this.endDate = this.startDate;
         }
@@ -198,12 +217,10 @@ export default {
           })
         let user
         await axios
-            .get("http://localhost:8080/api/user/" + userDetails)  
+            .get("http://localhost:8080/api/user/" + this.userDetails)  
             .then((response) => {
               user = response.data
             })
-
-            console.log(user);
 
         // then the event with the image id will be POSTED
         await axios
@@ -220,6 +237,7 @@ export default {
             ticketpreis: this.ticketPrice,
             isPublic: this.isPublicEvent,
             owner: {id: user.id},
+            eventGroup: {id: this.groupId}
           })
           .then((response) => {
             console.log("respoonse" + response);

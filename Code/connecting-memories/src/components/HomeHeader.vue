@@ -44,8 +44,6 @@
           Gruppe erstellen
         </div>
         <br />
-        <div class="menu-buttons" @click="onRedirectClicked('favoriteEvents')">Favorisierte Events</div>
-        <br />
         <div class="menu-buttons" @click="onClickLogout()">Abmelden</div>
       </ion-content>
     </ion-menu>

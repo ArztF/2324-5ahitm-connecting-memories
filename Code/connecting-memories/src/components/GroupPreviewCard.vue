@@ -1,11 +1,8 @@
 <template>
     <ion-card
             class="ion-card-container"
-            @click="onClickDetailView"
+            @click="showEventsInGroup"
     >
-<!--        <pre>-->
-<!--            {{ group }}-->
-<!--        </pre>-->
         <img
                 alt="Silhouette of mountains"
                 class="preview-card-image"
@@ -14,7 +11,7 @@
         <ion-card-header class="event-preview-header">
             <div class="event-preview-name-icon-wrapper">
                 <ion-card-title class="event-preview-title">{{
-                    group?.groupname
+                    group?.groupName
                     }}</ion-card-title>
                 <slot />
             </div>
@@ -29,7 +26,6 @@ import {
     IonCardTitle,
 } from "@ionic/vue";
 import { useIonRouter } from "@ionic/vue";
-import { formatDate } from '@/utils/format.js';
 import {
     calendarOutline,
     informationCircleOutline,
@@ -63,23 +59,11 @@ export default {
             type: Object,
             required: true,
         },
-        isClickable: {
-            type: Boolean,
-            required: false,
-            default: true
-        }
     },
 
     methods: {
-        formatDate,
-
-
-        onClickDetailView() {
-            if(this.isClickable) {
-                this.router.push("/eventdetail/" + this.group.id);
-            } else {
-                console.log('error');
-            }
+        showEventsInGroup() {
+                this.router.push("/event/" + this.group.id);
         }
     },
 };

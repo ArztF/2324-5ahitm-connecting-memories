@@ -28,7 +28,7 @@ const routes = [
     component: GroupPreview
   },
   {
-    path: '/event',
+    path: '/event/:id',
     name: 'EventPreview',
     component: EventPreview
   },

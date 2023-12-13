@@ -20,6 +20,7 @@ public class Event extends PanacheEntity {
     public String veranstalter;
     public Long ticketpreis;
     public Boolean isPublic;
+    public Boolean isInGroup;
 
     @ManyToOne
     @JoinColumn(name = "owner_id")

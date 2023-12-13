@@ -1,10 +1,11 @@
 <template>
   <page-layout title="Events">
-    <ion-searchbar class="header-searchbar" v-model="input" @input="
+    <ion-searchbar v-if="events?.length !== 0"  class="header-searchbar" v-model="input" @input="
           debounce(() => {
             input = $event.target.value;
           })
         "></ion-searchbar>
+
     <div class="event-preview-card-wrapper">
       <event-preview-card
         v-for="(event, index) in events"

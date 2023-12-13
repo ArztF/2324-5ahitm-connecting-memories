@@ -68,6 +68,16 @@
           placeholder="Ticketpreis ab"
           v-model="ticketPrice"
         />
+         <select
+          class="create-event-input"
+          v-model="groupId"
+          value="Gruppen Id"
+        >
+          <option value="" selected disabled hidden>Gruppen Id</option>
+          <div v-for="(group, index) in groups">
+            <option :value="group.id">{{ group.groupName }}</option>
+          </div>
+        </select>
       </div>
       <br />
       <ion-button
@@ -112,17 +122,24 @@ export default {
       ticketPrice: "",
       isPublicEvent: Boolean,
       invalidInputs: [],
-      typedInLocation: ""
+      typedInLocation: "",
+      groupId: 0,
+      groups: [],
+      userDetails: 0
     };
   },
 
-  mounted() {
+  async mounted() {
     // dont let the user access this page if he isnt logged in
     let userToken = sessionStorage.getItem("userToken");
     if (userToken == null) {
       this.router.push("/login");
     } else {
       this.router.push("/createevent");
+      this.userDetails = sessionStorage.getItem("userToken");
+      await axios.get('http://localhost:8080/api/eventgroup/byOwnerId' + this.userDetails).then((response) => {
+        this.groups = response.data
+      })
     }
   },
 
@@ -185,7 +202,6 @@ export default {
         this.ticketPrice = "";
         this.isPublicEvent = null;
       } else {
-        let userDetails = sessionStorage.getItem("userToken");
         if (this.endDate.length == 0) {
           this.endDate = this.startDate;
         }
@@ -198,7 +214,7 @@ export default {
           })
         let user
         await axios
-            .get("http://localhost:8080/api/user/" + userDetails)  
+            .get("http://localhost:8080/api/user/" + this.userDetails)  
             .then((response) => {
               user = response.data
             })

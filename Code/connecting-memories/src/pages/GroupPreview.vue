@@ -1,13 +1,9 @@
 <template>
     <page-layout title="Gruppen">
-        <ion-searchbar class="header-searchbar" v-model="input" @input="
-          debounce(() => {
-            input = $event.target.value;
-          })
-        "></ion-searchbar>
+        <ion-searchbar class="header-searchbar" v-model="input"></ion-searchbar>
         <div class="event-preview-card-wrapper">
             <group-preview-card
-                    v-for="(group, index) in groups"
+                    v-for="(group, index) in filteredList()"
                     :key="index"
                     :group="group"
             />
@@ -40,6 +36,14 @@ export default {
     },
 
     methods: {
+
+        filteredList () {
+            if (this.input.length > 0) {
+                return this.groups.filter((el) => el.groupName.toLowerCase().includes(this.input.toLowerCase()) )
+            } else {
+                return this.groups
+            }
+        },
 
         onClickChangeFilter(id) {
             let chipid = document.getElementById(id);

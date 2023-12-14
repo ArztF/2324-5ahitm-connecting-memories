@@ -4,12 +4,11 @@ import com.example.model.GroupParticipant;
 import com.example.repository.GroupParticipantRepository;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.hibernate.engine.jdbc.mutation.spi.BindingGroup;
+
+import java.util.List;
 
 @Path("api/groupparticipant/")
 public class GroupParticipantResource {
@@ -23,5 +22,12 @@ public class GroupParticipantResource {
     public GroupParticipant signUpToGroup(GroupParticipant groupParticipant) {
         groupParticipantRepository.persist(groupParticipant);
         return groupParticipant;
+    }
+
+    @GET
+    @Path("getAll")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<GroupParticipant> getAllParticipants() {
+        return groupParticipantRepository.findAll().stream().toList();
     }
 }

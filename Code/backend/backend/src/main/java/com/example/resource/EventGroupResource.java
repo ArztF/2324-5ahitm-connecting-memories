@@ -2,6 +2,7 @@ package com.example.resource;
 
 import com.example.model.EventGroup;
 import com.example.repository.EventGroupRepository;
+import com.example.repository.EventRepository;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
@@ -20,6 +21,14 @@ public class EventGroupResource {
     public List<EventGroup> getAllEventGroups() {
         return eventGroupRepository.listAll();
     }
+
+    @GET
+    @Path("getById/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public EventGroup getGroupById(@PathParam("id") long id) {
+        return eventGroupRepository.findById(id);
+    }
+
 
     @POST
     @Transactional

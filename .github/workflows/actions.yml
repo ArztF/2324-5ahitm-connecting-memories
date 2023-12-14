@@ -85,8 +85,8 @@ jobs:
 
       - name: Debug Maven Build
         run: |
-          pwd
-          ls -l
+          Write-Host "Current Directory: $PWD"
+          Get-ChildItem
           cd Code/backend/backend
           mvn clean install -B
 
@@ -94,7 +94,7 @@ jobs:
         run: |
           cd Code/backend/backend
           mvn clean install -B
-          
+
       - name: Run electron on windows  
         if: startsWith(matrix.os, 'windows-latest')
         run: |

@@ -2,7 +2,7 @@
   <div>
     <img
       alt="Silhouette of mountains"
-      :src="'http://localhost:3000/image/' + event?.bannerimg"
+      :src="'http://localhost:8080/image/' + this.event?.bannerimg?.id"
     />
     <ion-card-title class="eventDetailHeadline"
       >{{ event?.eventname }}
@@ -91,7 +91,6 @@ import SmallMap from "./SmallMap.vue";
 import { useIonRouter } from "@ionic/vue";
 import axios from "axios";
 import { presentToast } from '@/utils/toast.js';
-import { parseJwt } from '@/utils/parseJwt.js';
 import { formatDate } from '@/utils/format.js';
 import { copyTextToClipboard } from '@/utils/copyText.js'
 
@@ -132,6 +131,7 @@ export default {
       checkIfAlreadyFavourized: false,
       userToken: null,
       userId: null,
+      imgSrc: null,
     };
   },
 
@@ -142,16 +142,14 @@ export default {
     },
   },
 
-  // Get the UserToken and then check if it has favorized Events, in order to show it in the Favourized-Events-Page
+  
   async mounted() {
-    this.userToken = sessionStorage.getItem("userToken");
-    console.log(this.userToken);
-    this.userId = parseJwt(this.userToken);
-    console.log(this.userId);
+    
+    this.userId = sessionStorage.getItem("userToken");
     await axios
-      .get("http://localhost:3000/user/" + this.userId.user.id)
+      .get("http://localhost:8080/api/user/" + this.userId)
       .then((response) => {
-        let existingUser = response.data.existingUser;
+        let existingUser = response.data;
         for (let favEvents of existingUser.favouriteEvents) {
           if (favEvents._id == this.event?._id) {
             this.favorized = true;
@@ -181,14 +179,14 @@ export default {
 
   methods: {
     editEvent() {
-      this.router.push("/eventedit/" + this.event._id, "replace");
+      this.router.push("/eventedit/" + this.event._id);
     },
 
     copyTextToClipboard,
 
     favorizeEvent(eventId) {
       axios
-        .get("http://localhost:3000/user/" + this.userId.user.id)
+        .get("http://localhost:8080/api/user/" + this.userId.user.id)
         .then((response) => {
           let existingUser = response.data.existingUser;
           for (let favEvents of existingUser.favouriteEvents) {
@@ -201,7 +199,7 @@ export default {
             existingUser.favouriteEvents.push(eventId);
             axios
               .put(
-                "http://localhost:3000/user/" + this.userId.user.id,
+                "http://localhost:8080/api/user/" + this.userId.user.id,
                 existingUser
               )
               .then((response) => {
@@ -216,7 +214,7 @@ export default {
             );
             axios
               .put(
-                "http://localhost:3000/user/" + this.userId.user.id,
+                "http://localhost:8080/api/user/" + this.userId.user.id,
                 existingUser
               )
               .then((response) => {
@@ -236,7 +234,6 @@ export default {
     },
 
     presentToast,
-    parseJwt,
     formatDate
   },
 };

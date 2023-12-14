@@ -63,30 +63,25 @@ export default {
   },
 
   methods: {
-    // after you submited you inputs of the createevent you will get to this page and then you have 2 options
-
-    // first option is to publish the event
     publishEvent() {
-      console.log(this.event.isPublic);
+      console.log(this.event);
       if (!this.event.isPublic) {
         this.publishedEvent = false;
       } else {
-        this.router.push("/", "replace");
+        this.router.push("/");
       }
     },
 
-    // second option is to delete the event if you are not satisfied
     deleteEvent() {
       axios
-        .delete("http://localhost:3000/event/" + this.eventId)
+        .delete("http://localhost:8080/api/event/" + this.eventId)
         .then((response) => (this.event = response.data.existingEvent));
 
-      this.router.push("/", "replace");
+      this.router.push("/");
     },
 
-    // if you have created a private event you will get to another page where you can copy your invitation link
     publishedPrivateEvent() {
-      this.router.push("/myevents", "replace");
+      this.router.push("/mygroups");
     },
   },
 
@@ -100,7 +95,7 @@ export default {
   mounted() {
     this.eventId = sessionStorage.getItem("addedEvent");
     axios
-      .get("http://localhost:3000/event/" + this.eventId)
+      .get("http://localhost:8080/api/event/" + this.eventId)
       .then((response) => (this.event = response.data.existingEvent))
       .catch(() => {
         console.log("error");

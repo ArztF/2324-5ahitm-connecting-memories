@@ -77,7 +77,7 @@ export default {
   // with every reload of the page it will get all events from the db an will be saved in the global variable event
   mounted() {
     axios
-      .get("http://localhost:3000/event/" + this.eventId)
+      .get("http://localhost:8080/api/event/" + this.eventId)
       .then((response) => {
         this.event = response.data.existingEvent;
         this.currentEventName = this.event?.eventname;
@@ -126,24 +126,21 @@ export default {
   },
 
   methods: {
-    // function to update the event
     async onClickSubmit() {
       await axios
-        .put("http://localhost:3000/event/" + this.eventId, this.updateValues)
+        .put("http://localhost:8080/api/event/" + this.eventId, this.updateValues)
         .then((response) => {
           console.log(response);
-          this.router.push("/event", "replace");
+          this.router.push("/event");
         });
     },
 
-    // format the date in the following format YYYY-MM-DD
     formatDate(inDate) {
       dayjs.locale(de);
       const date = dayjs(inDate);
       return date.format("YYYY-MM-DD");
     },
 
-    // if there are invalid inputs the following message will be displayed
     async presentToast() {
       let errorMessage = "";
       for (let i = 0; i < this.invalidInputs.length; i++) {

@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
     <ion-icon
-      @click="() => router.push('/', 'back', 'replace')"
+      @click="() => router.push('/', 'back')"
       :icon="homeOutline"
       size="large"
     />
@@ -51,9 +51,9 @@ export default {
       let userToken = sessionStorage.getItem("userToken")
       if(userToken == null) {
         sessionStorage.setItem("comeFromWhichPage", "createEvent")
-        this.router.push('/login', 'replace')
+        this.router.push('/login')
       } else {
-        this.router.push('/createevent', 'replace')
+        this.router.push('/createevent')
       }
     },
 
@@ -62,9 +62,9 @@ export default {
       let userToken = sessionStorage.getItem("userToken")
       if(userToken == null) {
         sessionStorage.setItem("comeFromWhichPage", "submitToEvent")
-        this.router.push('/login', 'replace')
+        this.router.push('/login')
       } else {
-        this.router.push('/submittoevent', 'replace')
+        this.router.push('/submittoevent')
       }
     }
   }

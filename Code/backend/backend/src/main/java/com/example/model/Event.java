@@ -11,7 +11,8 @@ public class Event extends PanacheEntity {
     public String eventname;
     public String location;
     public String locationcords;
-    public String bannerimg;
+    @OneToOne
+    public Image bannerimg;
     public Date startdate;
     public Date enddate;
     public String beschreibung;
@@ -23,6 +24,10 @@ public class Event extends PanacheEntity {
     @ManyToOne
     @JoinColumn(name = "owner_id")
     public Customer owner;
+
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    public EventGroup eventGroup;
 
     @OneToMany(mappedBy = "event")
     public List<Participants> participantsList;

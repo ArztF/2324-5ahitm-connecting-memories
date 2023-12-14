@@ -34,11 +34,14 @@ export default {
       event: null
     };
   },
-  // with every reload of the page it will get all events from the db an will be saved in the global variable event
+
   mounted () {
+
     axios
-        .get("http://localhost:3000/event/" + this.eventId)
-        .then((response) => (this.event = response.data.existingEvent))
+        .get("http://localhost:8080/api/event/" + this.eventId)
+        .then((response) => {
+          this.event = response.data
+        ;})
         .catch(() => {
           console.log("error");
         });

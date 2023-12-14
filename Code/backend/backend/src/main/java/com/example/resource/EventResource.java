@@ -6,6 +6,7 @@ import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 
 import java.util.List;
 
@@ -25,7 +26,14 @@ public class EventResource {
         return eventRepository.findById(id);
     }
 
+    @GET
+    @Path("/getByGroupId/{id}")
+    public List<Event> getEventsByGroupId(@PathParam("id") Long id) {
+        return eventRepository.find("eventGroup.id", id).stream().toList();
+    }
+
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
     public Event createEvent(Event event) {
         eventRepository.persist(event);
@@ -38,7 +46,6 @@ public class EventResource {
     public Event updateEvent(@PathParam("id") Long id, Event updatedEvent) {
         Event event = eventRepository.findById(id);
         if (event != null) {
-            // Update event fields as needed
             event.eventname = updatedEvent.eventname;
             event.location = updatedEvent.location;
             event.bannerimg = updatedEvent.bannerimg;
@@ -52,8 +59,6 @@ public class EventResource {
             event.startdate = updatedEvent.startdate;
             event.ticketpreis = updatedEvent.ticketpreis;
             event.veranstalter = updatedEvent.veranstalter;
-
-
             eventRepository.persist(event);
         }
         return event;

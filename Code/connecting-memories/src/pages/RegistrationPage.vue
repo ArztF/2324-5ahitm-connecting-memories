@@ -4,7 +4,7 @@
       <div id="register-back-button">
         <ion-icon
           :icon="chevronBackOutline"
-          @click="() => router.push('/login', 'back', 'replace')"
+          @click="() => router.push('/login', 'back')"
         />
       </div>
       <div class="register">
@@ -93,7 +93,6 @@ export default {
 
   methods: {
     async submitClicked() {
-      // check if the input fields are not empty
       if (
         this.vorname.length > 3 &&
         this.nachname.length > 3 &&
@@ -102,7 +101,7 @@ export default {
         this.password1.length >= 8 &&
         this.password1 === this.password2
       ) {
-        // if they are correct create a json with the data which is pushed to the db
+    
         const user = {
           vorname: this.vorname,
           nachname: this.nachname,
@@ -112,19 +111,19 @@ export default {
           geburtsdatum: this.geburtsdatum,
           isVeranstalter: false,
         };
-        // post the user in the db
+        
         axios
-          .post("http://localhost:3000/auth/register", user)
+          .post("http://localhost:8080/api/user/register", user)
           .then((response) => {
             console.log(response);
-            // forward the user
-            this.router.push("/login", "forward", "replace");
+            
+            this.router.push("/login", "forward");
           })
           .catch((res) => {
             backendErrorToast(res.response.data.message);
           });
       }
-      // check if the inputs are valid
+      
       if (
         this.vorname.length < 3 &&
         this.nachname.length < 3 &&
@@ -135,33 +134,33 @@ export default {
       ) {
         this.invalidInputs.push("Es darf kein Feld leer sein!");
       }
-      // check vorname
+      
       if (this.vorname.length < 3) {
         this.invalidInputs.push("Vorname");
       }
-      // check nachname
+      
       if (this.nachname.length < 3) {
         this.invalidInputs.push("Nachname");
       }
-      // check username
+      
       if (this.username.length < 3) {
         this.invalidInputs.push("Username");
       }
-      // check email
+      
       if (!this.email.includes("@")) {
         this.invalidInputs.push("Email");
       }
-      // check password
+      
       if (this.password1.length <= 8) {
         this.invalidInputs.push("Passwort");
       }
-      // check password
+      
       if (this.password1 !== this.password2) {
         this.invalidInputs.push(
           "Passwort stimmt nicht mit dem ersten Passwort überein!"
         );
       }
-      // if there is an error display it
+      
       if (this.invalidInputs.length != 0) {
         this.presentToast();
       }

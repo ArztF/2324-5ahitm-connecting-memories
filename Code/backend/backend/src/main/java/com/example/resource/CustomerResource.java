@@ -5,7 +5,12 @@ import com.example.repository.CustomerRepository;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.UriInfo;
+import com.example.dtos.LoginUserDto;
 
+import java.net.URI;
 import java.util.List;
 
 @Path("api/user/")
@@ -13,7 +18,27 @@ public class CustomerResource {
     @Inject
     CustomerRepository customerRepository;
 
+
+    @Transactional
+    @POST
+    @Path("/register")
+    @Produces(MediaType.APPLICATION_JSON)
+    public URI createUser(Customer customer, @Context UriInfo uriInfo) {
+        customerRepository.createUser(customer);
+        return uriInfo.getAbsolutePathBuilder().path(Long.toString(customer.id)).build();
+    }
+
+    @POST
+    @Path("/login")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Long loginUser(LoginUserDto loginData) {
+        Long test = customerRepository.loginUser(loginData);
+        System.out.println(test);
+        return 1L;
+    }
+
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Customer> getCustomers() {
         return customerRepository.listAll();
     }
@@ -22,6 +47,12 @@ public class CustomerResource {
     @Path("/{id}")
     public Customer getCustomerById(@PathParam("id") Long id) {
         return customerRepository.findById(id);
+    }
+
+    @GET
+    @Path("/email/{email}")
+    public Customer getCustomerByEmail(@PathParam("email") String email) {
+        return customerRepository.findByEmail(email);
     }
 
     @POST

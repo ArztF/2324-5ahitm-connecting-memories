@@ -27,28 +27,28 @@
         placeholder="Beschreibung"
         v-model="description"
       />
-      <div class="radio-container">
-        <div class="radio-create-event">
-          <label class="label-radio">
-            <input
-              type="radio"
-              name="isPublicEvent"
-              value="true"
-              v-model="isPublicEvent"
-            />
-            <span>Öffentlich</span>
-          </label>
-          <label class="label-radio">
-            <input
-              type="radio"
-              name="isPublicEvent"
-              value="false"
-              v-model="isPublicEvent"
-            />
-            <span>Privat</span>
-          </label>
-        </div>
-      </div>
+<!--      <div class="radio-container">-->
+<!--        <div class="radio-create-event">-->
+<!--          <label class="label-radio">-->
+<!--            <input-->
+<!--              type="radio"-->
+<!--              name="isPublicEvent"-->
+<!--              value="true"-->
+<!--              v-model="isPublicEvent"-->
+<!--            />-->
+<!--            <span>Öffentlich</span>-->
+<!--          </label>-->
+<!--          <label class="label-radio">-->
+<!--            <input-->
+<!--              type="radio"-->
+<!--              name="isPublicEvent"-->
+<!--              value="false"-->
+<!--              v-model="isPublicEvent"-->
+<!--            />-->
+<!--            <span>Privat</span>-->
+<!--          </label>-->
+<!--        </div>-->
+<!--      </div>-->
       <div class="create-event-no-flex-box">
         <select
           class="create-event-input"
@@ -68,6 +68,14 @@
           placeholder="Ticketpreis ab"
           v-model="ticketPrice"
         />
+         <select
+          class="create-event-input"
+          v-model="groupId"
+          value="Gruppen Id"
+        >
+          <option value="" selected disabled hidden>Gruppen Id</option>
+            <option v-for="(group, index) in groups" :key="index" :value="group.id">{{ group.groupName }}</option>
+        </select>
       </div>
       <br />
       <ion-button
@@ -87,7 +95,6 @@ import axios from "axios";
 import { useIonRouter, IonButton } from "@ionic/vue";
 import PlacesCompletion from '../components/PlacesCompletion.vue';
 import { backendErrorToast } from '@/utils/toast.js'
-import { parseJwt } from '@/utils/parseJwt.js'
 export default {
   components: {
     PageLayout,
@@ -113,17 +120,26 @@ export default {
       ticketPrice: "",
       isPublicEvent: Boolean,
       invalidInputs: [],
-      typedInLocation: ""
+      typedInLocation: "",
+      groupId: 0,
+      groups: [],
+      userDetails: 0
     };
   },
 
-  mounted() {
+  async mounted() {
     // dont let the user access this page if he isnt logged in
     let userToken = sessionStorage.getItem("userToken");
     if (userToken == null) {
       this.router.push("/login");
     } else {
       this.router.push("/createevent");
+      this.userDetails = sessionStorage.getItem("userToken");
+      console.log(typeof this.userDetails);
+      await axios.get('http://localhost:8080/api/eventgroup/byOwnerId/' + this.userDetails).then((response) => {
+        this.groups = response.data
+        console.log(this.groups);
+      })
     }
   },
 
@@ -157,15 +173,10 @@ export default {
       if (this.endDate < this.startDate && this.endDate.length > 0) {
         this.invalidInputs.push("Enddatum darf nicht vor Startdatum sein");
       }
-      if (this.isPublicEvent != "true" && this.isPublicEvent != "false") {
-        this.invalidInputs.push("Public oder Private");
-      } else {
-        if (this.isPublicEvent == "true") {
-          this.isPublicEvent = true;
-        } else {
-          this.isPublicEvent = false;
-        }
+      if(this.groupId == '') {
+        this.invalidInputs.push('Gruppe')
       }
+
 
       const input = document.getElementById("file");
     const file = input.files[0]
@@ -173,10 +184,8 @@ export default {
     formData.set("name", "test")
     formData.set("file", file)
 
-      // if there is an error the POST will not be executed
       if (this.invalidInputs.length != 0) {
         this.presentToast();
-        // after the error message is displayed all the values will be reset to nothing, in order to get no errors or wrong inputs
         this.eventName = "";
         this.eventLocation = "";
         this.startDate = "";
@@ -186,43 +195,46 @@ export default {
         this.ticketPrice = "";
         this.isPublicEvent = null;
       } else {
-        let user = sessionStorage.getItem("userToken");
-        let userDetails = this.parseJwt(user);
         if (this.endDate.length == 0) {
           this.endDate = this.startDate;
         }
         let imageId;
-        // first the image will be POSTED in the image Collection
         await axios
-          .post("http://localhost:3000/image", formData)
+          .post("http://localhost:8080/image", formData)
           .then((response) => {
-            imageId = response.data._id;
+            imageId = response.data;
           })
-
-        // then the event with the image id will be POSTED
+        let user
         await axios
-          .post("http://localhost:3000/event", {
+            .get("http://localhost:8080/api/user/" + this.userDetails)  
+            .then((response) => {
+              user = response.data
+            })
+
+        await axios
+          .post("http://localhost:8080/api/event", {
             eventname: this.eventName,
             location: this.typedInLocation,
             locationcords: "HTL Leonding",
-            bannerimg: imageId,
+            bannerimg: {id: imageId},
             startdate: this.startDate,
             enddate: this.endDate,
             beschreibung: this.description,
             kategorie: this.kategorie,
             veranstalter: "HTL Leonding",
             ticketpreis: this.ticketPrice,
-            isPublic: this.isPublicEvent,
-            owner: userDetails.user.id,
+            isPublic: "true",
+            owner: {id: user.id},
+            eventGroup: {id: this.groupId}
           })
           .then((response) => {
-            sessionStorage.setItem("addedEvent", response.data.newEvent._id)
-            this.router.push("/eventadded", "replace");
+            console.log("respoonse" + response);
+            sessionStorage.setItem("addedEvent", response.data)
+              let id = sessionStorage.getItem("groupId")
+            this.router.push("/event/" + id);
           })
           .catch((res) => {
-            // if some inputs are not valid after the backend validation the errormessage will be displayed
-            backendErrorToast(res.response.data.message);
-            // all the values will be reset to nothing, in order to get no errors or wrong inputs
+            backendErrorToast(res.response.data);
             this.eventName = "";
             this.eventLocation = "";
             this.startDate = "";
@@ -234,8 +246,6 @@ export default {
           });
       }
     },
-
-    parseJwt,
     
     async presentToast() {
       let errorMessage = "";
@@ -255,8 +265,6 @@ export default {
       await toast.present();
       this.invalidInputs = [];
     },
-
-    // if there is a invalid backend validation the following error message will be displayed
     backendErrorToast
   },
 };

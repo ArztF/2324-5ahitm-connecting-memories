@@ -1,14 +1,13 @@
 <template>
     <page-layout title="Gruppe Beitreten">
           <group-preview-card :group="group" />
-
          <div class="show-invitation-code-box">
           <ion-button
             @click="submitToGroup"
             class="button-invitation-code"
             type="submit"
-            >Beitreten</ion-button
-          >
+            >Beitreten
+          </ion-button>
         </div>
     </page-layout>
 </template>

@@ -9,12 +9,6 @@
     </ion-card-title>
     <div class="event-preview-header-icon-box">
       <ion-icon :icon="imageOutline"></ion-icon>
-      <ion-icon
-        v-if="!favorized"
-        @click="favorizeEvent(event?._id)"
-        :icon="bookmarkOutline"
-      ></ion-icon>
-      <ion-icon v-else @click="favorizeEvent()" :icon="bookmark"></ion-icon>
       <ion-icon @click="editEvent" :icon="pencilOutline"></ion-icon>
     </div>
     <ion-card-content>
@@ -50,16 +44,6 @@
       <div class="event-preview-content">
         <ion-icon :icon="ticketOutline"></ion-icon>
         <p>ab {{ event?.ticketpreis }}€</p>
-      </div>
-      <div v-if="!event?.isPublic" class="event-preview-content">
-        <ion-icon :icon="keyOutline"></ion-icon>
-        <p>{{ event?._id }}</p>
-        <ion-icon
-          :icon="copyOutline"
-          @click="copyTextToClipboard(event?._id)"
-          class="copy-button"
-          >Text kopieren</ion-icon
-        >
       </div>
       <div class="event-preview-content-category">
         <p style="text-align: left; margin-top: 1%">{{ event?.kategorie }}</p>
@@ -179,55 +163,10 @@ export default {
 
   methods: {
     editEvent() {
-      this.router.push("/eventedit/" + this.event._id);
+      this.router.push("/eventedit/" + this.event.id);
     },
 
     copyTextToClipboard,
-
-    favorizeEvent(eventId) {
-      axios
-        .get("http://localhost:8080/api/user/" + this.userId.user.id)
-        .then((response) => {
-          let existingUser = response.data.existingUser;
-          for (let favEvents of existingUser.favouriteEvents) {
-            if (favEvents._id == eventId) {
-              this.checkIfAlreadyFavourized = true;
-            }
-          }
-
-          if (!this.checkIfAlreadyFavourized) {
-            existingUser.favouriteEvents.push(eventId);
-            axios
-              .put(
-                "http://localhost:8080/api/user/" + this.userId.user.id,
-                existingUser
-              )
-              .then((response) => {
-                console.log(response);
-                this.favorized = true;
-                presentToast("Sie haben dieses Event zu ihren Favouriten hinzugefügt!")
-              });
-          } else {
-            existingUser.favouriteEvents.splice(
-              existingUser.favouriteEvents.indexOf(eventId),
-              1
-            );
-            axios
-              .put(
-                "http://localhost:8080/api/user/" + this.userId.user.id,
-                existingUser
-              )
-              .then((response) => {
-                console.log(response);
-                this.favorized = false;
-                presentToast("Sie haben dieses Event aus ihren Favouriten entfernt!")
-              });
-          }
-        })
-        .catch(() => {
-          this.presentToastError();
-        });
-    },
 
     setOpen(isOpen) {
       this.isOpen = isOpen;

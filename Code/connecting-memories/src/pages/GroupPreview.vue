@@ -7,7 +7,7 @@
                     :key="index"
                     :group="group"
             />
-            <h1 v-if="noEventsFound">Es wurden keine Events gefunden</h1>
+            <button @click="addparticipants">Participants anlegen</button>
         </div>
     </page-layout>
 </template>
@@ -31,7 +31,6 @@ export default {
             input: "",
             publicEvents: null,
             noEventsFound: false,
-            debounce: this.createDebounce(),
         };
     },
 
@@ -52,19 +51,9 @@ export default {
             chipid.style.border = "#fff";
         },
 
-        createDebounce () {
-            let timeout = null
-            return function (fnc) {
-                clearTimeout(timeout)
-                timeout = setTimeout(async () => {
-                    fnc()
-                    axios.post("http://localhost:3000/search/searchByKeyword", { keyword: this.input })
-                        .then((response) => {
-                            console.log(response.data);
-                            this.groups = response.data
-                        })
-                }, 500)
-            }
+        addparticipants () {
+            axios
+                .post()
         }
     },
 

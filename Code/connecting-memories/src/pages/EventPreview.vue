@@ -1,11 +1,11 @@
 <template>
   <page-layout title="Events">
-    <ion-searchbar v-if="events?.length !== 0"  class="header-searchbar" v-model="input" @input="
+    <ion-searchbar v-if="events?.length !== 0 && 1 !== 1"  class="header-searchbar" v-model="input" @input="
           debounce(() => {
             input = $event.target.value;
           })
         "></ion-searchbar>
-
+      <event-header></event-header>
     <div class="event-preview-card-wrapper">
       <event-preview-card
         v-for="(event, index) in events"
@@ -20,12 +20,13 @@
 <script>
 import { addCircleOutline, enterOutline, searchOutline } from "ionicons/icons";
 import EventPreviewCard from "../components/EventPreviewCard.vue";
+import EventHeader from "../components/EventHeader.vue"
 import PageLayout from "@/components/PageLayout.vue";
 import axios from "axios";
 import { IonSearchbar } from "@ionic/vue";
 
 export default {
-  components: { EventPreviewCard, PageLayout, IonSearchbar },
+  components: { EventPreviewCard, PageLayout, IonSearchbar, EventHeader },
 
   data() {
     return {

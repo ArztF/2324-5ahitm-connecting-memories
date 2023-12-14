@@ -27,28 +27,28 @@
         placeholder="Beschreibung"
         v-model="description"
       />
-      <div class="radio-container">
-        <div class="radio-create-event">
-          <label class="label-radio">
-            <input
-              type="radio"
-              name="isPublicEvent"
-              value="true"
-              v-model="isPublicEvent"
-            />
-            <span>Öffentlich</span>
-          </label>
-          <label class="label-radio">
-            <input
-              type="radio"
-              name="isPublicEvent"
-              value="false"
-              v-model="isPublicEvent"
-            />
-            <span>Privat</span>
-          </label>
-        </div>
-      </div>
+<!--      <div class="radio-container">-->
+<!--        <div class="radio-create-event">-->
+<!--          <label class="label-radio">-->
+<!--            <input-->
+<!--              type="radio"-->
+<!--              name="isPublicEvent"-->
+<!--              value="true"-->
+<!--              v-model="isPublicEvent"-->
+<!--            />-->
+<!--            <span>Öffentlich</span>-->
+<!--          </label>-->
+<!--          <label class="label-radio">-->
+<!--            <input-->
+<!--              type="radio"-->
+<!--              name="isPublicEvent"-->
+<!--              value="false"-->
+<!--              v-model="isPublicEvent"-->
+<!--            />-->
+<!--            <span>Privat</span>-->
+<!--          </label>-->
+<!--        </div>-->
+<!--      </div>-->
       <div class="create-event-no-flex-box">
         <select
           class="create-event-input"
@@ -176,15 +176,7 @@ export default {
       if(this.groupId == '') {
         this.invalidInputs.push('Gruppe')
       }
-      if (this.isPublicEvent != "true" && this.isPublicEvent != "false") {
-        this.invalidInputs.push("Public oder Private");
-      } else {
-        if (this.isPublicEvent == "true") {
-          this.isPublicEvent = true;
-        } else {
-          this.isPublicEvent = false;
-        }
-      }
+
 
       const input = document.getElementById("file");
     const file = input.files[0]
@@ -192,10 +184,8 @@ export default {
     formData.set("name", "test")
     formData.set("file", file)
 
-      // if there is an error the POST will not be executed
       if (this.invalidInputs.length != 0) {
         this.presentToast();
-        // after the error message is displayed all the values will be reset to nothing, in order to get no errors or wrong inputs
         this.eventName = "";
         this.eventLocation = "";
         this.startDate = "";
@@ -209,7 +199,6 @@ export default {
           this.endDate = this.startDate;
         }
         let imageId;
-        // first the image will be POSTED in the image Collection
         await axios
           .post("http://localhost:8080/image", formData)
           .then((response) => {
@@ -222,7 +211,6 @@ export default {
               user = response.data
             })
 
-        // then the event with the image id will be POSTED
         await axios
           .post("http://localhost:8080/api/event", {
             eventname: this.eventName,
@@ -235,14 +223,15 @@ export default {
             kategorie: this.kategorie,
             veranstalter: "HTL Leonding",
             ticketpreis: this.ticketPrice,
-            isPublic: this.isPublicEvent,
+            isPublic: "true",
             owner: {id: user.id},
             eventGroup: {id: this.groupId}
           })
           .then((response) => {
             console.log("respoonse" + response);
             sessionStorage.setItem("addedEvent", response.data)
-            this.router.push("/event");
+              let id = sessionStorage.getItem("groupId")
+            this.router.push("/event/" + id);
           })
           .catch((res) => {
             backendErrorToast(res.response.data);

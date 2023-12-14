@@ -31,6 +31,7 @@ export default {
             input: "",
             publicEvents: null,
             noEventsFound: false,
+            event: null
         };
     },
 
@@ -52,8 +53,20 @@ export default {
         },
 
         addparticipants () {
+            axios.get("http://localhost:8080/api/event/1")
+                .then((response) => {
+                    this.event = response.data
+                })
             axios
-                .post()
+                .post("http://localhost:8080/api/groupparticipant/signUpToGroup",
+                    {
+                        id: 1,
+                        eventgroup_id: this.event,
+                        customer_id: this.groups[0].groupAdmin
+                    })
+                .then((response) => {
+                    console.log(response)
+                })
         }
     },
 

@@ -92,7 +92,7 @@ export default {
         image: {id: imageId}
       })
 
-       this.router.push('/')
+       this.router.replace('/')
     },
   },
 };

@@ -1,5 +1,6 @@
 package com.example.resource;
 
+import com.example.model.Event;
 import com.example.model.GroupParticipant;
 import com.example.repository.GroupParticipantRepository;
 import jakarta.inject.Inject;
@@ -11,10 +12,17 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.MediaType;
 import org.hibernate.engine.jdbc.mutation.spi.BindingGroup;
 
+import java.util.List;
+
 @Path("api/groupparticipant/")
 public class GroupParticipantResource {
     @Inject
     GroupParticipantRepository groupParticipantRepository;
+
+    @GET
+    public List<GroupParticipant> getEvents() {
+        return groupParticipantRepository.listAll();
+    }
 
     @POST
     @Transactional

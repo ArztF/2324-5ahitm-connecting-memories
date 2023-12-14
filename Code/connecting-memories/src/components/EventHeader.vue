@@ -10,6 +10,7 @@
     >Text kopieren</ion-icon
     >
     </div>
+  <p>Diese Gruppe hat {{ groupParticipants }} Mitglieder</p>
 </template>
 
 <script>
@@ -30,7 +31,8 @@ import {copyOutline, keyOutline} from "ionicons/icons";
       data () {
           return {
               groupAdmin: null,
-              group: null
+              group: null,
+              groupParticipants: null
           }
       },
 
@@ -42,7 +44,12 @@ import {copyOutline, keyOutline} from "ionicons/icons";
                   this.groupAdmin = response.data.groupAdmin
                   this.group = response.data
               })
-          console.log(this.group)
+
+          await axios
+              .get("http://localhost:8080/api/groupparticipant/")
+              .then((response) => {
+                  this.groupParticipants = response.data
+              })
       }
   }
 </script>

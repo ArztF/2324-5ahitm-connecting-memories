@@ -6,7 +6,7 @@
         <img
                 alt="Silhouette of mountains"
                 class="preview-card-image"
-                :src="'http://localhost:8080/image/' + group.image.id"
+                :src="'http://localhost:8080/image/' + group?.image?.id"
         />
         <ion-card-header class="event-preview-header">
             <div class="event-preview-name-icon-wrapper">

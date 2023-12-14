@@ -1,19 +1,6 @@
 <template>
     <page-layout title="Gruppe Beitreten">
-        <ion-card
-            class="ion-card-container"
-            @click="showEventsInGroup"
-        >
-        
-        <ion-card-header class="event-preview-header">
-            <div class="event-preview-name-icon-wrapper">
-                <ion-card-title class="event-preview-title">
-                    {{ group?.groupName }}
-                </ion-card-title>
-                <slot />
-            </div>
-        </ion-card-header>
-        </ion-card>
+          <group-preview-card :group="group" />
 
          <div class="show-invitation-code-box">
           <ion-button
@@ -29,38 +16,43 @@
 <script>
 import PageLayout from "../components/PageLayout.vue";
 import axios from "axios";
-import { IonCard, IonCardHeader, IonCardTitle } from "@ionic/vue";
+import GroupPreviewCard from "@/components/GroupPreviewCard.vue";
 
 export default {
-  components: { PageLayout, IonCard, IonCardHeader, IonCardTitle },
+  components: {GroupPreviewCard, PageLayout },
   data() {
     return {
       groupId: 0,
       group: null,
-      userId: 0
+      customer: null
     };
   },
 
   async mounted() {
-    this.userId = sessionStorage.getItem("userToken");
+
     this.groupId = this.$route.query.id;
-    console.log(this.groupId);
 
     await axios
       .get("http://localhost:8080/api/eventgroup/getById/" + this.groupId)
       .then((response) => {
         this.group = response.data;
-        console.log(this.group);
       });
   },
 
   methods: {
     async submitToGroup() {
+        let userId = sessionStorage.getItem("userToken");
+        axios
+            .get("http://localhost:8080/api/user/" + userId)
+            .then((response) => {
+                this.customer = response.data
+            })
         await axios.post('http://localhost:8080/api/groupparticipant/signUpToGroup', {
-            customer: {id: this.userId},
-            eventGroup: {id: this.groupId}
+            customer: this.customer,
+            eventGroup: this.group
         }).then((response) => {
-            console.log(response);
+            console.log(response)
+            this.$router.replace('/events' + this.group.id)
         })
     }
   }

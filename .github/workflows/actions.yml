@@ -81,14 +81,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '11'
-
-      - name: Debug Maven Build
-        run: |
-          Write-Host "Current Directory: $PWD"
-          Get-ChildItem
-          cd Code/backend/backend
-          mvn clean install -B
+          java-version: '17'
 
       - name: Build with Maven
         run: |

@@ -67,6 +67,7 @@ export default {
                 .then((response) => {
                     console.log(response)
                 })
+            
         }
     },
 

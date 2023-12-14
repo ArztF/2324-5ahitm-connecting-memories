@@ -87,6 +87,14 @@ jobs:
         run: |
           cd Code/backend/backend
           mvn clean install -B
+          
+      - name: Debug Maven Build
+        run: |
+          pwd
+          ls -l
+          cd Code/backend/backend
+          mvn clean install -B
+      
 
       - name: Run electron on windows  
         if: startsWith(matrix.os, 'windows-latest')

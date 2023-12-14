@@ -1,14 +1,36 @@
 <template>
-  <p>Veranstalter: {{ groupAdmin?.vorname }} {{ groupAdmin?.nachname }}</p>
+  <p>Gruppen Admin: {{ groupAdmin?.vorname }} {{ groupAdmin?.nachname }}</p>
+    <div class="event-preview-conten">
+    <ion-icon :icon="keyOutline"></ion-icon>
+    <p>{{ group?.id }}</p>
+    <ion-icon
+            :icon="copyOutline()"
+            @click="copyTextToClipboard(group?.id)"
+            class="copy-button"
+    >Text kopieren</ion-icon
+    >
+    </div>
 </template>
 
 <script>
 
 import axios from "axios";
+import {IonIcon} from "@ionic/vue";
+import {copyTextToClipboard} from "@/utils/copyText";
+import {copyOutline, keyOutline} from "ionicons/icons";
   export default {
+      methods: {
+          keyOutline() {
+              return keyOutline
+          },
+          copyOutline() {
+              return copyOutline
+          }, copyTextToClipboard},
+      components: {IonIcon},
       data () {
           return {
-              groupAdmin: null
+              groupAdmin: null,
+              group: null
           }
       },
 
@@ -18,9 +40,9 @@ import axios from "axios";
               .get("http://localhost:8080/api/eventgroup/getById/" + id)
               .then((response) => {
                   this.groupAdmin = response.data.groupAdmin
+                  this.group = response.data
               })
-
-          console.log(this.groupAdmin)
+          console.log(this.group)
       }
   }
 </script>

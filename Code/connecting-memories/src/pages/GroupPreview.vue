@@ -52,6 +52,7 @@ export default {
             chipid.style.border = "#fff";
         },
 
+        
         addparticipants () {
             axios.get("http://localhost:8080/api/event/1")
                 .then((response) => {

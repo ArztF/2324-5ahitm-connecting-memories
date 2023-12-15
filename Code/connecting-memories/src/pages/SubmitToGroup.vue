@@ -22,9 +22,6 @@ export default {
   components: {GroupPreviewCard, PageLayout },
   setup() {
       const router = useIonRouter();
-      return {
-          router,
-      };
   },
   data() {
     return {

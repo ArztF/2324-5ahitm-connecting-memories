@@ -90,8 +90,21 @@ export default {
   setup() {
     const router = useIonRouter();
     return {
-        router
-    }
+      router,
+      locationOutline,
+      calendarOutline,
+      openOutline,
+      arrowBackOutline,
+      ticketOutline,
+      pricetagOutline,
+      megaphoneOutline,
+      keyOutline,
+      copyOutline,
+      bookmarkOutline,
+      bookmark,
+      imageOutline,
+      pencilOutline,
+    };
   },
 
   data() {

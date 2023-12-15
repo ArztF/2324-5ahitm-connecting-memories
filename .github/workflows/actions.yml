@@ -32,7 +32,7 @@ jobs:
         
       - name: Build
         run: |
-          cd Code/connecting-memories-server
+          cd Code/backend/backend
           docker build -t farzt/connecting-memories-backend .
 
       - name: Login into Docker

@@ -24,23 +24,6 @@ jobs:
           release_name: "Release ${{ github.event.repository.updated_at }}"
           overwrite: true 
 
-  build-push:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
-        
-      - name: Build
-        run: |
-          cd Code/backend/backend
-          docker build -t farzt/connecting-memories-backend .
-
-      - name: Login into Docker
-        run: docker login -u farzt -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
-      - name: Push latest to Docker
-        run: docker push farzt/connecting-memories-backend:latest   
-
   electron:
     runs-on: ${{ matrix.os }}
     

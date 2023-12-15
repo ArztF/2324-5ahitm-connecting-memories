@@ -48,7 +48,7 @@ import {copyOutline, keyOutline} from "ionicons/icons";
           await axios
               .get("http://localhost:8080/api/groupparticipant/")
               .then((response) => {
-                  this.groupParticipants = response.data
+                this.groupParticipants = response.data.length
               })
       }
   }

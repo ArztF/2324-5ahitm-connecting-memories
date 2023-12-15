@@ -1,0 +1,29 @@
+
+ion-card {
+  cursor: pointer;
+}
+
+.group-header {
+  align-items: center;
+  display: flex;
+  margin-top: 3px;  
+
+}
+
+.group-name-col {
+  margin-top: 3px;  
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 17px; /* Add padding as needed */
+}
+
+.group-picture {
+  width: 80px; /* Adjust the width of the image as needed */
+  height: 80px; /* Adjust the height of the image as needed */
+  margin-right: 16px; /* Add margin as needed to separate image and text */
+}
+
+.group-name {
+  margin-left: 16px; /* Adjust margin as needed */
+}

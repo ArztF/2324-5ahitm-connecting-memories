@@ -16,6 +16,7 @@ import './theme/registration.css'
 import './theme/eventCreatedSuccessfully.css'
 import './theme/profilePage.css'
 import './theme/payment.css'
+import './theme/groupPreview.css'
 
 
 /* Basic CSS for apps built with Ionic */

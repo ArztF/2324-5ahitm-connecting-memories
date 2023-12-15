@@ -111,8 +111,6 @@ export default {
     return {
       isOpen: false,
       cords: null,
-      favorized: false,
-      checkIfAlreadyFavourized: false,
       userToken: null,
       userId: null,
       imgSrc: null,

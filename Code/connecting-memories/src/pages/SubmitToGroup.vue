@@ -16,9 +16,13 @@
 import PageLayout from "../components/PageLayout.vue";
 import axios from "axios";
 import GroupPreviewCard from "@/components/GroupPreviewCard.vue";
+import {useIonRouter} from "@ionic/vue";
 
 export default {
   components: {GroupPreviewCard, PageLayout },
+  setup() {
+      const router = useIonRouter();
+  },
   data() {
     return {
       groupId: 0,
@@ -51,7 +55,7 @@ export default {
             eventGroup: this.group
         }).then((response) => {
             console.log(response)
-            this.$router.replace('/events/' + this.group.id)
+            this.router.replace('/events/' + this.group.id)
         })
     }
   }

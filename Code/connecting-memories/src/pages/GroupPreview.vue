@@ -7,7 +7,7 @@
                     :key="index"
                     :group="group"
             />
-            <button @click="addparticipants">Participants anlegen</button>
+<!--            <button @click="addparticipants">Participants anlegen</button>-->
         </div>
     </page-layout>
 </template>

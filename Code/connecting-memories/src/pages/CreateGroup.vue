@@ -1,6 +1,6 @@
 <template>
   <page-layout title="Create Group">
-    <div class="create-event" @keydown.enter="onClickSubmit()">
+    <div v-if="!groupCreated" class="create-event" @keydown.enter="onClickSubmit()">
       <input
         class="create-event-input"
         v-model="groupName"
@@ -20,6 +20,27 @@
         >CREATE GROUP</ion-button
       >
     </div>
+
+    <div v-if="groupCreated">
+      <h1>Mit folgendem Link können Sie andere Personen einladen!</h1>
+      <div style="margin-top:40%">
+        <div class="show-invitation-code-box">
+          <input
+            class="input-invitation-code"
+            type="text"
+            :value="invitationLink"
+          />
+        </div>
+        <div class="show-invitation-code-box">
+          <ion-button
+            @click="publishedGroup"
+            class="button-invitation-code"
+            type="submit"
+            >Fertig</ion-button
+          >
+        </div>
+      </div>
+    </div>
   </page-layout>
 </template>
 
@@ -35,6 +56,8 @@ export default {
       groupName: "",
       groupDescription: "",
       invalidInputs: [],
+      groupCreated: false,
+      invitationLink: ""
     };
   },
 
@@ -90,10 +113,16 @@ export default {
         description: this.groupDescription,
         groupAdmin: {id: user.id},
         image: {id: imageId}
+      }).then((response) => {
+        console.log(response);
+        this.invitationLink = 'http://localhost:8081/#/submitToGroup?id=' + response.data.id
+        this.groupCreated = true
       })
-
-       this.router.replace('/')
     },
+
+    publishedGroup() {
+      this.router.push('/')
+    }
   },
 };
 </script>

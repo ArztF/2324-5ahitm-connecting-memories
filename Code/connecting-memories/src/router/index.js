@@ -14,6 +14,7 @@ import EventEdit from '../pages/EventEdit.vue'
 import CreateGroup from '../pages/CreateGroup.vue'
 import GroupPreview from "@/pages/GroupPreview.vue";
 import MyGroups from "@/pages/MyGroups.vue";
+import SubmitToGroup from "@/pages/SubmitToGroup.vue";
 
 const routes = [
   {
@@ -89,6 +90,11 @@ const routes = [
     path: '/creategroup',
     name: 'Create Group',
     component: CreateGroup
+  },
+  {
+    path: '/submitToGroup',
+    name: 'Gruppe beitreten',
+    component: SubmitToGroup
   }
 ]
 

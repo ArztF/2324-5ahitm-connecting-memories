@@ -3,7 +3,7 @@ name: Deployment
 on:
   push:
     branches:
-      - 'new-backend'
+      - 'main'
 
 env:
   IMAGE_NAME: farzt/connecting-memories-backend
@@ -19,7 +19,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: Code/connecting-memories-server/connecting-memories.yml
+          file: Code/backend/backend/connecting-memories.yml
           tag: latest
           release_name: "Release ${{ github.event.repository.updated_at }}"
           overwrite: true 
@@ -32,7 +32,7 @@ jobs:
         
       - name: Build
         run: |
-          cd Code/connecting-memories-server
+          cd Code/backend/backend
           docker build -t farzt/connecting-memories-backend .
 
       - name: Login into Docker
@@ -72,7 +72,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            ~/.m2/repository
+            Code/backend/backend
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
@@ -81,11 +81,12 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '11'
+          java-version: '17'
 
       - name: Build with Maven
-        run: mvn clean install -B
-
+        run: |
+          cd Code/backend/backend
+          mvn clean install -B
 
       - name: Run electron on windows  
         if: startsWith(matrix.os, 'windows-latest')

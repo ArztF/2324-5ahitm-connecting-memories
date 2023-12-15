@@ -31,4 +31,5 @@ public class Event extends PanacheEntity {
 
     @OneToMany(mappedBy = "event")
     public List<Participants> participantsList;
+
 }

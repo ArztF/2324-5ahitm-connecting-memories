@@ -119,6 +119,7 @@ export default {
         this.groupCreated = true
       })
 
+       this.router.replace('/')
     },
 
     publishedGroup() {

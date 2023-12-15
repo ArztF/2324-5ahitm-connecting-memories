@@ -7,7 +7,7 @@
     <img
       alt="Silhouette of mountains"
       class="preview-card-image"
-      :src="'http://localhost:8080/image/' + event.bannerimg.id"
+      :src="'http://localhost:8080/image/' + event?.bannerimg?.id"
     />
     <ion-card-header class="event-preview-header">
       <div class="event-preview-name-icon-wrapper">
@@ -79,11 +79,6 @@ export default {
       type: Object,
       required: true,
     },
-    isClickable: {
-      type: Boolean,
-      required: false,
-      default: true
-    }
   },
 
   methods: {
@@ -91,11 +86,8 @@ export default {
 
     
     onClickDetailView() {
-      if(this.isClickable) {
+        console.log(this.event)
         this.router.push("/eventdetail/" + this.event.id);
-      } else {
-        console.log('error');
-      }
     }
   },
 };

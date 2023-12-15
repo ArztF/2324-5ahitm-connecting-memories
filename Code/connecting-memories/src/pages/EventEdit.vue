@@ -3,7 +3,6 @@
     <div class="create-event" @keydown.enter="onClickSubmit()">
       <event-preview-card
         style="margin-bottom: -1%"
-        :isClickable="false"
         :event="updateValues"
       ></event-preview-card>
       <div class="create-event1">
@@ -79,14 +78,16 @@ export default {
     axios
       .get("http://localhost:8080/api/event/" + this.eventId)
       .then((response) => {
-        this.event = response.data.existingEvent;
+        this.event = response.data;
         this.currentEventName = this.event?.eventname;
         this.currentEventLocation = this.event?.location;
         this.currentDescription = this.event?.beschreibung;
+        this.bannerimg = this.event?.bannerimg.id;
       })
       .catch(() => {
         console.log("error");
       });
+      console.log(this.event)
     // format the date
     this.startdate = this.formatDate(this.event?.startdate);
     this.enddate = this.formatDate(this.event?.enddate);
@@ -99,7 +100,7 @@ export default {
         eventname: this.currentEventName,
         location: this.currentEventLocation,
         beschreibung: this.currentDescription,
-        bannerimg: this.event?.bannerimg,
+        bannerimg: this.event?.bannerimg?.id,
         startdate: this.startdate,
         enddate: this.enddate,
       };

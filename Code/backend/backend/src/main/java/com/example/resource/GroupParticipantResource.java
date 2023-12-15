@@ -1,5 +1,6 @@
 package com.example.resource;
 
+import com.example.model.Event;
 import com.example.model.GroupParticipant;
 import com.example.repository.GroupParticipantRepository;
 import jakarta.inject.Inject;
@@ -14,6 +15,11 @@ import java.util.List;
 public class GroupParticipantResource {
     @Inject
     GroupParticipantRepository groupParticipantRepository;
+
+    @GET
+    public List<GroupParticipant> getEvents() {
+        return groupParticipantRepository.listAll();
+    }
 
     @POST
     @Transactional

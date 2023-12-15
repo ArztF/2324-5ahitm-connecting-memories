@@ -126,25 +126,6 @@ export default {
     },
   },
 
-  
-  async mounted() {
-    
-    this.userId = sessionStorage.getItem("userToken");
-    await axios
-      .get("http://localhost:8080/api/user/" + this.userId)
-      .then((response) => {
-        let existingUser = response.data;
-        for (let favEvents of existingUser.favouriteEvents) {
-          if (favEvents._id == this.event?._id) {
-            this.favorized = true;
-          }
-        }
-      })
-      .catch(() => {
-        console.log("error");
-      });
-  },
-
   watch: {
     event() {
       let url =

@@ -51,7 +51,7 @@ export default {
             eventGroup: this.group
         }).then((response) => {
             console.log(response)
-            this.$router.replace('/events' + this.group.id)
+            this.$router.replace('/events/' + this.group.id)
         })
     }
   }

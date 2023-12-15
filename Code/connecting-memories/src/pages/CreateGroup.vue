@@ -118,8 +118,6 @@ export default {
         this.invitationLink = 'http://localhost:8081/#/submitToGroup?id=' + response.data.id
         this.groupCreated = true
       })
-
-       this.router.replace('/')
     },
 
     publishedGroup() {

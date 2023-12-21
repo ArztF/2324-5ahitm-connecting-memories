@@ -47,7 +47,6 @@ export default {
             password: this.password,
           })
           .then((response) => {
-            console.log("res" + response)
             if (response.status == 200) {
               console.log(response.data);
               sessionStorage.setItem("userToken", response.data);

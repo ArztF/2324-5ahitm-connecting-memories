@@ -64,7 +64,6 @@ export default {
 
   methods: {
     publishEvent() {
-      console.log(this.event);
       if (!this.event.isPublic) {
         this.publishedEvent = false;
       } else {

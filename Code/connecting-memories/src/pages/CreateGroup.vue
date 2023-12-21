@@ -114,7 +114,6 @@ export default {
         groupAdmin: {id: user.id},
         image: {id: imageId}
       }).then((response) => {
-        console.log(response);
         this.invitationLink = 'http://localhost:8081/#/submitToGroup?id=' + response.data.id
         this.groupCreated = true
       })

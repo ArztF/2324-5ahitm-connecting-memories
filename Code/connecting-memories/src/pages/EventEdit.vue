@@ -87,7 +87,6 @@ export default {
       .catch(() => {
         console.log("error");
       });
-      console.log(this.event)
     // format the date
     this.startdate = this.formatDate(this.event?.startdate);
     this.enddate = this.formatDate(this.event?.enddate);

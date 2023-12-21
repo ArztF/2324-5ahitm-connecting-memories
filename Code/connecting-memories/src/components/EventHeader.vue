@@ -87,7 +87,6 @@ export default {
       .get("http://localhost:8080/api/event/getByGroupId/" + groupId)
       .then((response) => {
         this.events = response.data;
-        console.log(this.events);
       });
   },
 };

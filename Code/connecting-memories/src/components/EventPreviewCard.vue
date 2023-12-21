@@ -86,7 +86,6 @@ export default {
 
     
     onClickDetailView() {
-        console.log(this.event)
         this.router.push("/eventdetail/" + this.event.id);
     }
   },

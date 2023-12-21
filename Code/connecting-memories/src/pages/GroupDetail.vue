@@ -49,7 +49,6 @@ export default {
           fnc()
           axios.post("http://localhost:3000/search/searchByKeyword", { keyword: this.input })
                .then((response) => {
-               console.log(response.data);
                this.events = response.data
       })
         }, 500)

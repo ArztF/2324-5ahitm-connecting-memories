@@ -135,10 +135,8 @@ export default {
     } else {
       this.router.push("/createevent");
       this.userDetails = sessionStorage.getItem("userToken");
-      console.log(typeof this.userDetails);
       await axios.get('http://localhost:8080/api/eventgroup/byOwnerId/' + this.userDetails).then((response) => {
         this.groups = response.data
-        console.log(this.groups);
       })
     }
   },
@@ -228,7 +226,6 @@ export default {
             eventGroup: {id: this.groupId}
           })
           .then((response) => {
-            console.log("respoonse" + response);
             sessionStorage.setItem("addedEvent", response.data)
               let id = sessionStorage.getItem("groupId")
             this.router.push("/event/" + id);

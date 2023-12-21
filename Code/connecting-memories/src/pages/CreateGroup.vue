@@ -48,6 +48,7 @@
 import PageLayout from "../components/PageLayout.vue";
 import { useIonRouter } from "@ionic/vue";
 import axios from "axios";
+import {presentToast} from "../utils/toast"
 
 export default {
   components: { PageLayout },
@@ -78,6 +79,7 @@ export default {
   },
 
   methods: {
+    presentToast,
    async onClickSubmit() {
       if(this.groupName.length == 0) {
         this.invalidInputs.push('Gruppenname')
@@ -114,6 +116,7 @@ export default {
         groupAdmin: {id: user.id},
         image: {id: imageId}
       }).then((response) => {
+        this.presentToast("Gruppe wurde erstellt")
         this.invitationLink = 'http://localhost:8081/#/submitToGroup?id=' + response.data.id
         this.groupCreated = true
       })

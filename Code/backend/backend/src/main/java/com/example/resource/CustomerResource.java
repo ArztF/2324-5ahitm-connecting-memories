@@ -32,9 +32,10 @@ public class CustomerResource {
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
     public Long loginUser(LoginUserDto loginData) {
+        System.out.println(loginData.email);
         Long test = customerRepository.loginUser(loginData);
-        System.out.println(test);
-        return 1L;
+        System.out.println("res: " + test);
+        return test;
     }
 
     @GET

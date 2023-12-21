@@ -9,6 +9,8 @@ import jakarta.persistence.TypedQuery;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.util.List;
+
 import com.example.dtos.LoginUserDto;
 import org.bouncycastle.util.encoders.Hex;
 
@@ -30,7 +32,11 @@ public class CustomerRepository implements PanacheRepository<Customer> {
     }
 
     public Long loginUser(LoginUserDto loginData) {
-        Customer customer = find("email", loginData.email).firstResult();
+        TypedQuery<Customer> query = getEntityManager().createQuery(
+                "select c from Customer c where c.email = :email", Customer.class
+        );
+        query.setParameter("email", loginData.email);
+        List<Customer> cust = query.getResultList();
 
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -38,9 +44,11 @@ public class CustomerRepository implements PanacheRepository<Customer> {
                     loginData.password.getBytes(StandardCharsets.UTF_8));
             String hashedPassword = new String(Hex.encode(hash));
 
-
-            if (customer.password.equals(hashedPassword)){
-                return customer.id;
+            Customer[] customers = cust.toArray(new Customer[0]);
+            System.out.println(customers[0].password);
+            System.out.println(hashedPassword);
+            if (customers[0].password.equals(hashedPassword)){
+                return customers[0].id;
             } else {
                 return null;
             }

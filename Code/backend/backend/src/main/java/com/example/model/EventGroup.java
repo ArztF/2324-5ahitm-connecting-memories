@@ -1,5 +1,6 @@
 package com.example.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
 
@@ -17,5 +18,7 @@ public class EventGroup extends PanacheEntity {
     public Image image;
 
     @OneToMany(mappedBy = "eventGroup")
-    public List<GroupParticipant> participants;
+    @JsonIgnore
+    public List<GroupParticipant> groupParticipants;
+
 }

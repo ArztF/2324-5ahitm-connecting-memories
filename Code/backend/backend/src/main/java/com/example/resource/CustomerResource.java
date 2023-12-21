@@ -75,7 +75,6 @@ public class CustomerResource {
             customer.email = updatedCustomer.email;
             customer.username = updatedCustomer.username;
             customer.password = updatedCustomer.password;
-            customer.favouriteEvents = updatedCustomer.favouriteEvents;
             customer.isVeranstalter = updatedCustomer.isVeranstalter;
             customer.geburtsdatum = updatedCustomer.geburtsdatum;
             

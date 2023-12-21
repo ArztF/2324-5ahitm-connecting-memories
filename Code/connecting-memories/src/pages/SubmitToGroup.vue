@@ -51,10 +51,9 @@ export default {
         axios
             .get("http://localhost:8080/api/user/" + userId)
             .then((response) => {
-                this.customer = response.data
                 axios.post('http://localhost:8080/api/groupparticipant/signUpToGroup', {
-                    customer: this.customer,
-                    eventGroup: this.group
+                    customer: {id: response.data.id},
+                    eventGroup: {id: this.group.id}
                 }).then((response) => {
                     console.log(response)
                     this.router.replace('/events/' + this.group.id)

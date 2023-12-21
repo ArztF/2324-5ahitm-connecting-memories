@@ -29,7 +29,4 @@ public class Event extends PanacheEntity {
     @JoinColumn(name = "group_id")
     public EventGroup eventGroup;
 
-    @OneToMany(mappedBy = "event")
-    public List<Participants> participantsList;
-
 }

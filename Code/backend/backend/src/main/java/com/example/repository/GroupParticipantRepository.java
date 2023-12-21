@@ -13,7 +13,6 @@ import java.util.List;
 public class GroupParticipantRepository implements PanacheRepository<GroupParticipant> {
 
     public List<GroupParticipant> customerByCustomer(Long id) {
-        System.out.println(id);
         TypedQuery<GroupParticipant> query = getEntityManager().createQuery(
                 "select gp from GroupParticipant gp where gp.customer.id = :id", GroupParticipant.class
         );

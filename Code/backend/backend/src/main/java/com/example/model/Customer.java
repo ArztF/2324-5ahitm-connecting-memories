@@ -17,7 +17,4 @@ public class Customer extends PanacheEntity {
     public String password;
     public Date geburtsdatum;
     public Boolean isVeranstalter;
-
-    @OneToMany(mappedBy = "customer")
-    public List<Participants> favouriteEvents;
 }

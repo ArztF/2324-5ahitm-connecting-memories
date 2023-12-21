@@ -55,7 +55,6 @@ public class EventResource {
             event.kategorie = updatedEvent.kategorie;
             event.locationcords = updatedEvent.locationcords;
             event.owner = updatedEvent.owner;
-            event.participantsList = updatedEvent.participantsList;
             event.startdate = updatedEvent.startdate;
             event.ticketpreis = updatedEvent.ticketpreis;
             event.veranstalter = updatedEvent.veranstalter;

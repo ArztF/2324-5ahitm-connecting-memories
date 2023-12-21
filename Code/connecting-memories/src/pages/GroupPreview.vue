@@ -1,7 +1,7 @@
 <template>
     <page-layout title="Gruppen">
         <ion-searchbar class="header-searchbar" v-model="input"></ion-searchbar>
-        <div class="event-preview-card-wrapper" v-if="groups">
+        <div class="event-preview-card-wrapper" v-if="groups?.length > 0">
             <group-preview-card
                     v-for="(group, index) in filteredList()"
                     :key="index"

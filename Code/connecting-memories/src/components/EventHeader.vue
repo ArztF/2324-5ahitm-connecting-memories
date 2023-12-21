@@ -1,55 +1,114 @@
 <template>
-  <p>Gruppen Admin: {{ groupAdmin?.vorname }} {{ groupAdmin?.nachname }}</p>
-    <div class="event-preview-conten">
-    <ion-icon :icon="keyOutline"></ion-icon>
-    <p>{{ group?.id }}</p>
-    <ion-icon
-            :icon="copyOutline()"
-            @click="copyTextToClipboard(group?.id)"
-            class="copy-button"
-    >Text kopieren</ion-icon
-    >
+  <div>
+    <ion-card>
+      <ion-card-header>
+        <ion-row class="group-header">
+          <ion-col size="2">
+            <ion-avatar>
+              <ion-img
+                :src="'http://localhost:8080/image/' + group?.image?.id"
+                alt="Group Image"
+              ></ion-img>
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="10" class="group-name-col">
+            <ion-card-title class="group-name">{{
+              group?.groupName
+            }}</ion-card-title>
+            <p style="text-align: left; padding-left: 16px">
+              {{ group?.groupAdmin?.vorname }} {{ group?.groupAdmin?.nachname }}
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-card-header>
+    </ion-card>
+    <div style="margin-bottom: 150px">
+      <h1 class="heading">Events</h1>
+      <event-preview
+        v-for="(event, index) in events"
+        :key="index"
+        :event="event"
+      ></event-preview>
     </div>
-  <p>Diese Gruppe hat {{ groupParticipants }} Mitglieder</p>
+  </div>
 </template>
 
 <script>
-
+import { IonCard, IonCardHeader, IonCardTitle } from "@ionic/vue";
 import axios from "axios";
-import {IonIcon} from "@ionic/vue";
-import {copyTextToClipboard} from "@/utils/copyText";
-import {copyOutline, keyOutline} from "ionicons/icons";
-  export default {
-      methods: {
-          keyOutline() {
-              return keyOutline
-          },
-          copyOutline() {
-              return copyOutline
-          }, copyTextToClipboard},
-      components: {IonIcon},
-      data () {
-          return {
-              groupAdmin: null,
-              group: null,
-              groupParticipants: null
-          }
-      },
+import { copyTextToClipboard } from "@/utils/copyText";
+import { copyOutline, keyOutline } from "ionicons/icons";
+import EventPreview from "./EventPreview.vue";
 
-      async mounted () {
-          let id = sessionStorage.getItem("groupId")
-          await axios
-              .get("http://localhost:8080/api/eventgroup/getById/" + id)
-              .then((response) => {
-                  this.groupAdmin = response.data.groupAdmin
-                  this.group = response.data
-              })
+export default {
+  methods: {
+    keyOutline() {
+      return keyOutline;
+    },
+    copyOutline() {
+      return copyOutline;
+    },
+    copyTextToClipboard,
+  },
+  components: { EventPreview, IonCard, IonCardHeader, IonCardTitle },
+  data() {
+    return {
+      events: null,
+      groupParticipants: null,
+    };
+  },
+  props: {
+    group: {
+      type: Object,
+      required: true,
+    },
+  },
 
-          await axios
-              .get("http://localhost:8080/api/groupparticipant/")
-              .then((response) => {
-                  this.groupParticipants = response.data
-              })
-      }
-  }
+  async mounted() {
+    let groupId = sessionStorage.getItem("groupId");
+    //   await axios
+    //       .get("http://localhost:8080/api/groupparticipant/")
+    //       .then((response) => {
+    //           this.groupParticipants = response.data
+    //           let i = 0
+    //           for(const user of this.groupParticipants) {
+    //             if(i < 3) {
+    //                 if(i == 2) {
+    //                     this.participantText += user.username + ",..."
+    //                 } else {
+    //                     this.participantText += user.username * ", "
+    //                     i++;
+    //                 }
+    //             }
+    //           }
+    //       })
+
+    await axios
+      .get("http://localhost:8080/api/event/getByGroupId/" + groupId)
+      .then((response) => {
+        this.events = response.data;
+        console.log(this.events);
+      });
+  },
+};
 </script>
+
+<style scoped>
+/* Add your styles here */
+ion-card {
+    cursor: pointer;
+}
+
+.group-header {
+    align-items: center;
+    display: flex;
+}
+
+.group-name-col {
+    display: block;
+}
+
+.group-name {
+    margin-left: 16px; /* Adjust margin as needed */
+}
+</style>

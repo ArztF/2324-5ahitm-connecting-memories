@@ -1,32 +1,23 @@
-<template>
-  <page-layout title="Events">
+<template style="overflow: scroll">
+  <page-layout :title="events?.groupName">
     <ion-searchbar v-if="events?.length !== 0 && 1 !== 1"  class="header-searchbar" v-model="input" @input="
           debounce(() => {
             input = $event.target.value;
           })
         "></ion-searchbar>
-      <event-header></event-header>
-    <div class="event-preview-card-wrapper">
-      <event-preview-card
-        v-for="(event, index) in events"
-        :key="index"
-        :event="event"
-      />
-      <h1 v-if="noEventsFound">Es wurden keine Events gefunden</h1>
-    </div>
+      <event-header :group="events"></event-header>      
   </page-layout>
 </template>
 
 <script>
 import { addCircleOutline, enterOutline, searchOutline } from "ionicons/icons";
-import EventPreviewCard from "../components/EventPreviewCard.vue";
 import EventHeader from "../components/EventHeader.vue"
 import PageLayout from "@/components/PageLayout.vue";
 import axios from "axios";
 import { IonSearchbar } from "@ionic/vue";
 
 export default {
-  components: { EventPreviewCard, PageLayout, IonSearchbar, EventHeader },
+  components: { PageLayout, IonSearchbar, EventHeader },
 
   data() {
     return {
@@ -69,7 +60,7 @@ export default {
   mounted() {
       let id = sessionStorage.getItem("groupId")
       axios
-      .get("http://localhost:8080/api/event/getByGroupId/" + id)
+      .get("http://localhost:8080/api/eventgroup/getById/" + id)
       .then((response) => {
         this.events = response.data
     })
@@ -79,3 +70,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/* Add your styles here */
+.heading {
+  color: var(--ion-color-primary);
+}
+</style>

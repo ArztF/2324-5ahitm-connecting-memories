@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from '@ionic/vue-router';
 
-import EventPreview from '../pages/EventPreview.vue'
+import GroupDetail from '../pages/GroupDetail.vue'
 import EventDetail from '../pages/EventDetail.vue'
 import CreateEvent from '../pages/CreateEvent.vue'
 import SubmitToEvent from '../pages/SubmitToEvent.vue'
@@ -27,9 +27,9 @@ const routes = [
     component: GroupPreview
   },
   {
-    path: '/event/:id',
-    name: 'EventPreview',
-    component: EventPreview
+    path: '/group/:id',
+    name: 'GroupDetail',
+    component: GroupDetail
   },
   {
     path: '/eventdetail/:id',

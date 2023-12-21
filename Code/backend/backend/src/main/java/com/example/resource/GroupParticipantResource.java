@@ -36,4 +36,12 @@ public class GroupParticipantResource {
     public List<GroupParticipant> getAllParticipants() {
         return groupParticipantRepository.findAll().stream().toList();
     }
+
+    @GET
+    @Path("getByCustomerId/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<GroupParticipant> getByCustomerParticipant(@PathParam("id") Long id) {
+        System.out.println(id);
+        return groupParticipantRepository.customerByCustomer(id);
+    }
 }

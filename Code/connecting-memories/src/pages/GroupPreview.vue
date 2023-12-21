@@ -1,7 +1,7 @@
 <template>
     <page-layout title="Gruppen">
         <ion-searchbar class="header-searchbar" v-model="input"></ion-searchbar>
-        <div class="event-preview-card-wrapper">
+        <div class="event-preview-card-wrapper" v-if="groups">
             <group-preview-card
                     v-for="(group, index) in filteredList()"
                     :key="index"
@@ -9,6 +9,7 @@
             />
 <!--            <button @click="addparticipants">Participants anlegen</button>-->
         </div>
+        <h1 v-else>Sie sind noch keiner Gruppe beigetreten!</h1>
     </page-layout>
 </template>
 
@@ -72,8 +73,10 @@ export default {
     },
 
     mounted() {
+        let userToken = sessionStorage.getItem('userToken')
+        console.log(userToken);
         axios
-            .get("http://localhost:8080/api/eventgroup/getAll")
+            .get("http://localhost:8080/api/groupparticipant/getByCustomerId/" + userToken)
             .then((response) => {
                 this.groups = response.data
             })

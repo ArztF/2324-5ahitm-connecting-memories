@@ -17,6 +17,7 @@ import PageLayout from "../components/PageLayout.vue";
 import axios from "axios";
 import GroupPreviewCard from "@/components/GroupPreviewCard.vue";
 import {useIonRouter} from "@ionic/vue";
+import {presentToast} from "../utils/toast"
 
 export default {
   components: {GroupPreviewCard, PageLayout },
@@ -46,6 +47,7 @@ export default {
   },
 
   methods: {
+    presentToast,
     async submitToGroup() {
         let userId = sessionStorage.getItem("userToken");
         axios
@@ -55,6 +57,7 @@ export default {
                     customer: {id: response.data.id},
                     eventGroup: {id: this.group.id}
                 }).then((response) => {
+                    this.presentToast("Sie sind erfolgreich in die Gruppe beigetreten!")
                     console.log(response)
                     this.router.replace('/events/' + this.group.id)
                 })

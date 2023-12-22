@@ -5,7 +5,7 @@
             <group-preview-card
                     v-for="(group, index) in filteredList()"
                     :key="index"
-                    :group="group"
+                    :group="group?.eventGroup"
             />
 <!--            <button @click="addparticipants">Participants anlegen</button>-->
         </div>
@@ -78,6 +78,7 @@ export default {
         axios
             .get("http://localhost:8080/api/groupparticipant/getByCustomerId/" + userToken)
             .then((response) => {
+                console.log(response);
                 this.groups = response.data
             })
             .catch(() => {

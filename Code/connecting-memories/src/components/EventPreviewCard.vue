@@ -79,6 +79,10 @@ export default {
       type: Object,
       required: true,
     },
+    isClickable: {
+      type: Boolean,
+      required: false
+    }
   },
 
   methods: {

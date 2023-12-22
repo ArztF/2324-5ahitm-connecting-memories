@@ -226,9 +226,9 @@ export default {
             eventGroup: {id: this.groupId}
           })
           .then((response) => {
-            sessionStorage.setItem("addedEvent", response.data)
-              let id = sessionStorage.getItem("groupId")
-            this.router.push("/event/" + id);
+            console.log(response);
+            sessionStorage.setItem("addedEvent", response.data.id)
+            this.router.push("/eventadded");
           })
           .catch((res) => {
             backendErrorToast(res.response.data);

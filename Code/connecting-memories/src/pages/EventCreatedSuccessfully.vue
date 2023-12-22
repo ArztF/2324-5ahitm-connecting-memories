@@ -18,27 +18,6 @@
         >
       </div>
     </div>
-
-    <div v-if="!publishedEvent">
-      <h1>Mit folgendem Code können Sie andere Personen einladen!</h1>
-      <div style="margin-top:40%">
-        <div class="show-invitation-code-box">
-          <input
-            class="input-invitation-code"
-            type="text"
-            :value="this.eventId"
-          />
-        </div>
-        <div class="show-invitation-code-box">
-          <ion-button
-            @click="publishedPrivateEvent"
-            class="button-invitation-code"
-            type="submit"
-            >Fertig</ion-button
-          >
-        </div>
-      </div>
-    </div>
   </page-layout>
 </template>
 
@@ -47,6 +26,8 @@ import axios from "axios";
 import EventPreviewCard from "../components/EventPreviewCard.vue";
 import PageLayout from "../components/PageLayout.vue";
 import { useIonRouter } from "@ionic/vue";
+import {presentToast} from "../utils/toast"
+
 export default {
   components: {
     EventPreviewCard,
@@ -63,24 +44,21 @@ export default {
   },
 
   methods: {
+    presentToast,
     publishEvent() {
-      if (!this.event.isPublic) {
-        this.publishedEvent = false;
-      } else {
-        this.router.push("/");
-      }
+      this.presentToast("Event wurde erfolgreich erstellt!")
+      this.router.push("/");
     },
 
     deleteEvent() {
       axios
         .delete("http://localhost:8080/api/event/" + this.eventId)
-        .then((response) => (this.event = response.data.existingEvent));
+        .then((response) => {
+          this.event = response.data
+          this.presentToast("Event wurde nicht erstellt!")
+          this.router.push("/");
+        });
 
-      this.router.push("/");
-    },
-
-    publishedPrivateEvent() {
-      this.router.push("/mygroups");
     },
   },
 
@@ -95,7 +73,10 @@ export default {
     this.eventId = sessionStorage.getItem("addedEvent");
     axios
       .get("http://localhost:8080/api/event/" + this.eventId)
-      .then((response) => (this.event = response.data.existingEvent))
+      .then((response) => {
+        console.log(response);
+        this.event = response.data
+      })
       .catch(() => {
         console.log("error");
       });

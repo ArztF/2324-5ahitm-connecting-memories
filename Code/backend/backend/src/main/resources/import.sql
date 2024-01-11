@@ -1,6 +1,6 @@
-/*INSERT INTO Image (id,imageName, imageData) VALUES
+INSERT INTO Image (id,imageName, imageData) VALUES
                                              (1,'Banner1', 'x0123456789ABCDEF'), -- Replace '\\x0123456789ABCDEF' with your actual binary data
-                                             (2,'Banner2', 'x0123456789ABCDEF');*/
+                                             (2,'Banner2', 'x0123456789ABCDEF');
 
 
 insert into CUSTOMER (ID, vorname, nachname, username, email, password, geburtsdatum, isVeranstalter) VALUES (1, 'Nico', 'Obermair', 'nicooo2302', 'nico.obermair@gmail.com', '307fd56085a6ed891cfb2c38276d7853b122968754378f1153e0127f3a764a0f', '2005-02-23', true);
@@ -27,10 +27,9 @@ insert into EVENT (ID, eventname, location, locationcords, startdate, enddate, b
 insert into EVENT (ID, eventname, location, locationcords, startdate, enddate, beschreibung, kategorie, veranstalter, ticketpreis, isPublic) VALUES
     (3, 'Test3', 'test3', 'test3', '2023-10-12 00:00:00', '2023-10-12 00:00:00', 'test', 'test', 'test', 10, true);
 */
-INSERT INTO EventGroup (id,groupName, description, owner_id, image_id) VALUES
-                                                                        (1,'Group1', 'Description1', 1, 1),
-                                                                        (2,'Group2', 'Description2', 2, 2);
-                                                                        -- Add more rows as needed.
+INSERT INTO eventgroup(id, image_id, owner_id, description, groupname) VALUES (1,1, 1, 'Description1','Group1'),
+                                                                              (2,2,2,'Description2','Group2');
+
 
 -- Insert data into GroupParticipant table
 INSERT INTO GroupParticipant (id,customer_id, eventgroup_id) VALUES

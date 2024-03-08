@@ -12,7 +12,7 @@
     ></ion-icon>
     <ion-icon
       @click="() => onSubmitToEventClicked()"
-      :icon="enterOutline"
+      :icon="personOutline"
       size="large"
     ></ion-icon>
   </div>
@@ -22,8 +22,8 @@
 import { IonIcon } from "@ionic/vue";
 import {
   addCircleOutline,
-  enterOutline,
   homeOutline,
+  personOutline
 } from "ionicons/icons";
 import { useIonRouter } from '@ionic/vue';
 
@@ -40,8 +40,8 @@ export default {
     const router = useIonRouter();
     return {
       addCircleOutline,
-      enterOutline,
       homeOutline,
+      personOutline,
       router,
     };
   },
@@ -64,7 +64,7 @@ export default {
         sessionStorage.setItem("comeFromWhichPage", "submitToEvent")
         this.router.push('/login')
       } else {
-        this.router.push('/submittoevent')
+        this.router.push('/profile/:id')
       }
     }
   }

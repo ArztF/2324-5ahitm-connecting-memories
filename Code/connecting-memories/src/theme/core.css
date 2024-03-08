@@ -1,28 +1,37 @@
-body {
-    background-color: var(--ion-color-primary);
-    height:100%;
-    --background: var(--ion-color-primary, #1f3038)
+ion-page {
+    display:flex;
+    justify-content:initial;
 }
 
-h1{
-    color: var(--ion-color-tertiary);
-    text-align: center;
+body {
+    color: white;
+    background-color: black;
+    height:100%;
+    --background: var(--ion-white)
 }
 
 .footer{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: var(--ion-color-secondary);
+    background-color: var(--ion-white);
     width: 100%;
     height: 11%;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+    color: white; /* Stellt sicher, dass der Text lesbar ist */
+    padding: 20px;
     position: fixed;
     bottom: 0px;
     z-index: 3;
 }
-ion-content{
-    background-color:var(--ion-color-secondary);
+  
+
+/*
+h1{
+    color: var(--ion-color-tertiary);
+    text-align: center;
 }
+
 
 ion-icon{
     --color: var(--ion-white);
@@ -31,17 +40,12 @@ ion-icon{
 
 ion-card{
     background-color:var(--ion-color-secondary);
-    /* box-shadow: 10px 10px 41px 0px rgba(255,255,255,1); */
+    /* box-shadow: 10px 10px 41px 0px rgba(255,255,255,1); 
 }
 
 ion-card-title, ion-card-subtitle, ion-card-content{
     color: var(--ion-white);
 }
-
-ion-searchbar {
-    color: var(--ion-white) !important;
-}
-
 
 ion-chip{
     background-color: var(--ion-color-primary);
@@ -63,7 +67,7 @@ ion-item{
 }
 
 .header-wrapper{
-    /* margin-top: 30px; */
+     margin-top: 30px; 
     display:flex;
     justify-content: space-between;
     padding:3%;
@@ -76,10 +80,7 @@ ion-item{
     margin-left:3%;
 }
 
-ion-page {
-    display:flex;
-    justify-content:initial;
-}
+
 
 .ion-casual-button{
     background-color: var(--ion-color-secondary);
@@ -150,4 +151,4 @@ ion-footer{
 
 #dropdown p:active {
     background-color: rgb(208, 208, 208);
-}
+}*/

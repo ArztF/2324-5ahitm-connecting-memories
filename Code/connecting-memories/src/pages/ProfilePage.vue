@@ -1,39 +1,30 @@
 <template>
   <page-layout title="Profil">
-    <div class="profile-content-wrapper" style="margin-top: 35%;">
-      <div class="profile">
-        <input
-          class="profile-input"
-          v-model="vorname"
-          name="vorname"
-          placeholder="Vorname"
-        />
-        <input
-          class="profile-input"
-          name="nachname"
-          v-model="nachname"
-          placeholder="Nachname"
-        />
-        <input
-          class="profile-input"
-          v-model="username"
-          placeholder="Benutzername"
-        />
-        <input
-          class="profile-input"
-          type="email"
-          v-model="email"
-          name="email"
-          placeholder="Email"
-        />
-        <ion-button
-          @click="onSubmitClicked"
-          class="profile-submit-button"
-          type="submit"
-          >Profil bearbeiten</ion-button
-        >
-      </div>
-    </div>
+    <div class="profile-container">
+  <header class="profile-header">
+    <h1>Profil</h1>
+    <ion-icon :icon="settingsOutline"></ion-icon>
+  </header>
+  
+  <section class="profile-info">
+    <h2 id="prfile-name"></h2>
+    <p id="prfile-user"></p>
+    <p id="prfile-email"></p>
+  </section>
+  
+  <div class="profile-actions">
+    <button class="action-button saved">
+      <ion-icon :icon="bookmarkOutline"></ion-icon>
+      Gespeichert
+    </button>
+    <button class="action-button created">
+      <ion-icon :icon="calendarOutline"></ion-icon>
+      Erstellte Events
+    </button>
+    <button class="action-button add-group">
+      <ion-icon :icon="addCircleOutline"></ion-icon>
+    </button>
+  </div>
   </page-layout>
 </template>
 
@@ -42,7 +33,12 @@ import PageLayout from "@/components/PageLayout.vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 import { toastController } from "@ionic/vue";
-
+import {
+  addCircleOutline,
+  bookmarkOutline,
+  calendarOutline,
+  settingsOutline
+} from "ionicons/icons";
 export default {
   components: {
     PageLayout,
@@ -64,6 +60,16 @@ export default {
       invalidInputs: [],
     };
   },
+  setup() {
+    const router = useIonRouter();
+    return {
+      addCircleOutline,
+      bookmarkOutline,
+      calendarOutline,
+      settingsOutline,
+      router,
+    }
+  },
 
   
   mounted() {
@@ -74,6 +80,10 @@ export default {
       this.nachname = this.user.nachname;
       this.username = this.user.username;
       this.email = this.user.email;
+
+      document.getElementById('profile-name').textContent = vorname + ' ' + nachname;
+      document.getElementById('profile-user').textContent = username;
+      document.getElementById('profile-email').textContent = email;
     });
   },
 

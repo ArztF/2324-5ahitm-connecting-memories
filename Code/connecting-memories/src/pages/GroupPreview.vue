@@ -1,7 +1,20 @@
 <template>
     <page-layout title="Gruppen">
-        <ion-searchbar class="header-searchbar" v-model="input"></ion-searchbar>
-        <div class="event-preview-card-wrapper" v-if="groups?.length > 0">
+        <div class="search-container" :class="{'show': showSearchBar}">
+                <ion-searchbar v-model="input"></ion-searchbar>
+            </div>
+        <div class="corner-icons">
+        <ion-icon :icon="searchOutline" @click="toggleSearchBar"></ion-icon>
+        <ion-icon :icon="mapOutline"></ion-icon>
+        </div>
+        <h2 class="welcome-heading">What's <span>your</span><br> plan today?</h2>
+        
+        <div class="group-preview-box">
+        <div class="group-preview-heading">
+        <h3 class="preview-box-heading">Öffentliche Events</h3>
+        <p id="more-pub-events">zeige mehr</p>
+        </div>
+            <div class="event-preview-card-wrapper" v-if="groups?.length > 0">
             <group-preview-card
                     v-for="(group, index) in filteredList()"
                     :key="index"
@@ -9,12 +22,19 @@
             />
 <!--            <button @click="addparticipants">Participants anlegen</button>-->
         </div>
-        <h1 v-else>Sie sind noch keiner Gruppe beigetreten!</h1>
+        </div>
+        <div class="group-preview-box">
+        <div class="group-preview-heading">
+        <h3 class="preview-box-heading">Private Events    </h3>
+        <p id="more-priv-events">zeige mehr</p>
+        </div>
+        <!--<h1 v-else>Sie sind noch keiner Gruppe beigetreten!</h1>-->
+        </div>
     </page-layout>
 </template>
 
 <script>
-import { addCircleOutline, enterOutline, searchOutline } from "ionicons/icons";
+import { addCircleOutline, enterOutline, searchOutline,mapOutline } from "ionicons/icons";
 import PageLayout from "@/components/PageLayout.vue";
 import axios from "axios";
 import { IonSearchbar } from "@ionic/vue";
@@ -27,8 +47,10 @@ export default {
         return {
             addCircleOutline,
             enterOutline,
+            mapOutline,
             searchOutline,
             groups: null,
+            showSearchBar: false,
             input: "",
             publicEvents: null,
             noEventsFound: false,
@@ -37,6 +59,9 @@ export default {
     },
 
     methods: {
+        toggleSearchBar() {
+            this.showSearchBar = !this.showSearchBar;
+        },
 
         filteredList () {
             if (this.input.length > 0) {

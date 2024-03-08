@@ -1,31 +1,72 @@
 
-.profile-content-wrapper {
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100vw;
-    height: 60vh;
-    vertical-align: middle;
-    z-index: -1;
-}
-.profile{
-    margin-top: 10vh;
+.profile-container {
+    background: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  .profile-header {
     display: flex;
-    flex-direction: column;
-    
-}
-.profile-input {
-    margin: 4% 2% 2% 2%;
-    padding: 3%;
-    background-color: var(--ion-color-primary);
-    border:var(--ion-color-tertiary) solid 1px;
-    border-radius: 10px;
-    color: var(--ion-color-tertiary);
-}
-.profile-submit-button {
-    --padding: 3%;
-    --background: var(--ion-black);
-    --color: var(--ion-white);
-    margin: 3%;   
-}.profile-input:focus{
-    outline: 1px solid #ff5400;
-}
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2em;
+  }
+  
+  ion-icon {
+    font-size: 1.5em;
+  }
+  
+  .profile-info h2 {
+    margin: 0.5em 0;
+  }
+  
+  .profile-info p {
+    margin: 0.25em 0;
+  }
+  
+  .profile-actions {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+  }
+  
+  .action-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #222;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    width: 100px;
+  }
+  
+  .action-button.saved ion-icon,
+  .action-button.created ion-icon {
+    margin-right: 5px;
+  }
+  
+  .add-group {
+    background: #9a67ea;
+    border-radius: 50%;
+    padding: 15px;
+  }
+  
+  .group-tabs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  
+  .tab-button {
+    background: #222;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    color: white;
+  }
+  
+  .tab-button.active {
+    background: #9a67ea;
+  }

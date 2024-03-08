@@ -1,74 +1,30 @@
 <template>
   <page-layout title="Create Event">
-    <div class="create-event" @keydown.enter="onClickSubmit()">
-      <input
-        class="create-event-input"
-        v-model="eventName"
-        placeholder="Eventname"
-      />
-      <places-completion @location="getLocation"></places-completion>
-      <input class="create-event-input" id="file" type="file" />
-    <div class="create-event-label-flex-box">
-        <label style="margin-left: 3%; font-weight: bold;">Startdate</label>
-        <label style="margin-left: 37%; font-weight: bold;">Enddate</label>
+    <div class="create-event-wrapper">
+    <h2 class="create-event-heading">Erstellen Sie ihr <span>Event</span></h2>
+  <div class="create-event" @keydown.enter="onClickSubmit">
+    <input class="create-event-input" type="text" placeholder="Eventname" v-model="eventName" />
+    <places-completion @location="getLocation"></places-completion>
+    <label for="file" class="file-label">Image Upload</label>
+    <input id="file" class="file-input" type="file" @change="onFileSelected" />
+
+    <div class="date-picker">
+      <input class="create-event-input" type="date" placeholder="Startdatum" v-model="startDate" />
+      <input class="create-event-input" type="date" placeholder="Enddatum" v-model="endDate" />
     </div>
-      <div class="create-event-no-flex-box">
-        <input
-          id="startdate"
-          class="create-event-input"
-          type="date"
-          v-model="startDate"
-        />
-        <input class="create-event-input" type="date" v-model="endDate" />
-      </div>
-      <textarea
-        class="create-event-input"
-        type="text"
-        placeholder="Beschreibung"
-        v-model="description"
-      />
-<!--      <div class="radio-container">-->
-<!--        <div class="radio-create-event">-->
-<!--          <label class="label-radio">-->
-<!--            <input-->
-<!--              type="radio"-->
-<!--              name="isPublicEvent"-->
-<!--              value="true"-->
-<!--              v-model="isPublicEvent"-->
-<!--            />-->
-<!--            <span>Öffentlich</span>-->
-<!--          </label>-->
-<!--          <label class="label-radio">-->
-<!--            <input-->
-<!--              type="radio"-->
-<!--              name="isPublicEvent"-->
-<!--              value="false"-->
-<!--              v-model="isPublicEvent"-->
-<!--            />-->
-<!--            <span>Privat</span>-->
-<!--          </label>-->
-<!--        </div>-->
-<!--      </div>-->
-      <div class="create-event-no-flex-box">
-        <select
-          class="create-event-input"
-          v-model="kategorie"
-          value="Kategorie"
-        >
-          <option value="" selected disabled hidden>Kategorie</option>
-          <option value="konzert">Konzert</option>
-          <option value="festival">Festival</option>
-          <option value="kultur">Kultur</option>
-          <option value="business">Business</option>
-          <option value="andere">Andere</option>
-        </select>
-        <input
-          class="create-event-input"
-          type="number"
-          placeholder="Ticketpreis ab"
-          v-model="ticketPrice"
-        />
-         <select
+    
+    <div class="radio-group">
+  <input type="radio" id="public" name="event-type" value="public" class="radio-input" />
+  <label for="public" class="radio-label">Public</label>
+  
+  <input type="radio" id="private" name="event-type" value="private" class="radio-input" />
+  <label for="private" class="radio-label">Private</label>
+</div>
+
+    
+    <textarea class="create-event-input" placeholder="Beschreibung" v-model="description"></textarea>
+    <input class="create-event-input" type="text" placeholder="Ticketpreis" v-model="ticketPrice" />
+     <select
           class="create-event-input"
           v-model="groupId"
           value="Gruppen Id"
@@ -76,15 +32,15 @@
           <option value="" selected disabled hidden>Gruppen Id</option>
             <option v-for="(group, index) in groups" :key="index" :value="group.id">{{ group.groupName }}</option>
         </select>
-      </div>
-      <br />
-      <ion-button
+    <ion-button
         @click="onClickSubmit"
         class="create-event-submit-button"
         type="submit"
-        >CREATE EVENT</ion-button
-      >
+        >CREATE EVENT</ion-button>
+  </div>
     </div>
+
+
   </page-layout>
 </template>
 
@@ -142,6 +98,11 @@ export default {
   },
 
   methods: {
+    onFileSelected(event) {
+    const fileName = event.target.files[0].name;
+    document.querySelector('.file-label').textContent = fileName;
+  },
+
     getLocation(location) {
       this.typedInLocation = location
     },

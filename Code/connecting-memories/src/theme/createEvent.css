@@ -35,7 +35,7 @@
   }
   
   .create-event-input::placeholder {
-    color: #bbb; /* Farbe des Platzhalters */
+    color: white; /* Farbe des Platzhalters */
   }
   
   .date-picker {
@@ -50,10 +50,15 @@
     --background-focused: #9747e2; /* Hintergrundfarbe bei Fokus */
     --border-color: #8C43D0; /* Rahmenfarbe */
     --color: #fff; /* Textfarbe */
-    width: 100%;
+    width: 50%;
     font-weight: bold;
-    margin-top: 15px; /* Abstand zum oberen Element */
+    margin: 15px auto 0 auto; /* Abstand zum oberen Element */
     border-radius: 8px; /* Abgerundete Ecken */
+  }
+  .radio-group{
+    display: flex;
+    justify-content: space-around;
+    color: white;
   }
   .radio-input {
     display: none; /* Verstecke die Standard-Radio-Buttons */
@@ -89,7 +94,7 @@
     padding: 12px 20px;
     color: white;
     background-color: #333;
-    text-align: center;
+
     margin-bottom: 10px;
     border-radius: 8px;
     cursor: pointer;

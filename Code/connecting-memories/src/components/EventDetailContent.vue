@@ -1,19 +1,21 @@
 <template>
   <div>
-    <img
+    <img class="img-detail-content"
       alt="Silhouette of mountains"
       :src="'http://localhost:8080/image/' + this.event?.bannerimg?.id"
     />
-    <ion-card-title class="eventDetailHeadline"
-      >{{ event?.eventname }}
-    </ion-card-title>
     <div class="event-preview-header-icon-box">
+      <ion-card-title class="eventDetailHeadline">
+      {{ event?.eventname }}
+    </ion-card-title>
       <ion-icon :icon="imageOutline"></ion-icon>
-      <ion-icon @click="editEvent" :icon="pencilOutline"></ion-icon>
+    </div>
+    <div class="event-preview-content">
+        <ion-icon :icon="calendarOutline"></ion-icon>
+        <p>{{ formatDate(event?.startdate, event?.enddate) }}</p>
     </div>
     <ion-card-content>
       <div class="event-preview-content">
-        <ion-icon :icon="locationOutline"></ion-icon>
         <p id="event-location-detail" @click="setOpen(true)">
           {{ event?.location }}
         </p>
@@ -32,25 +34,15 @@
             ></ion-icon>
           </div>
         </ion-modal>
-      </div>
-      <div class="event-preview-content">
-        <ion-icon :icon="calendarOutline"></ion-icon>
-        <p>{{ formatDate(event?.startdate, event?.enddate) }}</p>
-      </div>
-      <div class="event-preview-content">
         <ion-icon :icon="megaphoneOutline"></ion-icon>
         <p>{{ event?.veranstalter }}</p>
-      </div>
-      <div class="event-preview-content">
         <ion-icon :icon="ticketOutline"></ion-icon>
         <p>ab {{ event?.ticketpreis }}€</p>
-      </div>
-      <div class="event-preview-content-category">
-        <p style="text-align: left; margin-top: 1%">{{ event?.kategorie }}</p>
-      </div>
       <p style="text-align: left; margin-top: 3%">{{ event?.beschreibung }}</p>
+      </div>
     </ion-card-content>
   </div>
+  
 </template>
 
 <script>

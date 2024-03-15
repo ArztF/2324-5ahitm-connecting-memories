@@ -1,6 +1,11 @@
 <template>
   <page-layout :title="event?.eventname">
     <event-detail-content :event="event" />
+    <ion-button
+          @click="deleteEvent"
+          class="publish-join-button"
+          type="submit"
+          ><p>Teilnehmen</p></ion-button>
   </page-layout>
 </template>
 

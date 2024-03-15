@@ -1,5 +1,4 @@
 import { createRouter, createWebHashHistory } from '@ionic/vue-router';
-
 import GroupDetail from '../pages/GroupDetail.vue'
 import EventDetail from '../pages/EventDetail.vue'
 import CreateEvent from '../pages/CreateEvent.vue'
@@ -9,7 +8,6 @@ import LoginPage from '../pages/LoginPage.vue'
 import RegistrationPage from '../pages/RegistrationPage.vue'
 import EventCreatedSuccessfully from '../pages/EventCreatedSuccessfully.vue'
 import ProfilePage from '../pages/ProfilePage.vue';
-import PaymentPage from '../pages/PaymentPage.vue';
 import EventEdit from '../pages/EventEdit.vue'
 import CreateGroup from '../pages/CreateGroup.vue'
 import GroupPreview from "@/pages/GroupPreview.vue";
@@ -80,11 +78,6 @@ const routes = [
     path: '/mygroups',
     name: 'MyGroups',
     component: MyGroups
-  },
-  {
-    path: '/payment',
-    name: 'Payment',
-    component: PaymentPage
   },
   {
     path: '/creategroup',

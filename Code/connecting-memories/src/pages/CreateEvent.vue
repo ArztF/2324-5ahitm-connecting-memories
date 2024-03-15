@@ -7,7 +7,6 @@
     <places-completion @location="getLocation"></places-completion>
     <label for="file" class="file-label">Image Upload</label>
     <input id="file" class="file-input" type="file" @change="onFileSelected" />
-
     <div class="date-picker">
       <input class="create-event-input" type="date" placeholder="Startdatum" v-model="startDate" />
       <input class="create-event-input" type="date" placeholder="Enddatum" v-model="endDate" />
@@ -72,7 +71,6 @@ export default {
       startDate: "",
       endDate: "",
       description: "",
-      kategorie: "",
       ticketPrice: "",
       isPublicEvent: Boolean,
       invalidInputs: [],
@@ -123,9 +121,6 @@ export default {
       if (this.description.length == 0) {
         this.invalidInputs.push("Beschreibung");
       }
-      if (this.kategorie.length == 0) {
-        this.invalidInputs.push("Kategorie");
-      }
       if (this.ticketPrice.length == 0) {
         this.invalidInputs.push("Ticketpreis");
       }
@@ -150,7 +145,6 @@ export default {
         this.startDate = "";
         this.endDate = "";
         this.description = "";
-        this.kategorie = "";
         this.ticketPrice = "";
         this.isPublicEvent = null;
       } else {
@@ -179,7 +173,6 @@ export default {
             startdate: this.startDate,
             enddate: this.endDate,
             beschreibung: this.description,
-            kategorie: this.kategorie,
             veranstalter: "HTL Leonding",
             ticketpreis: this.ticketPrice,
             isPublic: "true",
@@ -198,7 +191,6 @@ export default {
             this.startDate = "";
             this.endDate = "";
             this.description = "";
-            this.kategorie = "";
             this.ticketPrice = "";
             this.isPublicEvent = null;
           });

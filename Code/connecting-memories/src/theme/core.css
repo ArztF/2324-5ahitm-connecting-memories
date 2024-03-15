@@ -9,6 +9,15 @@ body {
     height:100%;
     --background: var(--ion-white)
 }
+#placesCompletion input{
+    padding: 15px;
+    width: 100%;
+    border: none;
+    border-radius: 8px; /* Abgerundete Ecken */
+    margin-bottom: 10px;
+    background-color: #333;
+    color: white;
+}
 
 .footer{
     display: flex;

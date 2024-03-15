@@ -1,72 +1,199 @@
-
 .profile-container {
-    background: #000;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    padding: 20px;
-  }
-  
-  .profile-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.2em;
-  }
-  
-  ion-icon {
-    font-size: 1.5em;
-  }
-  
-  .profile-info h2 {
-    margin: 0.5em 0;
-  }
-  
-  .profile-info p {
-    margin: 0.25em 0;
-  }
-  
-  .profile-actions {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
-  }
-  
-  .action-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #222;
-    border: none;
-    border-radius: 8px;
-    padding: 10px;
-    width: 100px;
-  }
-  
-  .action-button.saved ion-icon,
-  .action-button.created ion-icon {
-    margin-right: 5px;
-  }
-  
-  .add-group {
-    background: #9a67ea;
-    border-radius: 50%;
-    padding: 15px;
-  }
-  
-  .group-tabs {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-  }
-  
-  .tab-button {
-    background: #222;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
-    color: white;
-  }
-  
-  .tab-button.active {
-    background: #9a67ea;
-  }
+  background-color: #000;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+  max-width: 400px; /* Anpassen je nach Bildschirmgröße */
+  margin: auto;
+  padding: 20px;
+}
+
+.profile-header {
+  margin-top: 4vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-header h1 {
+  margin: 0;
+  font-weight: bolder;
+}
+
+.profile-info {
+  text-align: center;
+}
+.profile-info p{
+  margin-top: -1vh;
+  color: #898989;
+
+}
+#profile-name {
+  font-size: 1.5em;
+  margin: 10px 0;
+}
+
+#profile-user, #profile-email {
+  margin: 5px 0;
+ 
+}
+
+.profile-actions {
+  display: flex; /* Aktiviert Flexbox */
+  justify-content: space-around; /* Gibt den Buttons gleichmäßig Platz */
+  align-items: center; /* Zentriert die Buttons vertikal */
+  width: 100%;
+  margin: 25px 0; /* Sorgt dafür, dass der Container die gesamte verfügbare Breite einnimmt */
+}
+.action-button {
+  width: 80px; /* Setze eine feste Größe für den Button */
+  height: 80px; /* Setze eine feste Größe für den Button */
+  border-radius: 20%; /* Leicht abgerundete Ecken */
+  display: flex;
+  flex-direction: column; /* Stapele Icon und Text vertikal */
+  justify-content: center; /* Zentriert die Inhalte vertikal */
+  align-items: center; /* Zentriert die Inhalte horizontal */
+  border: none;
+  position: relative;
+  margin: 10px; /* Abstand zwischen den Buttons */
+  background-color: #444; /* Hintergrundfarbe der Buttons */
+}
+
+.action-button ion-icon {
+  font-size: 30px; /* Größere Icons */
+  color: white;
+  margin-bottom: 4px; /* Abstand zwischen Icon und Text */
+}
+
+.action-button p {
+  margin: 0; /* Entfernt den Standardabstand */
+  font-size: 10px; /* Kleinere Schriftgröße für den Text */
+  color: #898989;
+  text-align: center; /* Zentriert den Text horizontal */
+}
+
+/* Du kannst spezifische Stile für gespeicherte und erstellte Buttons hinzufügen, falls nötig */
+.action-button.saved {
+  background-color: #222; /* Unterscheidung der Farben */
+  /* Weitere spezifische Stile hier */
+}
+
+.action-button.created {
+  background-color: #222; /* Unterscheidung der Farben */
+  /* Weitere spezifische Stile hier */
+}
+
+
+.action-button.created {
+  width: 80px; /* Setze eine feste Größe für den Button */
+  height: 80px; /* Setze eine feste Größe für den Button */
+  border-radius: 20%; /* Mache den Button rund */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  position: relative; /* Für absolute Positionierung des Icons */
+}
+
+.action-button.created ion-icon{
+  color: white;
+}
+
+.action-button.created p{
+  flex-wrap: wrap;
+  font-size: 9px;
+  color: #898989;
+
+}
+.action-button.add-group {
+  background-image: linear-gradient(to right top, #8c43d0, #ad4cd5, #ca58d9, #e565dd, #ff73e1);
+  width: 120px; /* Setze eine feste Größe für den Button */
+  height: 120px; /* Setze eine feste Größe für den Button */
+  border-radius: 20%; /* Mache den Button rund */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  position: relative; /* Für absolute Positionierung des Icons */
+  margin-top: 20px; /* Abstand vom oberen Inhalt */
+  margin-bottom: 20px; /* Abstand vom unteren Inhalt */
+}
+
+.action-button.add-group{
+  font-size: 4rem; /* Größe des Plus-Icons */
+  font-weight: bold; /* Macht das Plus-Zeichen dicker */
+  color: white; /* Farbe des Icons */
+}
+
+/* Alternative Methode, um das Plus-Zeichen dicker zu machen, falls nötig */
+.action-button.add-group::before {
+  content: '+';
+  font-size: 4rem; /* Größe des Plus-Zeichens */
+  font-weight: bold; /* Dicke des Plus-Zeichens */
+  color: white; /* Farbe des Plus-Zeichens */
+  line-height: 60px; /* Zentrierung des Plus-Zeichens */
+}
+
+/* Weitere spezifische Stile nach Bedarf hinzufügen */
+.groups-section {
+  /* Dunkler Hintergrund für die Gruppensektion */
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.groups-section h2 {
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.group-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.button-group {
+  width: 140px;
+  background-color: #000;
+   /* Dunklere Hintergrundfarbe für Buttons */
+  color: white;
+  border: 2px solid #222;
+  padding: 10px 15px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.group-list {
+  margin-bottom: 20px;
+}
+
+.group-item {
+  background-color: #222; /* Noch dunklerer Hintergrund für Einträge */
+  border-radius: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.group-item:last-child {
+  margin-bottom: 0;
+}
+
+.group-icon {
+  width: 50px; /* Anpassen je nach gewünschter Größe */
+  height: 50px; /* Anpassen je nach gewünschter Größe */
+  margin-right: 15px;
+}
+
+.group-info h3 {
+  margin: 0 0 5px 0; /* Abstand zwischen Überschrift und Beschreibung */
+  font-size: 1.1em; /* Größere Schrift für Gruppennamen */
+}
+
+.group-info p {
+  margin: 5px 0;
+  font-size: 0.9em; /* Kleinere Schrift für zusätzliche Infos */
+}

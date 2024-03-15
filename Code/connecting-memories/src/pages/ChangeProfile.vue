@@ -2,33 +2,23 @@
   <page-layout title="Profil">
   <div class="profile-container">
   <div class="profile-header">
-    <h1>Profil</h1>
-    <ion-icon :icon="settingsOutline"></ion-icon>
+    <h1>Profil bearbeiten</h1>
   </div>
-  <div class="profile-info">
-    <h2 id="prfile-name">Nico Obermair</h2>
-    <p id="prfile-user">nico123</p>
-    <p id="prfile-email">nico.obermair@gmail.com</p>
+   <div class="change-name">
+    <input class="name-input" type="text" placeholder="Vorname" v-model="vorname"/>
+    <input class="name-input" type="text" placeholder="Nachname" v-model="nachname"/>
+    </div>
+    <input class="change-input" type="text" placeholder="Username" v-model="username"/>
+    <input class="change-input" type="text" placeholder="Email" v-model="email"/>
+    <input class="change-input" type="date" placeholder="Geburtsdatum" v-model="email"/>
+    <input class="change-input" type="password" placeholder="Password" v-model="password"/>
+    <input class="change-input" type="password" placeholder="Password wiederholen" v-model="password"/>
+    <ion-button
+        @click="onClickSubmit"
+        class="change-profil-submit-button"
+        type="submit"
+        >DATEN SPEICHERN</ion-button>
   </div>
-  
-  <div class="profile-actions">
-    <button class="action-button saved">
-      <ion-icon :icon="bookmarkOutline"></ion-icon>
-      <p>Gespeichert</p>
-    </button>
-    <button class="action-button created">
-      <ion-icon :icon="calendarOutline"></ion-icon>
-      <p>Erstellte Events</p>
-    </button>
-  </div>
-   <div class="profile-actions">
-  <button class="action-button add-group">
-    </button>
-  </div>  
-  <div class="groups-section">
-  <h2>Gruppen</h2>
-  </div>
-</div>
   </page-layout>
 </template>
 

@@ -51,7 +51,7 @@ import { useRouter } from "vue-router";
 import axios from "axios";
 import { toastController } from "@ionic/vue";
 import {
-    bookmarkOutline,
+  bookmarkOutline,
   calendarOutline,
   settingsOutline
 } from "ionicons/icons";

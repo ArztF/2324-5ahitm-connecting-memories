@@ -198,6 +198,7 @@
   font-size: 0.9em; /* Kleinere Schrift für zusätzliche Infos */
 }.group-buttons {
   display: flex;
+  justify-content: space-around;
 }
 
 .group-buttons label {
@@ -224,3 +225,37 @@
   background-color: #222; /* Ändere die Hintergrundfarbe der ausgewählten Box */
   color: white; /* Ändere die Textfarbe */
 }
+
+.profile-info-name {
+  font-weight:bolder;
+  color:#8C43D0;
+}
+.profile-infos{
+  margin-top: -10px;
+  font-weight: bold;
+}
+.event-preview-box{
+  width: auto;
+  height: 30vh;
+  position: relative;
+  top:20vh;
+}
+.event-preview-heading{
+  width: 96%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+.event-preview-heading h3{
+  font-size: 18px;
+  font-weight: bolder;
+}
+.more-events {
+  display: inline-block;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  cursor: pointer;
+  color: white;
+  }
+

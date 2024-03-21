@@ -5,15 +5,16 @@ import CreateEvent from '../pages/CreateEvent.vue'
 import SubmitToEvent from '../pages/SubmitToEvent.vue'
 import EventSubscription from '../pages/EventSubscription.vue'
 import LoginPage from '../pages/LoginPage.vue'
-import RegistrationPage from '../pages/RegistrationPage.vue'
-import EventCreatedSuccessfully from '../pages/EventCreatedSuccessfully.vue'
+import RegistrationPage from '../pages/RegistrationPage.vue';
+import EventCreatedSuccessfully from '../pages/EventCreatedSuccessfully.vue';
 import ProfilePage from '../pages/ProfilePage.vue';
-import EventEdit from '../pages/EventEdit.vue'
-import CreateGroup from '../pages/CreateGroup.vue'
+import EventEdit from '../pages/EventEdit.vue';
+import CreateGroup from '../pages/CreateGroup.vue';
 import GroupPreview from "@/pages/GroupPreview.vue";
 import MyGroups from "@/pages/MyGroups.vue";
 import SubmitToGroup from "@/pages/SubmitToGroup.vue";
-import ChangeProfile from "@/pages/ChangeProfile.vue"
+import ChangeProfile from "@/pages/ChangeProfile.vue";
+import DetailProfile from "@/pages/DetailProfile.vue";
 
 const routes = [
   
@@ -76,6 +77,7 @@ const routes = [
     name: 'Profile',
     component: ProfilePage
   },
+  
   {
     path: '/changeprofile/:id',
     name: 'ChangeProfile',
@@ -95,7 +97,12 @@ const routes = [
     path: '/submitToGroup',
     name: 'Gruppe beitreten',
     component: SubmitToGroup
-  }
+  },
+  {
+    path: '/detailprofile/:id',
+    name: 'DetailProfile',
+    component: DetailProfile
+  },
 ]
 
 const router = createRouter({

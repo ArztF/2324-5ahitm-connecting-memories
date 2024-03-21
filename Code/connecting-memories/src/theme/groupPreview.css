@@ -78,7 +78,7 @@ ion-searchbar {
     align-items: center;
   }
   /* Links zu mehr Events */
-  #more-pub-events, #more-priv-events {
+  .more-pub-events, .more-priv-events {
     display: inline-block;
     font-size: 0.9rem;
     text-decoration: underline;

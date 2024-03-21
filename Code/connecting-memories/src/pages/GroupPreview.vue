@@ -12,7 +12,7 @@
         <div class="group-preview-box">
         <div class="group-preview-heading">
         <h3 class="preview-box-heading">Öffentliche Events</h3>
-        <p id="more-pub-events">zeige mehr</p>
+        <p class="more-pub-events">zeige mehr</p>
         </div>
             <div class="event-preview-card-wrapper" v-if="groups?.length > 0">
             <group-preview-card
@@ -26,8 +26,13 @@
         <div class="group-preview-box">
         <div class="group-preview-heading">
         <h3 class="preview-box-heading">Private Events    </h3>
-        <p id="more-priv-events">zeige mehr</p>
+        <p class="more-priv-events">zeige mehr</p>
         </div>
+        <group-preview-card
+                    v-for="(group, index) in filteredList()"
+                    :key="index"
+                    :group="group?.eventGroup"
+            />
         <!--<h1 v-else>Sie sind noch keiner Gruppe beigetreten!</h1>-->
         </div>
     </page-layout>

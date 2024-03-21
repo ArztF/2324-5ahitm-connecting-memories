@@ -15,6 +15,12 @@ import MyGroups from "@/pages/MyGroups.vue";
 import SubmitToGroup from "@/pages/SubmitToGroup.vue";
 import ChangeProfile from "@/pages/ChangeProfile.vue";
 import DetailProfile from "@/pages/DetailProfile.vue";
+import CreateEventForGroup from "@/pages/CreateEventForGroup.vue";
+import SavedEvent from "@/pages/SavedEvent.vue";
+import CreatedEvent from "@/pages/CreatedEvent.vue";
+import EventForGroup from "@/pages/EventForGroup.vue";
+import PublicEvent from "@/pages/PublicEvent.vue";
+import PrivateEvent from "@/pages/PrivateEvent.vue";
 
 const routes = [
   
@@ -36,6 +42,11 @@ const routes = [
     path: '/eventdetail/:id',
     name: 'EventDetail',
     component: EventDetail
+  },
+  {
+    path: '/eventforgroup/:id',
+    name: 'CreateEventForGroup',
+    component: CreateEventForGroup
   },
   {
     path: '/eventedit/:id',
@@ -102,6 +113,31 @@ const routes = [
     path: '/detailprofile/:id',
     name: 'DetailProfile',
     component: DetailProfile
+  },
+  {
+    path: '/createdevents/',
+    name: 'CreatedEvent',
+    component: CreatedEvent
+  },
+  {
+    path: '/publicevents/',
+    name: 'PublicEvent',
+    component: PublicEvent
+  },
+  {
+    path: '/privateevents/',
+    name: 'PrivateEvent',
+    component: PrivateEvent
+  },
+  {
+    path: '/savedevents/',
+    name: 'SavedEvent',
+    component: SavedEvent
+  },
+  {
+    path: '/eventsforgroup/:id',
+    name: 'EventForGroup',
+    component: EventForGroup
   },
 ]
 

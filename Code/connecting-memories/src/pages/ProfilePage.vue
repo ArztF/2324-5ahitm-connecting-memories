@@ -49,7 +49,6 @@ import GroupPreviewCard from "@/components/GroupPreviewCard.vue";
 import PageLayout from "@/components/PageLayout.vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
-import { toastController } from "@ionic/vue";
 import {
   bookmarkOutline,
   calendarOutline,
@@ -71,10 +70,6 @@ export default {
       username: "",
       email: "",
       password: "",
-      currentVorname: "",
-      currentNachname: "",
-      currentEmail: "",
-      currentUsername: "",
       user: null,
       invalidInputs: [],
     };
@@ -105,55 +100,6 @@ export default {
   },
 
   methods: {
-
-    async onSubmitClicked() {
-      let updateUser;
-  
-      if (
-        this.vorname.length < 3 &&
-        this.nachname.length < 3 &&
-        this.username.length < 3 &&
-        this.email.includes("@")
-      ) {
-  
-        this.invalidInputs.push("Ihre Eingaben sind leider nicht valid!");
-        this.presentToast(this.invalidInputs);
-      }
-  
-      if (this.invalidInputs.length == 0) {
-        updateUser = {
-          vorname: this.vorname,
-          nachname: this.nachname,
-          username: this.username,
-          email: this.email,
-        };
-  
-        await axios
-          .put("http://localhost:8080/api/user/" + this.id, updateUser)
-          .then((response) => {
-            console.log(response);
-          });
-      }
-    },
-
-    async presentToast() {
-      let errorMessage = "";
-      for (let i = 0; i < this.invalidInputs.length; i++) {
-        if (this.invalidInputs.length - 1 == i) {
-          errorMessage += this.invalidInputs[i] + " ";
-        } else {
-          errorMessage += this.invalidInputs[i] + ", ";
-        }
-      }
-      const toast = await toastController.create({
-        message: errorMessage + "darf nicht leer sein!",
-        duration: 1500,
-        cssClass: "custom-toast",
-      });
-
-      await toast.present();
-      this.invalidInputs = [];
-    },
   },
 
   setup() {

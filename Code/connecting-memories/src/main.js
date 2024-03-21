@@ -25,7 +25,7 @@ import './theme/eventPreviewCard.css'
 import './theme/createGroup.css'
 import './theme/eventDetail.css'
 import './theme/changeProfile.css'
-
+import './theme/groupDetail.css'
 
 /* Basic CSS for apps built with Ionic */
 import '@ionic/vue/css/normalize.css';

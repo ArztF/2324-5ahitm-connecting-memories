@@ -34,5 +34,60 @@ small-map{
 }
 
 #event-location-detail{
-    color: var(--ion-color-tertiary);
+  font-size: 0.9rem;
+  text-decoration: underline;
+  cursor: pointer;
+  color: white;
 }
+.event-detail-container {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    max-width: 400px; /* Anpassen je nach Bildschirmgröße */
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .event-detail-header {
+    margin-top: 4vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4vh;
+  }
+  
+  .event-detail-header h1 {
+    margin: 0;
+    font-weight: bolder;
+    color:#8c43d0;
+  }
+  .img-detail-content{
+    border-radius: 30px;
+  }
+  .event-detail-date-content p{
+    font-size: 25px;
+    font-weight: bolder;
+  }
+  .detail-content-event{
+    margin-top:-1vh ;
+  }
+  #button-box{
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+  }
+  #publish-join-button{
+    --background: #333; /* Hintergrundfarbe des Buttons */
+    --border-color: #333; /* Rahmenfarbe */
+    --background-activated: #444; /* Hintergrundfarbe bei Aktivierung */
+    --background-focused: #444; /* Hintergrundfarbe bei Fokus */
+    --color: #fff; /* Textfarbe */
+    width: 30vw;
+    font-weight: bold;
+    margin-top: 25vh; /* Abstand zum oberen Element */
+    --border-radius: 20px; /* Abgerundete Ecken */
+
+  }
+
+  

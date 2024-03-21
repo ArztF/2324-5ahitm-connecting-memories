@@ -8,7 +8,13 @@
     color: #fff; /* Weiße Textfarbe */
     font-family: 'Arial', sans-serif;
   }
-  
+  .login-heading{
+    color: #9747e2;
+    font-weight: bold;
+    position: absolute;
+    top: 50px;
+    left: 20px;
+  }
   #login-back-button {
     position: absolute;
     top: 20px;
@@ -44,7 +50,7 @@
   }
   
   .register-input::placeholder {
-    color: #999; /* Farbe des Platzhaltertextes */
+    color: white; /* Farbe des Platzhaltertextes */
   }
   
   .login-submit-button {
@@ -53,7 +59,7 @@
     --background-focused: #9747e2; /* Hintergrundfarbe bei Fokus */
     --border-color: #8C43D0; /* Rahmenfarbe */
     --color: #fff; /* Textfarbe */
-    width: 100%;
+    width: 60%;
     font-weight: bold;
     margin-top: 15px; /* Abstand zum oberen Element */
     border-radius: 8px; /* Abgerundete Ecken */

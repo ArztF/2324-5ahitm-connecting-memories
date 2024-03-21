@@ -196,4 +196,31 @@
 .group-info p {
   margin: 5px 0;
   font-size: 0.9em; /* Kleinere Schrift für zusätzliche Infos */
+}.group-buttons {
+  display: flex;
+}
+
+.group-buttons label {
+  width: 30vw;
+  height: auto;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: solid 2px #222;
+  margin: 10px;
+  background-color: black;
+  cursor: pointer; /* Zeige Handzeiger beim Überfahren */
+}
+
+.group-buttons input[type="radio"] {
+  display: none; /* Verstecke die eigentlichen Radio-Buttons */
+}
+
+#attend:checked + .group-button-attend,
+#created:checked + .group-button-created {
+  background-color: #222; /* Ändere die Hintergrundfarbe der ausgewählten Box */
+  color: white; /* Ändere die Textfarbe */
 }

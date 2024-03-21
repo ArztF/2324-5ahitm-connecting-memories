@@ -1,3 +1,18 @@
+.profile-edit-container{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+  background-color: #000;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+  max-width: 400px; /* Anpassen je nach Bildschirmgröße */
+  margin: 15vh auto auto auto;
+  padding: 20px;
+}
+.change-input::placeholder {
+  color: white; /* Farbe des Platzhalters */
+}
+
 .change-input {
     width: 100%;
     padding: 12px;
@@ -17,8 +32,16 @@
     --background-focused: #9747e2; /* Hintergrundfarbe bei Fokus */
     --border-color: #8C43D0; /* Rahmenfarbe */
     --color: #fff; /* Textfarbe */
-    width: 100%;
+    width: 60%;
     font-weight: bold;
     margin-top: 15px; /* Abstand zum oberen Element */
     border-radius: 8px; /* Abgerundete Ecken */
   }
+  .profil-edit-heading{
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    top: 50px;
+    left: 20px;
+  }
+  

@@ -1,5 +1,6 @@
 <template>
   <ion-page>
+    <h1 class="login-heading">Login</h1>
     <div class="login-content-wrapper" @keydown.enter="submitClicked()">
       <div id="login-back-button" >
           <ion-icon :icon="chevronBackOutline" @click="() => router.push('/', 'back')" />

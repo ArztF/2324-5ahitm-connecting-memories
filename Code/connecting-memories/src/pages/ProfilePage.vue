@@ -27,12 +27,25 @@
   </div>  
   <div class="groups-section">
   <h2>Gruppen</h2>
+  <div class="group-buttons">
+  <input type="radio" id="attend" name="group-selection" value="attend" checked>
+  <label class="group-button-attend" for="attend">Beigetreten</label>
+
+  <input type="radio" id="created" name="group-selection" value="created">
+  <label class="group-button-created" for="created">Erstellt</label>
+</div>
+  <group-preview-card
+      v-for="(group, index) in groups"
+      :key="index"
+      :group="group"
+  />
   </div>
 </div>
   </page-layout>
 </template>
 
 <script>
+import GroupPreviewCard from "@/components/GroupPreviewCard.vue";
 import PageLayout from "@/components/PageLayout.vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
@@ -44,11 +57,14 @@ import {
 } from "ionicons/icons";
 export default {
   components: {
+    GroupPreviewCard,
     PageLayout,
   },
 
   data() {
     return {
+      groups: null,
+      myGroups: null,
       id: this.$route.params.id,
       vorname: "",
       nachname: "",
@@ -68,6 +84,16 @@ export default {
 
   
   mounted() {
+    
+  
+      //let id = sessionStorage.getItem("userToken")
+    axios
+      .get("http://localhost:8080/api/eventgroup/byOwnerId/" + 1)
+      .then((response) => (this.groups = response.data))
+      .catch(() => {
+        console.log("error");
+      });
+
     axios.get("http://localhost:8080/api/user/" + this.id).then((response) => {
   
       this.user = response.data;

@@ -1,13 +1,11 @@
 <template>
   <page-layout title="Profil">
-  <div class="profile-container">
-  <div class="profile-header">
-    <h1>Profil bearbeiten</h1>
+  <div class="profile-edit-header">
+    <h1 class="profil-edit-heading">Profil bearbeiten</h1>
   </div>
-   <div class="change-name">
-    <input class="name-input" type="text" placeholder="Vorname" v-model="vorname"/>
-    <input class="name-input" type="text" placeholder="Nachname" v-model="nachname"/>
-    </div>
+  <div class="profile-edit-container">
+    <input class="change-input" type="text" placeholder="Vorname" v-model="vorname"/>
+    <input class="change-input" type="text" placeholder="Nachname" v-model="nachname"/>
     <input class="change-input" type="text" placeholder="Username" v-model="username"/>
     <input class="change-input" type="text" placeholder="Email" v-model="email"/>
     <input class="change-input" type="date" placeholder="Geburtsdatum" v-model="email"/>
@@ -65,6 +63,7 @@ export default {
       this.nachname = this.user.nachname;
       this.username = this.user.username;
       this.email = this.user.email;
+      this.password = this.user.password;
     });
   },
 

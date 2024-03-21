@@ -10,10 +10,11 @@ import './theme/eventPreview.css'
 import './theme/eventSubscription.css'
 import './theme/submitToEvent.css'
 
-import './theme/registration.css'
-import './theme/eventCreatedSuccessfully.css'
 
+import './theme/eventCreatedSuccessfully.css'
 import './theme/payment.css'*/
+
+import './theme/registration.css'
 import '@ionic/vue/css/core.css';
 import './theme/groupPreview.css'
 import './theme/login.css'
@@ -23,6 +24,9 @@ import './theme/eventCreatedSuccessfully.css'
 import './theme/eventPreviewCard.css'
 import './theme/createGroup.css'
 import './theme/eventDetail.css'
+import './theme/changeProfile.css'
+
+
 /* Basic CSS for apps built with Ionic */
 import '@ionic/vue/css/normalize.css';
 import '@ionic/vue/css/structure.css';

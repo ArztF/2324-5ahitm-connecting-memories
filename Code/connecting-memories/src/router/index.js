@@ -13,8 +13,10 @@ import CreateGroup from '../pages/CreateGroup.vue'
 import GroupPreview from "@/pages/GroupPreview.vue";
 import MyGroups from "@/pages/MyGroups.vue";
 import SubmitToGroup from "@/pages/SubmitToGroup.vue";
+import ChangeProfile from "@/pages/ChangeProfile.vue"
 
 const routes = [
+  
   {
     path: '/',
     redirect: '/group'
@@ -73,6 +75,11 @@ const routes = [
     path: '/profile/:id',
     name: 'Profile',
     component: ProfilePage
+  },
+  {
+    path: '/changeprofile/:id',
+    name: 'ChangeProfile',
+    component: ChangeProfile
   },
   {
     path: '/mygroups',

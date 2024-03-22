@@ -1,45 +1,40 @@
 <template>
   <page-layout title="Create Group">
+    <div class="create-group-wrapper">
+    <h1 v-if="!groupCreated" class="heading-create-group">Erstellen Sie eine <span>Gruppe</span></h1>
     <div v-if="!groupCreated" class="create-event" @keydown.enter="onClickSubmit()">
       <input
-        class="create-event-input"
+        class="create-group-input"
         v-model="groupName"
         placeholder="Gruppenname"
       />
-      <input class="create-event-input" id="file" type="file" />
+      <label for="file" class="file-label">Image Upload</label>
+      <input id="file" class="file-input" type="file" @change="onFileSelected" />
+
       <textarea
-        class="create-event-input"
+        class="create-group-input"
         type="text"
         placeholder="Beschreibung"
         v-model="groupDescription"
       />
       <ion-button
         @click="onClickSubmit"
-        class="create-event-submit-button"
+        class="create-group-submit-button"
         type="submit"
         >CREATE GROUP</ion-button
       >
     </div>
+    </div>
 
-    <div v-if="groupCreated">
-      <h1>Mit folgendem Link können Sie andere Personen einladen!</h1>
-      <div style="margin-top:40%">
-        <div class="show-invitation-code-box">
-          <input
-            class="input-invitation-code"
-            type="text"
-            :value="invitationLink"
-          />
-        </div>
-        <div class="show-invitation-code-box">
+    <div v-if="groupCreated" class="created-group-link">
+      <h1>Einladungslink</h1>
+          <p class="input-invitation-code">
+            {{invitationLink}}
+          </p>
           <ion-button
             @click="publishedGroup"
             class="button-invitation-code"
-            type="submit"
-            >Fertig</ion-button
-          >
-        </div>
-      </div>
+            type="submit">Fertig</ion-button>
     </div>
   </page-layout>
 </template>
@@ -79,6 +74,10 @@ export default {
   },
 
   methods: {
+    onFileSelected(event) {
+    const fileName = event.target.files[0].name;
+    document.querySelector('.file-label').textContent = fileName;
+  },
     presentToast,
    async onClickSubmit() {
       if(this.groupName.length == 0) {

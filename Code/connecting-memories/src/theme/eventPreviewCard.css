@@ -1,0 +1,40 @@
+.ion-card-container {
+    background-color: #222; /* oder eine andere Farbe deiner Wahl */
+    color: #fff;
+    margin: auto;
+    display: block;
+    position: relative;
+    width: 90%;
+    height: auto;
+    max-width: 500px; /* Maximale Breite der Karte */
+  }
+  
+  .publish-preview-card-image {
+    width: 90%; /* Breite des Bildes, weniger als 100% für Seitenabstand */
+    height: auto; /* Höhe des Bildes, behält das Seitenverhältnis bei */
+    margin: 20px auto; /* Zentriert das Bild horizontal */
+    display: block;
+  }
+  
+  .publish-event-preview-name-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0; /* Abstand oben und unten */
+  }
+  
+  .publish-event-preview-title {
+    font-size: 1.5rem;
+    color: #fff; /* Farbe des Event-Titels */
+  }
+  
+  /* Hier sollten zusätzliche Stile für ion-card-header, ion-card-title und ion-card-content hinzugefügt werden, basierend auf den spezifischen Bedürfnissen deines Layouts. */
+  .beschreibung-event-preview{
+    margin-top: 20px;
+  }
+  .location-event-preview{
+    margin-top: -10px;
+  }
+  .date-event-preview{
+    margin-top: -10px;
+  }

@@ -1,21 +1,20 @@
 <template>
   <page-layout :title="event?.eventname">
     <div v-if="publishedEvent">
-      <h1>Your Event will look like this</h1>
+      <h1 class="heading-publish">So würde <span>Ihr</span><br> Event aussehen</h1>
       <event-preview-card :event="event" :isClickable="isPreviewClickable" />
-      <div class="publish-delete-class">
+
+      <div class="publish-button-class">
         <ion-button
           @click="publishEvent"
-          class="login-submit-button"
+          class="publish-submit-button"
           type="submit"
-          >PUBLISH</ion-button
-        >
+          ><p>Veröffentlichen</p></ion-button>
         <ion-button
           @click="deleteEvent"
-          class="login-submit-button"
+          class="publish-delete-button"
           type="submit"
-          >DELETE</ion-button
-        >
+          ><p>Verwerfen</p></ion-button>
       </div>
     </div>
   </page-layout>

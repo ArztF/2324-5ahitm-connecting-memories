@@ -1,22 +1,31 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
-
 import { IonicVue } from '@ionic/vue';
 
-/* Core CSS required for Ionic components to work properly */
-import './theme/createEvent.css'
-import './theme/eventDetail.css'
+/* Core CSS required for Ionic components to work properly 
+
+
 import './theme/eventPreview.css'
 import './theme/eventSubscription.css'
 import './theme/submitToEvent.css'
-import './theme/login.css'
-import '@ionic/vue/css/core.css';
-import './theme/registration.css'
-import './theme/eventCreatedSuccessfully.css'
-import './theme/profilePage.css'
-import './theme/payment.css'
 
+
+import './theme/eventCreatedSuccessfully.css'
+import './theme/payment.css'*/
+
+import './theme/registration.css'
+import '@ionic/vue/css/core.css';
+import './theme/groupPreview.css'
+import './theme/login.css'
+import './theme/createEvent.css'
+import './theme/profilePage.css'
+import './theme/eventCreatedSuccessfully.css'
+import './theme/eventPreviewCard.css'
+import './theme/createGroup.css'
+import './theme/eventDetail.css'
+import './theme/changeProfile.css'
+import './theme/groupDetail.css'
 
 /* Basic CSS for apps built with Ionic */
 import '@ionic/vue/css/normalize.css';

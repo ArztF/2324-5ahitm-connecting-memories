@@ -23,14 +23,6 @@
     
     <textarea class="create-event-input" placeholder="Beschreibung" v-model="description"></textarea>
     <input class="create-event-input" type="text" placeholder="Ticketpreis" v-model="ticketPrice" />
-     <select
-          class="create-event-input"
-          v-model="groupId"
-          value="Gruppen Id"
-        >
-          <option value="" selected disabled hidden>Gruppen Id</option>
-            <option v-for="(group, index) in groups" :key="index" :value="group.id">{{ group.groupName }}</option>
-        </select>
     <ion-button
         @click="onClickSubmit"
         class="create-event-submit-button"

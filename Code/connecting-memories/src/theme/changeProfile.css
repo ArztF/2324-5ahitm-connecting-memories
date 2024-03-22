@@ -1,0 +1,47 @@
+.profile-edit-container{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+  background-color: #000;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+  max-width: 400px; /* Anpassen je nach Bildschirmgröße */
+  margin: 15vh auto auto auto;
+  padding: 20px;
+}
+.change-input::placeholder {
+  color: white; /* Farbe des Platzhalters */
+}
+
+.change-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px; /* Abstand zwischen den Feldern */
+    background: #222; /* Hintergrundfarbe der Eingabefelder */
+    border: 1px solid #222; /* Rahmen der Eingabefelder */
+    border-radius: 8px; /* Abgerundete Ecken */
+    color: white; /* Textfarbe */
+    font-size: 1rem; /* Schriftgröße */
+  }
+  .change-input:focus{
+    border: 1px solid #9747e2;
+  }
+  .change-profil-submit-button{
+    --background: #8C43D0; /* Hintergrundfarbe des Buttons */
+    --background-activated: #9747e2; /* Hintergrundfarbe bei Aktivierung */
+    --background-focused: #9747e2; /* Hintergrundfarbe bei Fokus */
+    --border-color: #8C43D0; /* Rahmenfarbe */
+    --color: #fff; /* Textfarbe */
+    width: 60%;
+    font-weight: bold;
+    margin-top: 15px; /* Abstand zum oberen Element */
+    border-radius: 8px; /* Abgerundete Ecken */
+  }
+  .profil-edit-heading{
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    top: 50px;
+    left: 20px;
+  }
+  

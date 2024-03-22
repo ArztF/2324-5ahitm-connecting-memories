@@ -1,14 +1,14 @@
 <template>
   <ion-page>
+    <h1 class="login-heading">Login</h1>
     <div class="login-content-wrapper" @keydown.enter="submitClicked()">
       <div id="login-back-button" >
           <ion-icon :icon="chevronBackOutline" @click="() => router.push('/', 'back')" />
       </div>
       <div class="login">
-        
         <input class="register-input" v-model="email" name="email" placeholder="Email" />
         <input class="register-input" v-model="password" type="password" name="password" placeholder="Passwort" />
-        <p>Sie haben noch keinen Account? Hier <span @click="() => router.push('/registration')" style="color: #ff5400; font-weight: bold;">registrieren</span></p>
+        <p>Sie haben noch keinen Account? Hier <span @click="() => router.push('/registration')">registrieren</span></p>
         <ion-button @click="submitClicked()" class="login-submit-button" type="submit">LOGIN</ion-button>
       </div>
     </div>

@@ -1,0 +1,108 @@
+.ion-content-wrapper {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    --background: #000;
+    color: #fff;
+  }
+  .corner-icons{
+    width: 100%;
+    margin-top: 6vh;
+    padding-right: 3vw;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  /* Suchleiste und Icons */
+  ion-icon {
+    color: white;
+    padding: 2px;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  
+  .search-container {
+    position: absolute;
+    top: 0; /* Positionierung am oberen Rand */
+    left: 0;
+    right: 0; /* Sorgt dafür, dass es sich über die gesamte Breite erstreckt */
+    z-index: 100; /* Stellt sicher, dass es über anderen Inhalten schwebt */
+    display: none; /* Standardmäßig versteckt */
+    color: white;
+}
+ion-searchbar {
+  --background: #222 !important; /* Hintergrundfarbe der Suchleiste */
+  --color: white !important; /* Farbe des Textes */
+  --placeholder-color: white !important; /* Farbe des Platzhalters */
+  --icon-color: white !important; /* Farbe der Icons */
+}
+
+
+/* Stellt sicher, dass die Suchleiste sichtbar ist, wenn .show aktiv ist */
+.search-container.show {
+    display: block;
+}
+  
+  /* Titel-Stil */
+  .welcome-heading {
+    font-size: 2.3rem;
+    color: white;
+    font-weight: bolder;
+    position: absolute;
+    top: 12vh;
+    left:10vw
+  }
+  h2 span {
+    color: #8C43D0;
+    font-weight: bolder; /* Heller Grauton für Kontrast */
+  }
+  
+  /* Unterüberschriften für Event-Kategorien */
+  .preview-box-heading {
+    font-size: 1.2rem;
+    margin-left: 4vw;
+    color: white;
+    font-weight: bolder;
+    display: inline;
+  }
+  .group-preview-box{
+    width: auto;
+    height: 30vh;
+    position: relative;
+    top:20vh;
+  }
+  .group-preview-heading{
+    width: 96%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  /* Links zu mehr Events */
+  .more-pub-events, .more-priv-events {
+    display: inline-block;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    cursor: pointer;
+    color: white;
+    }
+  
+  /* Event-Karten-Wrapper */
+  .event-preview-card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Abstand zwischen den Karten */
+  }
+  
+  /* Einzelne Event-Vorschau-Karte */
+  .group-preview-card {
+    width: calc(50% - 7.5px); /* Responsive Breite mit Abstand */
+    background: #222; /* Dunkler Hintergrund für Karten */
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  /* Footer-Stil */
+  footer {
+    padding: 20px;
+    background: #111; /* Dunkler Hintergrund für den Footer */
+  }

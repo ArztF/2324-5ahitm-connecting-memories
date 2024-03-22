@@ -1,0 +1,83 @@
+h1 span {
+    color: #8C43D0;
+    font-weight: bolder; /* Heller Grauton für Kontrast */
+}
+.create-group-input {
+    padding: 15px;
+    border: none;
+    border-radius: 8px; /* Abgerundete Ecken */
+    margin-bottom: 10px;
+    background-color: #333;
+    color: white;
+}
+  
+.create-group-input::placeholder {
+    color: white; /* Farbe des Platzhalters */
+}
+  
+  
+.heading-create-group {
+    font-size: 1.3rem;
+    color: white;
+    font-weight: bolder;
+    margin-bottom: 2vh;
+}
+
+.create-group-wrapper {
+    color: #fff;
+    font-family: Arial, sans-serif;
+    padding: 30px;
+    border-radius: 12px; /* Abgerundete Ecken */
+    width: 100%;
+    max-width: 400px; /* Maximale Breite des Formulars */
+    margin: auto;
+  }
+  .create-group-submit-button {
+    --background: #8C43D0; /* Hintergrundfarbe des Buttons */
+    --background-activated: #9747e2; /* Hintergrundfarbe bei Aktivierung */
+    --background-focused: #9747e2; /* Hintergrundfarbe bei Fokus */
+    --border-color: #8C43D0; /* Rahmenfarbe */
+    --color: #fff; /* Textfarbe */
+    width: 50%;
+    font-weight: bold;
+    margin: 15px auto 0 auto; /* Abstand zum oberen Element */
+    border-radius: 8px; /* Abgerundete Ecken */
+  }
+  .create-group-link {
+    display: flex;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    padding: 30px;
+    border-radius: 12px; /* Abgerundete Ecken */
+    width: 100%;
+    max-width: 400px; /* Maximale Breite des Formulars */
+    margin: auto;
+  }
+
+  .created-group-link h1{
+    margin-left: 10vw;
+    color: white !important;
+    font-weight: bolder; /* Heller Grauton für Kontrast */
+  }
+  .button-invitation-code{
+    justify-self: center;
+    --background: #8C43D0; /* Hintergrundfarbe des Buttons */
+    --background-activated: #9747e2; /* Hintergrundfarbe bei Aktivierung */
+    --background-focused: #9747e2; /* Hintergrundfarbe bei Fokus */
+    --border-color: #8C43D0; /* Rahmenfarbe */
+    --color: #fff; /* Textfarbe */
+    width: 30%;
+    font-weight: bold;
+    margin-left: 35%; /* Abstand zum oberen Element */
+    border-radius: 20%; /* Abgerundete Ecken */
+  }
+  .input-invitation-code{
+    justify-self: center;
+    width: 85%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px; /* Abgerundete Ecken */
+    margin: 50% auto 10px auto;
+    background-color: #333;
+    color: white;
+  }

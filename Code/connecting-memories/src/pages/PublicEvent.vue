@@ -7,33 +7,20 @@
         <ion-icon :icon="searchOutline" @click="toggleSearchBar"></ion-icon>
         <ion-icon :icon="mapOutline"></ion-icon>
         </div>
-        <h2 class="welcome-heading">What's <span>your</span><br> plan today?</h2>
+        <h2 class="welcome-heading"><span>Öffentliche</span><br>
+        Events 
+        </h2>
         
         <div class="group-preview-box">
-        <div class="group-preview-heading">
-        <h3 class="preview-box-heading">Öffentliche Events</h3>
-        <p class="more-pub-events">zeige mehr</p>
-        </div>
             <div class="event-preview-card-wrapper" v-if="groups?.length > 0">
             <group-preview-card
                     v-for="(group, index) in filteredList()"
                     :key="index"
                     :group="group?.eventGroup"
             />
-<!--            <button @click="addparticipants">Participants anlegen</button>-->
         </div>
-        </div>
-        <div class="group-preview-box">
-        <div class="group-preview-heading">
-        <h3 class="preview-box-heading">Private Events    </h3>
-        <p class="more-priv-events">zeige mehr</p>
-        </div>
-        <group-preview-card
-                    v-for="(group, index) in filteredList()"
-                    :key="index"
-                    :group="group?.eventGroup"
-            />
-        <!--<h1 v-else>Sie sind noch keiner Gruppe beigetreten!</h1>-->
+        
+        <!--<h1 v-else>Es noch keine öffentlichen Events!</h1>-->
         </div>
     </page-layout>
 </template>

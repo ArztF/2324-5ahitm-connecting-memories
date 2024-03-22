@@ -1,64 +1,80 @@
-
 .login-content-wrapper {
-    background-image: url("../../public/assets/login1.svg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100vw;
-    height: 100vh;
-    vertical-align: middle;
-    z-index: -1;
-}
-
-#login-back-button > ion-icon{
-    width: 10vw;
-    height: 6vh;
-    margin: 3%;
-    color: var(--ion-black);
-}
-.log-icons{
-    position: relative;
-    top: 30vh;
-    left: 4vw;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 2;
-    font-size: 1.2em;
-}
-.custom-toast {
-    --margin-bottom: 20%;
-    z-index: 10;
-}
-
-
-.login{
     display: flex;
     flex-direction: column;
-    margin-top: 55%;
-}
-
-.login-input {
-    margin: 5% 5% 5% 5%;
-    padding: 5%;
-    background-color: var(--ion-color-primary);
-    border:var(--ion-color-tertiary) solid 1px;
-    border-radius: 10px;
-    --color: var(--ion-color-tertiary);
-}
-.headline-login{
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #000; /* Schwarzer Hintergrund */
+    color: #fff; /* Weiße Textfarbe */
+    font-family: 'Arial', sans-serif;
+  }
+  .login-heading{
+    color: #9747e2;
+    font-weight: bold;
     position: absolute;
-    left: 10vw;
-    top: 24vh;
-    font-size: 3rem;
-    font-weight: bolder;
-    color: #ff5400;
-}
-
-.login-submit-button {
-    --padding: 3%;
-    --background: var(--ion-black);
-    --color: var(--ion-white);
-    margin: 3%;   
-}
-.info-register{
+    top: 50px;
+    left: 20px;
+  }
+  #login-back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  ion-icon {
+    font-size: 1.5rem; /* Größe des Icons */
+  }
+  
+  .login {
+    width: 90%; /* Breite des Login-Blocks */
+    max-width: 400px; /* Maximale Breite */
     display: flex;
-}
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .register-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px; /* Abstand zwischen den Feldern */
+    background: #222; /* Hintergrundfarbe der Eingabefelder */
+    border: 1px solid #222; /* Rahmen der Eingabefelder */
+    border-radius: 8px; /* Abgerundete Ecken */
+    color: white; /* Textfarbe */
+    font-size: 1rem; /* Schriftgröße */
+  }
+  .register-input:focus{
+    border: 1px solid #9747e2;
+  }
+  
+  .register-input::placeholder {
+    color: white; /* Farbe des Platzhaltertextes */
+  }
+  
+  .login-submit-button {
+    --background: #8C43D0; /* Hintergrundfarbe des Buttons */
+    --background-activated: #9747e2; /* Hintergrundfarbe bei Aktivierung */
+    --background-focused: #9747e2; /* Hintergrundfarbe bei Fokus */
+    --border-color: #8C43D0; /* Rahmenfarbe */
+    --color: #fff; /* Textfarbe */
+    width: 60%;
+    font-weight: bold;
+    margin-top: 15px; /* Abstand zum oberen Element */
+    border-radius: 8px; /* Abgerundete Ecken */
+  }
+  
+  p {
+    color: #fff; /* Farbe des Paragrafen */
+    font-size: 0.9rem; /* Schriftgröße */
+    margin-top: 20px; /* Abstand nach oben */
+  }
+  
+  p span {
+    color: #8C43D0;
+    font-weight: bolder;
+    cursor: pointer;
+    text-decoration: underline; /* Unterstrichen */
+  }
+  

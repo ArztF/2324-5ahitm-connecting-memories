@@ -1,23 +1,44 @@
 <template style="overflow: scroll">
-  <page-layout :title="events?.groupName">
-    <ion-searchbar v-if="events?.length !== 0 && 1 !== 1"  class="header-searchbar" v-model="input" @input="
-          debounce(() => {
-            input = $event.target.value;
-          })
-        "></ion-searchbar>
-      <event-header :group="events"></event-header>      
+  <page-layout>
+    <div class="group-detail-container">
+  <div class="group-detail-header">
+    <h1>{{group?.groupName}}</h1>
+  </div>
+   <group-preview-card :group="group"/>
+
+  
+  <div class="group-detail-events-heading">
+        <h3 class="group-detail-heading">Events in dieser Gruppe</h3>
+        <p class="more-events">zeige mehr</p>
+  </div>
+  <div v-for="(event, index) of events" :key="index">
+  <event-preview-card :event="event" :isClickable="true"/>
+  </div>
+ <div class="add-event-action">
+  <button class="button-add-event" @click="() => router.push('/createevent', 'back')">
+    </button>
+  </div> 
+      </div>
   </page-layout>
 </template>
 
 <script>
 import { addCircleOutline, enterOutline, searchOutline } from "ionicons/icons";
-import EventHeader from "../components/EventHeader.vue"
 import PageLayout from "@/components/PageLayout.vue";
+import GroupPreviewCard from "@/components/GroupPreviewCard.vue";
 import axios from "axios";
-import { IonSearchbar } from "@ionic/vue";
+import { useRouter } from "vue-router";
+import EventPreviewCard from '../components/EventPreviewCard.vue';
 
 export default {
-  components: { PageLayout, IonSearchbar, EventHeader },
+  components: { PageLayout,GroupPreviewCard, EventPreviewCard},
+
+  setup() {
+    const router = useRouter();
+    return {
+      router,
+    };
+  },
 
   data() {
     return {
@@ -25,54 +46,37 @@ export default {
       enterOutline,
       searchOutline,
       events: null,
-      input: "",
       publicEvents: null,
       noEventsFound: false,
-      debounce: this.createDebounce(),
+      group: null,
     };
   },
 
   methods: {
-
-    onClickChangeFilter(id) {
-      let chipid = document.getElementById(id);
-      chipid.style.background = "#ff5400";
-      chipid.style.color = "#fff";
-      chipid.style.border = "#fff";
-    },
-
-    createDebounce () {
-      let timeout = null
-      return function (fnc) {
-        clearTimeout(timeout)
-        timeout = setTimeout(async () => {
-          fnc()
-          axios.post("http://localhost:3000/search/searchByKeyword", { keyword: this.input })
-               .then((response) => {
-               this.events = response.data
-      })
-        }, 500)
-      }
-    }
   },
 
   mounted() {
-      let id = sessionStorage.getItem("groupId")
+
+
+      //let id = sessionStorage.getItem("groupId")
       axios
-      .get("http://localhost:8080/api/eventgroup/getById/" + id)
+      .get("http://localhost:8080/api/eventgroup/getById/" + 1)
+      .then((response) => {
+        this.group = response.data
+        axios
+      .get("http://localhost:8080/api/event/getByGroupId/" + this.group.id)
       .then((response) => {
         this.events = response.data
     })
       .catch(() => {
         console.log("error");
       }); 
+    })
+      .catch(() => {
+        console.log("error");
+      }); 
+
+      
   },
 };
 </script>
-
-<style scoped>
-/* Add your styles here */
-.heading {
-  color: var(--ion-color-primary);
-}
-</style>

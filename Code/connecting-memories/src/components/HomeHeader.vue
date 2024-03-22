@@ -3,13 +3,6 @@
     <ion-header>
       <ion-toolbar>
         <div class="header-wrapper">
-          <img
-            @click="() => router.push('/', 'back')"
-            class="logo"
-            alt="Silhouette of mountains"
-            src="../../public/assets/Logo-Nico.svg"
-          />
-
           <h1 class="main-header-title">{{ headerTitle }}</h1>
           <ion-menu-button id="main-content"> </ion-menu-button>
         </div>

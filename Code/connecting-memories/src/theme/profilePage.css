@@ -1,31 +1,261 @@
+.profile-container {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+  max-width: 400px; /* Anpassen je nach Bildschirmgröße */
+  margin: auto;
+  padding: 20px;
+}
 
-.profile-content-wrapper {
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100vw;
-    height: 60vh;
-    vertical-align: middle;
-    z-index: -1;
+.profile-header {
+  margin-top: 4vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.profile{
-    margin-top: 10vh;
-    display: flex;
-    flex-direction: column;
-    
+
+.profile-header h1 {
+  margin: 0;
+  font-weight: bolder;
 }
-.profile-input {
-    margin: 4% 2% 2% 2%;
-    padding: 3%;
-    background-color: var(--ion-color-primary);
-    border:var(--ion-color-tertiary) solid 1px;
-    border-radius: 10px;
-    color: var(--ion-color-tertiary);
+
+.profile-info {
+  text-align: center;
 }
-.profile-submit-button {
-    --padding: 3%;
-    --background: var(--ion-black);
-    --color: var(--ion-white);
-    margin: 3%;   
-}.profile-input:focus{
-    outline: 1px solid #ff5400;
+.profile-info p{
+  margin-top: -1vh;
+  color: #898989;
+
 }
+#profile-name {
+  font-size: 1.5em;
+  margin: 10px 0;
+}
+
+#profile-user, #profile-email {
+  margin: 5px 0;
+ 
+}
+
+.profile-actions {
+  display: flex; /* Aktiviert Flexbox */
+  justify-content: space-around; /* Gibt den Buttons gleichmäßig Platz */
+  align-items: center; /* Zentriert die Buttons vertikal */
+  width: 100%;
+  margin: 25px 0; /* Sorgt dafür, dass der Container die gesamte verfügbare Breite einnimmt */
+}
+.action-button {
+  width: 80px; /* Setze eine feste Größe für den Button */
+  height: 80px; /* Setze eine feste Größe für den Button */
+  border-radius: 20%; /* Leicht abgerundete Ecken */
+  display: flex;
+  flex-direction: column; /* Stapele Icon und Text vertikal */
+  justify-content: center; /* Zentriert die Inhalte vertikal */
+  align-items: center; /* Zentriert die Inhalte horizontal */
+  border: none;
+  position: relative;
+  margin: 10px; /* Abstand zwischen den Buttons */
+  background-color: #444; /* Hintergrundfarbe der Buttons */
+}
+
+.action-button ion-icon {
+  font-size: 30px; /* Größere Icons */
+  color: white;
+  margin-bottom: 4px; /* Abstand zwischen Icon und Text */
+}
+
+.action-button p {
+  margin: 0; /* Entfernt den Standardabstand */
+  font-size: 10px; /* Kleinere Schriftgröße für den Text */
+  color: #898989;
+  text-align: center; /* Zentriert den Text horizontal */
+}
+
+/* Du kannst spezifische Stile für gespeicherte und erstellte Buttons hinzufügen, falls nötig */
+.action-button.saved {
+  background-color: #222; /* Unterscheidung der Farben */
+  /* Weitere spezifische Stile hier */
+}
+
+.action-button.created {
+  background-color: #222; /* Unterscheidung der Farben */
+  /* Weitere spezifische Stile hier */
+}
+
+
+.action-button.created {
+  width: 80px; /* Setze eine feste Größe für den Button */
+  height: 80px; /* Setze eine feste Größe für den Button */
+  border-radius: 20%; /* Mache den Button rund */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  position: relative; /* Für absolute Positionierung des Icons */
+}
+
+.action-button.created ion-icon{
+  color: white;
+}
+
+.action-button.created p{
+  flex-wrap: wrap;
+  font-size: 9px;
+  color: #898989;
+
+}
+.action-button.add-group {
+  background-image: linear-gradient(to right top, #8c43d0, #ad4cd5, #ca58d9, #e565dd, #ff73e1);
+  width: 120px; /* Setze eine feste Größe für den Button */
+  height: 120px; /* Setze eine feste Größe für den Button */
+  border-radius: 20%; /* Mache den Button rund */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  position: relative; /* Für absolute Positionierung des Icons */
+  margin-top: 20px; /* Abstand vom oberen Inhalt */
+  margin-bottom: 20px; /* Abstand vom unteren Inhalt */
+}
+
+.action-button.add-group{
+  font-size: 4rem; /* Größe des Plus-Icons */
+  font-weight: bold; /* Macht das Plus-Zeichen dicker */
+  color: white; /* Farbe des Icons */
+}
+
+/* Alternative Methode, um das Plus-Zeichen dicker zu machen, falls nötig */
+.action-button.add-group::before {
+  content: '+';
+  font-size: 4rem; /* Größe des Plus-Zeichens */
+  font-weight: bold; /* Dicke des Plus-Zeichens */
+  color: white; /* Farbe des Plus-Zeichens */
+  line-height: 60px; /* Zentrierung des Plus-Zeichens */
+}
+
+/* Weitere spezifische Stile nach Bedarf hinzufügen */
+.groups-section {
+  /* Dunkler Hintergrund für die Gruppensektion */
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.groups-section h2 {
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.group-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.button-group {
+  width: 140px;
+  background-color: #000;
+   /* Dunklere Hintergrundfarbe für Buttons */
+  color: white;
+  border: 2px solid #222;
+  padding: 10px 15px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.group-list {
+  margin-bottom: 20px;
+}
+
+.group-item {
+  background-color: #222; /* Noch dunklerer Hintergrund für Einträge */
+  border-radius: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.group-item:last-child {
+  margin-bottom: 0;
+}
+
+.group-icon {
+  width: 50px; /* Anpassen je nach gewünschter Größe */
+  height: 50px; /* Anpassen je nach gewünschter Größe */
+  margin-right: 15px;
+}
+
+.group-info h3 {
+  margin: 0 0 5px 0; /* Abstand zwischen Überschrift und Beschreibung */
+  font-size: 1.1em; /* Größere Schrift für Gruppennamen */
+}
+
+.group-info p {
+  margin: 5px 0;
+  font-size: 0.9em; /* Kleinere Schrift für zusätzliche Infos */
+}.group-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.group-buttons label {
+  width: 30vw;
+  height: auto;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: solid 2px #222;
+  margin: 10px;
+  background-color: black;
+  cursor: pointer; /* Zeige Handzeiger beim Überfahren */
+}
+
+.group-buttons input[type="radio"] {
+  display: none; /* Verstecke die eigentlichen Radio-Buttons */
+}
+
+#attend:checked + .group-button-attend,
+#created:checked + .group-button-created {
+  background-color: #222; /* Ändere die Hintergrundfarbe der ausgewählten Box */
+  color: white; /* Ändere die Textfarbe */
+}
+
+.profile-info-name {
+  font-weight:bolder;
+  color:#8C43D0;
+}
+.profile-infos{
+  margin-top: -10px;
+  font-weight: bold;
+}
+.event-preview-box{
+  width: auto;
+  height: 30vh;
+  position: relative;
+  top:20vh;
+}
+.event-preview-heading{
+  width: 96%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+.event-preview-heading h3{
+  font-size: 18px;
+  font-weight: bolder;
+}
+.more-events {
+  display: inline-block;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  cursor: pointer;
+  color: white;
+  }
+

@@ -1,19 +1,19 @@
 <template>
-  <div>
-    <img
+    <div class="event-detail-container">
+  <div class="event-detail-header">
+    <h1>{{ event?.eventname }}</h1>
+    <ion-icon :icon="bookmarkOutline"></ion-icon>
+  </div>
+    <img class="img-detail-content"
       alt="Silhouette of mountains"
       :src="'http://localhost:8080/image/' + this.event?.bannerimg?.id"
     />
-    <ion-card-title class="eventDetailHeadline"
-      >{{ event?.eventname }}
-    </ion-card-title>
-    <div class="event-preview-header-icon-box">
-      <ion-icon :icon="imageOutline"></ion-icon>
-      <ion-icon @click="editEvent" :icon="pencilOutline"></ion-icon>
+    
+    <ion-card-content class="detail-content-event">
+      <div class="event-detail-date-content">
+        <p>{{ formatDate(event?.startdate, event?.enddate) }}</p>
     </div>
-    <ion-card-content>
       <div class="event-preview-content">
-        <ion-icon :icon="locationOutline"></ion-icon>
         <p id="event-location-detail" @click="setOpen(true)">
           {{ event?.location }}
         </p>
@@ -32,44 +32,19 @@
             ></ion-icon>
           </div>
         </ion-modal>
-      </div>
-      <div class="event-preview-content">
-        <ion-icon :icon="calendarOutline"></ion-icon>
-        <p>{{ formatDate(event?.startdate, event?.enddate) }}</p>
-      </div>
-      <div class="event-preview-content">
-        <ion-icon :icon="megaphoneOutline"></ion-icon>
         <p>{{ event?.veranstalter }}</p>
+      <p style="text-align: left; margin-top: 4vh">{{ event?.beschreibung }}</p>
       </div>
-      <div class="event-preview-content">
-        <ion-icon :icon="ticketOutline"></ion-icon>
-        <p>ab {{ event?.ticketpreis }}€</p>
-      </div>
-      <div class="event-preview-content-category">
-        <p style="text-align: left; margin-top: 1%">{{ event?.kategorie }}</p>
-      </div>
-      <p style="text-align: left; margin-top: 3%">{{ event?.beschreibung }}</p>
     </ion-card-content>
   </div>
 </template>
 
 <script>
 import {
-  calendarOutline,
-  locationOutline,
-  openOutline,
-  arrowBackOutline,
-  ticketOutline,
-  pricetagOutline,
-  megaphoneOutline,
-  keyOutline,
-  copyOutline,
   bookmarkOutline,
   bookmark,
-  imageOutline,
-  pencilOutline,
 } from "ionicons/icons";
-import { IonCardTitle, IonIcon, IonHeader, IonCardContent } from "@ionic/vue";
+import { IonIcon, IonHeader, IonCardContent } from "@ionic/vue";
 import { IonModal } from "@ionic/vue";
 import SmallMap from "./SmallMap.vue";
 import { useIonRouter } from "@ionic/vue";
@@ -82,7 +57,6 @@ export default {
   components: {
     SmallMap,
     IonModal,
-    IonCardTitle,
     IonIcon,
     IonHeader,
     IonCardContent,
@@ -91,19 +65,8 @@ export default {
     const router = useIonRouter();
     return {
       router,
-      locationOutline,
-      calendarOutline,
-      openOutline,
-      arrowBackOutline,
-      ticketOutline,
-      pricetagOutline,
-      megaphoneOutline,
-      keyOutline,
-      copyOutline,
       bookmarkOutline,
       bookmark,
-      imageOutline,
-      pencilOutline,
     };
   },
 

@@ -1,0 +1,76 @@
+.group-detail-container {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    max-width: 400px; /* Anpassen je nach Bildschirmgröße */
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .group-detail-header {
+    margin-top: 4vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .group-detail-header h1 {
+    margin: 0;
+    font-weight: bolder;
+  }
+
+  .group-detail-events-heading{
+    width: 96%;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+
+  }
+  .group-detail-events-heading h3{
+    font-size: 15px;
+    font-weight: bolder;
+  }
+  .more-events {
+    font-size: 10px;
+    text-decoration: underline;
+    cursor: pointer;
+    color: white;
+    }
+
+    .button-add-event {
+        background-image: linear-gradient(to right top, #8c43d0, #ad4cd5, #ca58d9, #e565dd, #ff73e1);
+        width: 90px; /* Setze eine feste Größe für den Button */
+        height: 90px; /* Setze eine feste Größe für den Button */
+        border-radius: 20%; /* Mache den Button rund */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        position: fixed;
+        top: 75vh;
+        left: auto; /* Für absolute Positionierung des Icons */
+        margin-top: 20px; /* Abstand vom oberen Inhalt */
+        margin-bottom: 20px; /* Abstand vom unteren Inhalt */
+      }
+      
+      .button-add-event{
+        font-size: 4rem; /* Größe des Plus-Icons */
+        font-weight: bold; /* Macht das Plus-Zeichen dicker */
+        color: white; /* Farbe des Icons */
+      }
+      
+    .add-event-action {
+    display: flex; /* Aktiviert Flexbox */
+    justify-content: space-around; /* Gibt den Buttons gleichmäßig Platz */
+    align-items: center; /* Zentriert die Buttons vertikal */
+    width: 100%;
+    margin: 25px 0; /* Sorgt dafür, dass der Container die gesamte verfügbare Breite einnimmt */
+    }
+      /* Alternative Methode, um das Plus-Zeichen dicker zu machen, falls nötig */
+      .button-add-event::before {
+        content: '+';
+        font-size: 3.5rem; /* Größe des Plus-Zeichens */
+        font-weight: bold; /* Dicke des Plus-Zeichens */
+        color: white; /* Farbe des Plus-Zeichens */
+        line-height: 60px; /* Zentrierung des Plus-Zeichens */
+      }

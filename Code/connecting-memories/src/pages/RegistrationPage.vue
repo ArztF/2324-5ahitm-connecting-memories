@@ -1,5 +1,6 @@
 <template>
   <ion-page>
+    <h1 class="registration-heading">Registrierung</h1>
     <div class="registration-content-wrapper" @keydown.enter="submitClicked()">
       <div id="register-back-button">
         <ion-icon
@@ -58,7 +59,7 @@
           @click="submitClicked"
           class="login-submit-button"
           type="submit"
-          >REGISTER</ion-button
+          >REGISTRIEREN</ion-button
         >
       </div>
     </div>

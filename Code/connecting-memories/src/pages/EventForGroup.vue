@@ -19,8 +19,6 @@
                     :group="group?.eventGroup"
             />
         </div>
-        
-        <!--<h1 v-else>Für diese Gruppe gibt es noch keine Events!</h1>-->
         </div>
     </page-layout>
 </template>

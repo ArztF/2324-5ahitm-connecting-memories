@@ -15,7 +15,7 @@
         <p class="more-pub-events">zeige mehr</p>
         </div>
             <div class="event-preview-card-wrapper" v-if="groups?.length > 0">
-            <group-preview-card
+            <event-preview-card
                     v-for="(group, index) in filteredList()"
                     :key="index"
                     :group="group?.eventGroup"
@@ -28,7 +28,7 @@
         <h3 class="preview-box-heading">Private Events    </h3>
         <p class="more-priv-events">zeige mehr</p>
         </div>
-        <group-preview-card
+        <event-preview-card
                     v-for="(group, index) in filteredList()"
                     :key="index"
                     :group="group?.eventGroup"
@@ -43,10 +43,10 @@ import { addCircleOutline, enterOutline, searchOutline,mapOutline } from "ionico
 import PageLayout from "@/components/PageLayout.vue";
 import axios from "axios";
 import { IonSearchbar } from "@ionic/vue";
-import GroupPreviewCard from "@/components/GroupPreviewCard.vue";
+import EventPreviewCard from "@/components/EventPreviewCard.vue";
 
 export default {
-    components: {GroupPreviewCard, PageLayout, IonSearchbar },
+    components: { PageLayout, IonSearchbar, EventPreviewCard },
 
     data() {
         return {
@@ -103,10 +103,8 @@ export default {
     },
 
     mounted() {
-        let userToken = sessionStorage.getItem('userToken')
-        console.log(userToken);
         axios
-            .get("http://localhost:8080/api/groupparticipant/getByCustomerId/" + userToken)
+            .get("http://localhost:8080/api/event")
             .then((response) => {
                 console.log(response);
                 this.groups = response.data

@@ -46,10 +46,10 @@ export default {
             email: this.email,
             password: this.password,
           })
-          .then((response) => {
+          .then(async (response) => {
             if (response.status == 200) {
               console.log(response.data);
-              sessionStorage.setItem("userToken", response.data);
+              this.getAccessToken()
               let comeFromWhichPage = sessionStorage.getItem("comeFromWhichPage");
               if(comeFromWhichPage == "createEvent") {
                 this.router.push('createevent')
@@ -92,7 +92,39 @@ export default {
       this.invalidInputs = [];
     },
 
-    backendErrorToast
+    backendErrorToast,
+
+    getAccessToken(){
+      const body = {
+        'client_id': 'vegastro',
+        'client_secret': '8xE3bA89Ys86PxU8zhXI6AgudSXejSKj',
+        'grant_type': 'client_credentials'
+      }
+
+      axios.post("/realms/vegastroRealm/protocol/openid-connect/token", body, {
+        headers: {"Content-Type": "application/x-www-form-urlencoded"}
+        }).then(() => {
+          this.getUserToken()
+
+        })
+    },
+
+    getUserToken(){
+    const body = {
+      'client_id': 'vegastro',
+      'client_secret': '8xE3bA89Ys86PxU8zhXI6AgudSXejSKj',
+      'grant_type': 'password',
+      'username': this.email,
+      'password': this.password
+    }
+
+    axios.post( "/realms/vegastroRealm/protocol/openid-connect/token", body, {
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    }).then((response) => {
+      console.log(response);
+      sessionStorage.setItem("userToken", response.data.access_token);
+    })
+  }
   },
 
   setup() {

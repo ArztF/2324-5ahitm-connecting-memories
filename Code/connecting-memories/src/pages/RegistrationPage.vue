@@ -93,13 +93,25 @@ export default {
   },
 
   methods: {
+    getAccessToken(){
+      const body = {
+        'client_id': 'vegastro',
+        'client_secret': '8xE3bA89Ys86PxU8zhXI6AgudSXejSKj',
+        'grant_type': 'client_credentials'
+      }
+
+      return axios.post("/realms/vegastroRealm/protocol/openid-connect/token", body, {
+        headers: {"Content-Type": "application/x-www-form-urlencoded"}
+        })
+    },
+
     async submitClicked() {
       if (
         this.vorname.length > 3 &&
         this.nachname.length > 3 &&
         this.username.length > 3 &&
         this.email.includes("@") &&
-        this.password1.length >= 8 &&
+        this.password1.length >= 2 &&
         this.password1 === this.password2
       ) {
     
@@ -112,6 +124,11 @@ export default {
           geburtsdatum: this.geburtsdatum,
           isVeranstalter: false,
         };
+
+        this.getAccessToken().then((response) => {
+          const value = this.createUser(user, response.data.access_token)
+          console.log(value);
+        })
         
         axios
           .post("http://localhost:8080/api/user/register", user)
@@ -123,47 +140,6 @@ export default {
           .catch((res) => {
             backendErrorToast(res.response.data.message);
           });
-      }
-      
-      if (
-        this.vorname.length < 3 &&
-        this.nachname.length < 3 &&
-        this.username.length < 3 &&
-        !this.email.includes("@") &&
-        this.password1.length <= 8 &&
-        this.password1 !== this.password2
-      ) {
-        this.invalidInputs.push("Es darf kein Feld leer sein!");
-      }
-      
-      if (this.vorname.length < 3) {
-        this.invalidInputs.push("Vorname");
-      }
-      
-      if (this.nachname.length < 3) {
-        this.invalidInputs.push("Nachname");
-      }
-      
-      if (this.username.length < 3) {
-        this.invalidInputs.push("Username");
-      }
-      
-      if (!this.email.includes("@")) {
-        this.invalidInputs.push("Email");
-      }
-      
-      if (this.password1.length <= 8) {
-        this.invalidInputs.push("Passwort");
-      }
-      
-      if (this.password1 !== this.password2) {
-        this.invalidInputs.push(
-          "Passwort stimmt nicht mit dem ersten Passwort überein!"
-        );
-      }
-      
-      if (this.invalidInputs.length != 0) {
-        this.presentToast();
       }
     },
 
@@ -187,6 +163,43 @@ export default {
     },
 
     backendErrorToast,
+
+    createUser(user, token){
+
+    let registrationData = {
+      "username": user.email,
+      "email": user.email,
+      "firstName": user.vorname,
+      "lastName": user.nachname,
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": user.password,
+          "temporary": false
+        }
+      ],
+    }
+
+    console.log(registrationData)
+    console.log(token)
+
+
+    return axios.post("/admin/realms/vegastroRealm/users", registrationData, {
+      headers: {'Authorization': "Bearer "+ token}
+    }).then(() => {
+      axios
+          .post("http://localhost:8080/api/user/register", registrationData)
+          .then((response) => {
+            console.log(response);
+            
+            this.router.push("/login", "forward");
+          })
+          .catch((res) => {
+            backendErrorToast(res.response.data.message);
+          });
+    })
+  }
   },
 
   setup() {

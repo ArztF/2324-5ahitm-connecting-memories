@@ -37,7 +37,7 @@ export default {
 
   data() {
     return {
-      id: this.$route.params.id,
+      userId: this.$route.params.id,
       vorname: "",
       nachname: "",
       username: "",
@@ -56,7 +56,7 @@ export default {
 
   
   mounted() {
-    axios.get("http://localhost:8080/api/user/" + this.id).then((response) => {
+    axios.get("http://localhost:8080/api/user/" + this.userId).then((response) => {
   
       this.user = response.data;
       this.vorname = this.user.vorname;
@@ -92,7 +92,7 @@ export default {
         };
   
         await axios
-          .put("http://localhost:8080/api/user/" + this.id, updateUser)
+          .put("http://localhost:8080/api/user/" + this.userId, updateUser)
           .then((response) => {
             console.log(response);
           });

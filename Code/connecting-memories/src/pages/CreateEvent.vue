@@ -82,7 +82,6 @@ export default {
   },
 
   async mounted() {
-    // dont let the user access this page if he isnt logged in
     let userToken = sessionStorage.getItem("userToken");
     if (userToken == null) {
       this.router.push("/login");
@@ -105,11 +104,8 @@ export default {
       this.typedInLocation = location
     },
 
-    // check if the values which are given from the user are all valid
-    // the will be checked again in the backend
     async onClickSubmit() {
       if (this.eventName.length == 0) {
-        // if the input isnt valid then it will be pushed in an error array which, will be presented to the user after all values are checked
         this.invalidInputs.push("Eventname");
       }
       if (this.typedInLocation.length == 0) {

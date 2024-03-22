@@ -62,8 +62,6 @@ export default {
 
   methods: {
     formatDate,
-
-    
     onClickDetailView() {
         this.router.push("/eventdetail/" + this.event.id);
     }

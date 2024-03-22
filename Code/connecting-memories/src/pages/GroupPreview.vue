@@ -33,7 +33,7 @@
                     :key="index"
                     :group="group?.eventGroup"
             />
-        
+
         </div>
     </page-layout>
 </template>

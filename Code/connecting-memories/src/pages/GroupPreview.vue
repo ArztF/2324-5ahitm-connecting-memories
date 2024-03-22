@@ -20,7 +20,7 @@
                     :key="index"
                     :group="group?.eventGroup"
             />
-<!--            <button @click="addparticipants">Participants anlegen</button>-->
+
         </div>
         </div>
         <div class="group-preview-box">
@@ -33,7 +33,7 @@
                     :key="index"
                     :group="group?.eventGroup"
             />
-        <!--<h1 v-else>Sie sind noch keiner Gruppe beigetreten!</h1>-->
+        
         </div>
     </page-layout>
 </template>

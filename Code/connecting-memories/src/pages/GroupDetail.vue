@@ -11,8 +11,11 @@
         <h3 class="group-detail-heading">Events in dieser Gruppe</h3>
         <p class="more-events">zeige mehr</p>
   </div>
+  <div v-for="(event, index) of events" :key="index">
+  <event-preview-card :event="event" :isClickable="true"/>
+  </div>
  <div class="add-event-action">
-  <button class="button-add-event">
+  <button class="button-add-event" @click="() => router.push('/createevent', 'back')">
     </button>
   </div> 
       </div>
@@ -24,9 +27,18 @@ import { addCircleOutline, enterOutline, searchOutline } from "ionicons/icons";
 import PageLayout from "@/components/PageLayout.vue";
 import GroupPreviewCard from "@/components/GroupPreviewCard.vue";
 import axios from "axios";
+import { useRouter } from "vue-router";
+import EventPreviewCard from '../components/EventPreviewCard.vue';
 
 export default {
-  components: { PageLayout,GroupPreviewCard},
+  components: { PageLayout,GroupPreviewCard, EventPreviewCard},
+
+  setup() {
+    const router = useRouter();
+    return {
+      router,
+    };
+  },
 
   data() {
     return {
@@ -51,10 +63,20 @@ export default {
       .get("http://localhost:8080/api/eventgroup/getById/" + 1)
       .then((response) => {
         this.group = response.data
+        axios
+      .get("http://localhost:8080/api/event/getByGroupId/" + this.group.id)
+      .then((response) => {
+        this.events = response.data
     })
       .catch(() => {
         console.log("error");
       }); 
+    })
+      .catch(() => {
+        console.log("error");
+      }); 
+
+      
   },
 };
 </script>

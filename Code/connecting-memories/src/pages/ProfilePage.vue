@@ -3,35 +3,35 @@
   <div class="profile-container">
   <div class="profile-header">
     <h1>Profil</h1>
-    <ion-icon :icon="settingsOutline"></ion-icon>
+    <ion-icon :icon="settingsOutline" @click="() => router.push(`/changeprofile/${id}`, 'back')"></ion-icon>
   </div>
   <div class="profile-info">
-    <h2 id="prfile-name">Nico Obermair</h2>
-    <p id="prfile-user">nico123</p>
-    <p id="prfile-email">nico.obermair@gmail.com</p>
+    <h2 id="prfile-name">{{vorname}} {{nachname}}</h2>
+    <p id="prfile-user">{{username}}</p>
+    <p id="prfile-email">{{email}}</p>
   </div>
   
   <div class="profile-actions">
-    <button class="action-button saved">
+    <button class="action-button saved" @click="() => router.push('/savedevents', 'back')">
       <ion-icon :icon="bookmarkOutline"></ion-icon>
       <p>Gespeichert</p>
     </button>
-    <button class="action-button created">
+    <button class="action-button created" @click="() => router.push('/mygroups', 'back')">
       <ion-icon :icon="calendarOutline"></ion-icon>
       <p>Erstellte Events</p>
     </button>
   </div>
    <div class="profile-actions">
-  <button class="action-button add-group">
+  <button class="action-button add-group" @click="() => router.push('/creategroup', 'back')">
     </button>
   </div>  
   <div class="groups-section">
   <h2>Gruppen</h2>
   <div class="group-buttons">
-  <input type="radio" id="attend" name="group-selection" value="attend" checked>
+  <input type="radio" id="attend" name="group-selection" value="attend" checked @click="switchOperation">
   <label class="group-button-attend" for="attend">Beigetreten</label>
 
-  <input type="radio" id="created" name="group-selection" value="created">
+  <input type="radio" id="created" name="group-selection" value="created" @click="switchOperation">
   <label class="group-button-created" for="created">Erstellt</label>
 </div>
   <group-preview-card
@@ -64,7 +64,7 @@ export default {
     return {
       groups: null,
       myGroups: null,
-      id: this.$route.params.id,
+      id: 0,
       vorname: "",
       nachname: "",
       username: "",
@@ -72,24 +72,25 @@ export default {
       password: "",
       user: null,
       invalidInputs: [],
+      isCreated: true
     };
   },
    
   
 
   
-  mounted() {
+  async mounted() {
     
   
-      //let id = sessionStorage.getItem("userToken")
-    axios
-      .get("http://localhost:8080/api/eventgroup/byOwnerId/" + 1)
+    this.id = sessionStorage.getItem("userToken")
+   this.groups = await axios
+      .get("http://localhost:8080/api/groupparticipant/getByCustomerId/" + 1)
       .then((response) => (this.groups = response.data))
       .catch(() => {
         console.log("error");
       });
 
-    axios.get("http://localhost:8080/api/user/" + this.id).then((response) => {
+    this.user = await axios.get("http://localhost:8080/api/user/" + this.id).then((response) => {
   
       this.user = response.data;
       this.vorname = this.user.vorname;
@@ -100,6 +101,25 @@ export default {
   },
 
   methods: {
+    async switchOperation () {
+      console.log("in");
+      this.isCreated = !this.isCreated
+      if(this.isCreated) {
+       this.groups = await axios
+      .get("http://localhost:8080/api/groupparticipant/getByCustomerId/" + 1)
+      .then((response) => (this.groups = response.data))
+      .catch(() => {
+        console.log("error");
+      });
+      } else {
+        await axios
+      .get("http://localhost:8080/api/eventgroup/byOwnerId/" + 1)
+      .then((response) => (this.groups = response.data))
+      .catch(() => {
+        console.log("error");
+      });
+      }
+    }
   },
 
   setup() {

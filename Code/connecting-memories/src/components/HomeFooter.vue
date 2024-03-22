@@ -64,7 +64,7 @@ export default {
         sessionStorage.setItem("comeFromWhichPage", "submitToEvent")
         this.router.push('/login')
       } else {
-        this.router.push('/profile/:id')
+        this.router.push('/profile')
       }
     }
   }

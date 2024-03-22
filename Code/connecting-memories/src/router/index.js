@@ -84,7 +84,7 @@ const routes = [
     component: EventCreatedSuccessfully
   },
   {
-    path: '/profile/:id',
+    path: '/profile',
     name: 'Profile',
     component: ProfilePage
   },

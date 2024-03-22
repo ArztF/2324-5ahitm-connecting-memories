@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: connecting-memories-keycloak
+  labels:
+    app: connecting-memories-keycloak
+  namespace: student-f-arzt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: connecting-memories-keycloak
+  template:
+    metadata:
+      labels:
+        app: connecting-memories-keycloak
+    spec:
+      containers:
+        - name: keycloak
+          image: quay.io/keycloak/keycloak:24.0.1
+          args: ["start-dev"]
+          env:
+            - name: KEYCLOAK_ADMIN
+              value: "admin"
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              value: "admin"
+            - name: KC_PROXY
+              value: "edge"
+            - name: PROXY_ADDRESS_FORWARDING
+              value: "true"
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /realms/master
+              port: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: connecting-memories-service-keycloak
+  namespace: student-f-arzt
+spec:
+  selector:
+    app: connecting-memories-keycloak
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: connecting-memories-keycloak-ingress
+  namespace: student-f-arzt
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: "/$1"
+spec:
+  rules:
+    - host: student.cloud.htl-leonding.ac.at
+      http:
+        paths:
+          - path: /connecting-memories-keycloak/(.*)$
+            pathType: Prefix
+            backend:
+              service:
+                name: connecting-memories-service-keycloak
+                port:
+                  number: 8080

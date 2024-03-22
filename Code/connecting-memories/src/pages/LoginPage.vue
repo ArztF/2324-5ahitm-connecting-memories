@@ -96,12 +96,12 @@ export default {
 
     getAccessToken(){
       const body = {
-        'client_id': 'vegastro',
-        'client_secret': '8xE3bA89Ys86PxU8zhXI6AgudSXejSKj',
+        'client_id': 'cm_client',
+        'client_secret': 'QssId9M1izZLinOW8QRMXePyrZMcCwDQ',
         'grant_type': 'client_credentials'
       }
 
-      axios.post("/realms/vegastroRealm/protocol/openid-connect/token", body, {
+      axios.post("realms/cmRealm/protocol/openid-connect/token", body, {
         headers: {"Content-Type": "application/x-www-form-urlencoded"}
         }).then(() => {
           this.getUserToken()
@@ -111,14 +111,14 @@ export default {
 
     getUserToken(){
     const body = {
-      'client_id': 'vegastro',
-      'client_secret': '8xE3bA89Ys86PxU8zhXI6AgudSXejSKj',
+      'client_id': 'cm_client',
+      'client_secret': 'QssId9M1izZLinOW8QRMXePyrZMcCwDQ',
       'grant_type': 'password',
       'username': this.email,
       'password': this.password
     }
 
-    axios.post( "/realms/vegastroRealm/protocol/openid-connect/token", body, {
+    axios.post( "realms/cmRealm/protocol/openid-connect/token", body, {
       headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     }).then((response) => {
       console.log(response);

@@ -71,7 +71,8 @@ import { IonPage, toastController, IonIcon } from "@ionic/vue";
 import axios from "axios";
 import { useIonRouter } from "@ionic/vue";
 import { chevronBackOutline } from "ionicons/icons";
-import { backendErrorToast } from '@/utils/toast.js'
+import { backendErrorToast } from "@/utils/toast.js";
+import { parseJWT } from "@/utils/parseJwt.js";
 
 export default {
   components: {
@@ -93,16 +94,17 @@ export default {
   },
 
   methods: {
-    getAccessToken(){
+    parseJWT,
+    getAccessToken() {
       const body = {
-        'client_id': 'vegastro',
-        'client_secret': '8xE3bA89Ys86PxU8zhXI6AgudSXejSKj',
-        'grant_type': 'client_credentials'
-      }
+        client_id: "cm_client",
+        client_secret: "QssId9M1izZLinOW8QRMXePyrZMcCwDQ",
+        grant_type: "client_credentials",
+      };
 
-      return axios.post("/realms/vegastroRealm/protocol/openid-connect/token", body, {
-        headers: {"Content-Type": "application/x-www-form-urlencoded"}
-        })
+      return axios.post("/realms/cmRealm/protocol/openid-connect/token", body, {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      });
     },
 
     async submitClicked() {
@@ -114,7 +116,6 @@ export default {
         this.password1.length >= 2 &&
         this.password1 === this.password2
       ) {
-    
         const user = {
           vorname: this.vorname,
           nachname: this.nachname,
@@ -126,20 +127,9 @@ export default {
         };
 
         this.getAccessToken().then((response) => {
-          const value = this.createUser(user, response.data.access_token)
-          console.log(value);
-        })
-        
-        axios
-          .post("http://localhost:8080/api/user/register", user)
-          .then((response) => {
-            console.log(response);
-            
-            this.router.push("/login", "forward");
-          })
-          .catch((res) => {
-            backendErrorToast(res.response.data.message);
-          });
+          this.createUser(user, response.data.access_token);
+          console.log(response);
+        });
       }
     },
 
@@ -164,42 +154,98 @@ export default {
 
     backendErrorToast,
 
-    createUser(user, token){
+    createUser(user, token) {
+      let registrationData = {
+        username: user.email,
+        email: user.email,
+        firstName: user.vorname,
+        lastName: user.nachname,
+        enabled: true,
+        credentials: [
+          {
+            type: "password",
+            value: user.password,
+            temporary: false,
+          },
+        ],
+      };
 
-    let registrationData = {
-      "username": user.email,
-      "email": user.email,
-      "firstName": user.vorname,
-      "lastName": user.nachname,
-      "enabled": true,
-      "credentials": [
-        {
-          "type": "password",
-          "value": user.password,
-          "temporary": false
-        }
-      ],
-    }
-
-    console.log(registrationData)
-    console.log(token)
-
-
-    return axios.post("/admin/realms/vegastroRealm/users", registrationData, {
-      headers: {'Authorization': "Bearer "+ token}
-    }).then(() => {
+      // Registrieren
       axios
-          .post("http://localhost:8080/api/user/register", registrationData)
-          .then((response) => {
-            console.log(response);
-            
-            this.router.push("/login", "forward");
+        .post("/admin/realms/cmRealm/users", registrationData, {
+          headers: { Authorization: "Bearer " + token },
+        })
+        .then(() => {
+          axios
+            .post("http://localhost:8080/api/user/register", user)
+            .then(async (response) => {
+              console.log(response);
+              const token2 = await this.submitClickedLogin(user);
+              const uid = parseJWT(token2).sub;
+
+              this.mapDefaultRole(uid, token);
+              this.router.push("/login", "forward");
+            })
+            .catch((res) => {
+              backendErrorToast(res.response.data.message);
+            });
+        });
+    },
+    mapDefaultRole(uid, token) {
+      axios
+        .get(
+          `/admin/realms/lowco2_realm/clients/6e105bf8-def4-474e-9802-2c2ab869a5b9/roles/default`,
+          { headers: { authorization: "Bearer " + token } }
+        )
+        .then((role) => {
+          this.mapRole(role, uid, token);
+        });
+    },
+
+    mapRole(role, uid, token) {
+      axios
+        .post(
+          `/admin/realms/lowco2_realm/users/${uid}/role-mappings/clients/6e105bf8-def4-474e-9802-2c2ab869a5b9`,
+          [role],
+          { headers: { authorization: "Bearer " + token } }
+        )
+        .then(() => {});
+    },
+
+    async submitClickedLogin(user) {
+      if (!this.email.length == 0 && !this.password.length == 0) {
+        await axios
+          .post("http://localhost:8080/api/user/login", {
+            email: user.email,
+            password: user.password,
           })
-          .catch((res) => {
-            backendErrorToast(res.response.data.message);
+          .then(async (response) => {
+            if (response.status == 200) {
+              console.log(response.data);
+              this.getAccessToken();
+              let comeFromWhichPage =
+                sessionStorage.getItem("comeFromWhichPage");
+              if (comeFromWhichPage == "createEvent") {
+                this.router.push("createevent");
+              } else {
+                this.router.push("/");
+              }
+              sessionStorage.setItem("comeFromWhichPage", "");
+            } else {
+              backendErrorToast("Login war nicht erfolgreich");
+            }
           });
-    })
-  }
+      }
+      if (this.email.length == 0 && !this.email.includes("@")) {
+        this.invalidInputs.push("Etwas Stimmt nicht mit deiner Email");
+      }
+      if (this.password.length == 0 && this.password.length < 8) {
+        this.invalidInputs.push("Dein Passwort ist zu kurz");
+      }
+      if (this.invalidInputs.length != 0) {
+        this.presentToast();
+      }
+    },
   },
 
   setup() {

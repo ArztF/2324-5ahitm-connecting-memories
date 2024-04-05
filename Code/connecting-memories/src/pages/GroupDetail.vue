@@ -42,6 +42,7 @@ export default {
 
   data() {
     return {
+      groupId: this.$route.params.id,
       addCircleOutline,
       enterOutline,
       searchOutline,
@@ -60,7 +61,7 @@ export default {
 
       //let id = sessionStorage.getItem("groupId")
       axios
-      .get("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/eventgroup/getById/" + 1)
+      .get("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/eventgroup/getById/" + this.groupId)
       .then((response) => {
         this.group = response.data
         axios

@@ -104,7 +104,6 @@ export default {
 
   mounted() {
     this.userToken = sessionStorage.getItem("userId");
-    console.log(userToken);
     axios
       .get(
         "https://student.cloud.htl-leonding.ac.at/connecting-memories/api/groupparticipant/getByCustomerId/" +

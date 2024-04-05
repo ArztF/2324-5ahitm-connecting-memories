@@ -76,8 +76,6 @@ export default {
           .then(async (response) => {
             if (response.status == 200) {
               sessionStorage.setItem("userId", response.data);
-              console.log(response);
-              console.log("beidl");
               this.getAccessToken();
             }
           });
@@ -126,7 +124,6 @@ export default {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
         })
         .then((response) => {
-          console.log(response.data.access_token);
           this.getUserToken(response.data.access_token);
         })
         .catch(() => {
@@ -137,7 +134,6 @@ export default {
     },
 
     getUserToken(token) {
-      console.log("beidl2");
       const body = {
         client_id: "cm_client",
         client_secret: "bp5HJf8tPamuekr4wAUuMSTFFxc6nLLS",
@@ -145,14 +141,12 @@ export default {
         username: this.email,
         password: this.password,
       };
-      console.log(body);
 
       axios
         .get("/admin/realms/cmRealm/users?email=" + this.email, {
           headers: { Authorization: "Bearer " + token },
         })
         .then((response) => {
-          console.log(response);
           if (!response.data[0].emailVerified) {
             this.backendErrorToast("Email wurde noch nicht verifiziert!");
             return;

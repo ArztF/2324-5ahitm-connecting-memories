@@ -73,7 +73,6 @@ export default {
     axios
       .get("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/event/" + this.eventId)
       .then((response) => {
-        console.log(response);
         this.event = response.data
       })
       .catch(() => {

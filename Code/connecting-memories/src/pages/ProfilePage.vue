@@ -137,7 +137,6 @@ export default {
     },
 
     async switchOperation() {
-      console.log("in");
       this.isCreated = !this.isCreated;
       if (this.isCreated) {
         this.groups = await axios

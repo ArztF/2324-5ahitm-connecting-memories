@@ -128,7 +128,6 @@ export default {
 
         this.getAccessToken().then((response) => {
           this.createUser(user, response.data.access_token);
-          console.log(response);
         });
       }
     },
@@ -155,7 +154,6 @@ export default {
     backendErrorToast,
 
     createUser(user, token) {
-      console.log(user);
       let registrationData = {
         username: user.email,
         email: user.email,
@@ -182,18 +180,13 @@ export default {
               "https://student.cloud.htl-leonding.ac.at/connecting-memories/api/user/register",
               user
             )
-            .then(async (response) => {
-              console.log("beidl123");
-              console.log(response);
+            .then(async () => {
 
-              console.log(user.email);
               axios
                 .get("/admin/realms/cmRealm/users?email=" + user.email, {
                   headers: { Authorization: "Bearer " + token },
                 })
                 .then((response) => {
-                  console.log("beidl");
-                  console.log(response);
 
                   const options = {
                     method: "put",
@@ -250,7 +243,6 @@ export default {
         )
         .then(async (response) => {
           if (response.status == 200) {
-            console.log(response.data);
             this.getAccessToken();
             let comeFromWhichPage = sessionStorage.getItem("comeFromWhichPage");
             if (comeFromWhichPage == "createEvent") {

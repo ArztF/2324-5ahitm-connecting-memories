@@ -95,7 +95,6 @@ export default {
         axios
             .get("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/groupparticipant/getByCustomerId/" + this.userDetails)
             .then((response) => {
-                console.log(response);
                 this.groups = response.data
             })
             .catch(() => {

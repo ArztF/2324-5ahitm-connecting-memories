@@ -110,7 +110,6 @@ export default {
           this.userToken
       )
       .then((response) => {
-        console.log(response);
         this.groups = response.data;
       })
       .catch(() => {

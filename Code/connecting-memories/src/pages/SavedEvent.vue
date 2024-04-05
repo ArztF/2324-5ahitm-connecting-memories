@@ -111,7 +111,6 @@ export default {
           this.userDetails
       )
       .then((response) => {
-        console.log(response);
         this.groups = response.data;
       })
       .catch(() => {

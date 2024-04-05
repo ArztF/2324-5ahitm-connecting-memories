@@ -122,7 +122,6 @@ export default {
         "https://student.cloud.htl-leonding.ac.at/connecting-memories/api/event"
       )
       .then((response) => {
-        console.log(response);
         this.events = response.data;
       })
       .catch(() => {

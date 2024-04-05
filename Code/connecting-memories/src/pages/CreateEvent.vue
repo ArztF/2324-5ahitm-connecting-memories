@@ -232,7 +232,6 @@ export default {
             }
           )
           .then((response) => {
-            console.log(response);
             sessionStorage.setItem("addedEvent", response.data.id);
             this.router.push("/eventadded");
           })

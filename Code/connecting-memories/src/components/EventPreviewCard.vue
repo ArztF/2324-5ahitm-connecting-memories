@@ -66,5 +66,9 @@ export default {
         this.router.push("/eventdetail/" + this.event.id);
     }
   },
+
+  mounted() {
+    console.log(this.event);
+  }
 };
 </script>

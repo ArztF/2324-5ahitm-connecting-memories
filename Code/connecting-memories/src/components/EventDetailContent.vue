@@ -9,8 +9,7 @@
       alt="Silhouette of mountains"
       :src="
         'https://student.cloud.htl-leonding.ac.at/connecting-memories/image/' +
-        this.event?.bannerimg?.id
-      "
+        this.bannerimgId"
     />
 
     <ion-card-content class="detail-content-event">
@@ -75,6 +74,9 @@ export default {
 
   data() {
     return {
+      bannerimgId: 0,
+      event: null,
+      eventId: this.$route.params.id,
       isOpen: false,
       cords: null,
       userToken: null,
@@ -83,11 +85,11 @@ export default {
     };
   },
 
-  props: {
-    event: {
-      type: Object,
-      required: false,
-    },
+  async mounted() {
+    await axios.get("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/event/" + this.eventId).then((response) => {
+      this.event = response.data
+      this.bannerimgId = response.data.bannerimg.id
+    })
   },
 
   watch: {

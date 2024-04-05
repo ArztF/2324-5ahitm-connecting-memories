@@ -6,7 +6,7 @@
           <ion-col size="2">
             <ion-avatar>
               <ion-img
-                :src="'http://localhost:8080/image/' + group?.image?.id"
+                :src="'https://student.cloud.htl-leonding.ac.at/connecting-memories/image/' + group?.image?.id"
                 alt="Group Image"
               ></ion-img>
             </ion-avatar>
@@ -67,7 +67,7 @@ export default {
   async mounted() {
     let groupId = sessionStorage.getItem("groupId");
     //   await axios
-    //       .get("http://localhost:8080/api/groupparticipant/")
+    //       .get("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/groupparticipant/")
     //       .then((response) => {
     //           this.groupParticipants = response.data
     //           let i = 0
@@ -84,7 +84,7 @@ export default {
     //       })
 
     await axios
-      .get("http://localhost:8080/api/event/getByGroupId/" + groupId)
+      .get("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/event/getByGroupId/" + groupId)
       .then((response) => {
         this.events = response.data;
       });

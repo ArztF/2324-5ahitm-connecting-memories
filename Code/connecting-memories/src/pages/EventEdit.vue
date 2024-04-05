@@ -76,7 +76,7 @@ export default {
   // with every reload of the page it will get all events from the db an will be saved in the global variable event
   mounted() {
     axios
-      .get("http://localhost:8080/api/event/" + this.eventId)
+      .get("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/event/" + this.eventId)
       .then((response) => {
         this.event = response.data;
         this.currentEventName = this.event?.eventname;
@@ -128,7 +128,7 @@ export default {
   methods: {
     async onClickSubmit() {
       await axios
-        .put("http://localhost:8080/api/event/" + this.eventId, this.updateValues)
+        .put("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/event/" + this.eventId, this.updateValues)
         .then((response) => {
           console.log(response);
           this.router.push("/event");

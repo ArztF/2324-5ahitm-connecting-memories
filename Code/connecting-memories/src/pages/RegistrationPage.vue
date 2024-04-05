@@ -71,7 +71,8 @@ import { IonPage, toastController, IonIcon } from "@ionic/vue";
 import axios from "axios";
 import { useIonRouter } from "@ionic/vue";
 import { chevronBackOutline } from "ionicons/icons";
-import { backendErrorToast } from '@/utils/toast.js'
+import { backendErrorToast } from "@/utils/toast.js";
+import { parseJWT } from "@/utils/parseJwt.js";
 
 export default {
   components: {
@@ -93,16 +94,28 @@ export default {
   },
 
   methods: {
+    parseJWT,
+    getAccessToken() {
+      const body = {
+        client_id: "cm_client",
+        client_secret: "bp5HJf8tPamuekr4wAUuMSTFFxc6nLLS",
+        grant_type: "client_credentials",
+      };
+
+      return axios.post("/realms/cmRealm/protocol/openid-connect/token", body, {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      });
+    },
+
     async submitClicked() {
       if (
         this.vorname.length > 3 &&
         this.nachname.length > 3 &&
         this.username.length > 3 &&
         this.email.includes("@") &&
-        this.password1.length >= 8 &&
+        this.password1.length >= 2 &&
         this.password1 === this.password2
       ) {
-    
         const user = {
           vorname: this.vorname,
           nachname: this.nachname,
@@ -112,58 +125,11 @@ export default {
           geburtsdatum: this.geburtsdatum,
           isVeranstalter: false,
         };
-        
-        axios
-          .post("http://localhost:8080/api/user/register", user)
-          .then((response) => {
-            console.log(response);
-            
-            this.router.push("/login", "forward");
-          })
-          .catch((res) => {
-            backendErrorToast(res.response.data.message);
-          });
-      }
-      
-      if (
-        this.vorname.length < 3 &&
-        this.nachname.length < 3 &&
-        this.username.length < 3 &&
-        !this.email.includes("@") &&
-        this.password1.length <= 8 &&
-        this.password1 !== this.password2
-      ) {
-        this.invalidInputs.push("Es darf kein Feld leer sein!");
-      }
-      
-      if (this.vorname.length < 3) {
-        this.invalidInputs.push("Vorname");
-      }
-      
-      if (this.nachname.length < 3) {
-        this.invalidInputs.push("Nachname");
-      }
-      
-      if (this.username.length < 3) {
-        this.invalidInputs.push("Username");
-      }
-      
-      if (!this.email.includes("@")) {
-        this.invalidInputs.push("Email");
-      }
-      
-      if (this.password1.length <= 8) {
-        this.invalidInputs.push("Passwort");
-      }
-      
-      if (this.password1 !== this.password2) {
-        this.invalidInputs.push(
-          "Passwort stimmt nicht mit dem ersten Passwort überein!"
-        );
-      }
-      
-      if (this.invalidInputs.length != 0) {
-        this.presentToast();
+
+        this.getAccessToken().then((response) => {
+          this.createUser(user, response.data.access_token);
+          console.log(response);
+        });
       }
     },
 
@@ -187,6 +153,117 @@ export default {
     },
 
     backendErrorToast,
+
+    createUser(user, token) {
+      console.log(user);
+      let registrationData = {
+        username: user.email,
+        email: user.email,
+        firstName: user.vorname,
+        lastName: user.nachname,
+        enabled: true,
+        credentials: [
+          {
+            type: "password",
+            value: user.password,
+            temporary: false,
+          },
+        ],
+      };
+
+      // Registrieren
+      axios
+        .post("/admin/realms/cmRealm/users", registrationData, {
+          headers: { Authorization: "Bearer " + token },
+        })
+        .then(() => {
+          axios
+            .post(
+              "https://student.cloud.htl-leonding.ac.at/connecting-memories/api/user/register",
+              user
+            )
+            .then(async (response) => {
+              console.log("beidl123");
+              console.log(response);
+
+              console.log(user.email);
+              axios
+                .get("/admin/realms/cmRealm/users?email=" + user.email, {
+                  headers: { Authorization: "Bearer " + token },
+                })
+                .then((response) => {
+                  console.log("beidl");
+                  console.log(response);
+
+                  const options = {
+                    method: "put",
+                    headers: {
+                      Authorization: "Bearer " + token,
+                      "Access-Control-Allow-Origin": "*",
+                    },
+                  };
+                  fetch(
+                    `/admin/realms/cmRealm/users/${response.data[0].id}/execute-actions-email?client_id=cm_client`,
+                    options
+                  );
+                });
+              const token2 = await this.submitClickedLogin(user);
+              const uid = parseJWT(token2).sub;
+
+              this.mapDefaultRole(uid, token);
+              this.router.push("/login", "forward");
+            })
+            .catch((res) => {
+              backendErrorToast(res);
+            });
+        });
+    },
+    mapDefaultRole(uid, token) {
+      axios
+        .get(
+          `/admin/realms/cmRealm/clients/6e105bf8-def4-474e-9802-2c2ab869a5b9/roles/default`,
+          { headers: { authorization: "Bearer " + token } }
+        )
+        .then((role) => {
+          this.mapRole(role, uid, token);
+        });
+    },
+
+    mapRole(role, uid, token) {
+      axios
+        .post(
+          `/admin/realms/cmRealm/users/${uid}/role-mappings/clients/6e105bf8-def4-474e-9802-2c2ab869a5b9`,
+          [role],
+          { headers: { authorization: "Bearer " + token } }
+        )
+        .then(() => {});
+    },
+
+    async submitClickedLogin(user) {
+      await axios
+        .post(
+          "https://student.cloud.htl-leonding.ac.at/connecting-memories/api/user/login",
+          {
+            email: user.email,
+            password: user.password,
+          }
+        )
+        .then(async (response) => {
+          if (response.status == 200) {
+            console.log(response.data);
+            this.getAccessToken();
+            let comeFromWhichPage = sessionStorage.getItem("comeFromWhichPage");
+            if (comeFromWhichPage == "createEvent") {
+              this.router.push("createevent");
+            } else {
+              this.router.push("/");
+            }
+            sessionStorage.setItem("comeFromWhichPage", "");
+          } else {
+            backendErrorToast("Login war nicht erfolgreich");
+          }
+        });
+    },
   },
 
   setup() {

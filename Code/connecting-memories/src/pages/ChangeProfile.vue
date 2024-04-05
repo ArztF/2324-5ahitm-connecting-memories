@@ -56,7 +56,7 @@ export default {
 
   
   mounted() {
-    axios.get("http://localhost:8080/api/user/" + this.userId).then((response) => {
+    axios.get("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/user/" + this.userId).then((response) => {
   
       this.user = response.data;
       this.vorname = this.user.vorname;
@@ -92,7 +92,7 @@ export default {
         };
   
         await axios
-          .put("http://localhost:8080/api/user/" + this.userId, updateUser)
+          .put("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/user/" + this.userId, updateUser)
           .then((response) => {
             console.log(response);
           });

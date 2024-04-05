@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: connecting-memories-quarkus
+  labels:
+    app: connecting-memories
+  namespace: student-f-arzt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: connecting-memories
+  template:
+    metadata:
+      labels:
+        app: connecting-memories
+    spec:
+      containers:
+        - name: connecting-memories-backend
+          image: farzt/connecting-memories:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "0.2"
+            requests:
+              memory: "500Mi"
+              cpu: "0.1"
+          env:
+            - name: QUARKUS_DATASOURCE_JDBC_URL
+              value: jdbc:postgresql://postgres:5432/postgres
+            - name: QUARKUS_DATASOURCE_PASSWORD
+              value: demo
+            - name: QUARKUS_DATASOURCE_USERNAME
+              value: demo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: connecting-memories-service
+  namespace: student-f-arzt
+spec:
+  selector:
+    app: connecting-memories
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: connecting-memories-ingress
+  namespace: student-f-arzt
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: "/$1"
+spec:
+  rules:
+    - host: student.cloud.htl-leonding.ac.at
+      http:
+        paths:
+          - path: /connecting-memories/(.*)$
+            pathType: Prefix
+            backend:
+              service:
+                name: connecting-memories-service
+                port:
+                  number: 8080

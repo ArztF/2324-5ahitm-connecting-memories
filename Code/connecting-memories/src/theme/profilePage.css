@@ -10,7 +10,6 @@
 .profile-header {
   margin-top: 4vh;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 

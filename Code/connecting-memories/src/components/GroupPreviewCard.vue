@@ -2,7 +2,7 @@
     <ion-card @click="showEventsInGroup" class="group-card">
         <ion-card-header class="group-card-header">
                     <ion-avatar class="group-image-box">
-                        <ion-img :src="'http://localhost:8080/image/' + group?.image?.id" alt="Group Image" class="group-image"></ion-img>
+                        <ion-img :src="'https://student.cloud.htl-leonding.ac.at/connecting-memories/image/' + group?.image?.id" alt="Group Image" class="group-image"></ion-img>
                     </ion-avatar>
             <div class="group-text">       
                  <ion-card-title class="group-name">{{ group?.groupName }}</ion-card-title>

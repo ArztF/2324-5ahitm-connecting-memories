@@ -51,7 +51,7 @@ export default {
 
     deleteEvent() {
       axios
-        .delete("http://localhost:8080/api/event/" + this.eventId)
+        .delete("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/event/" + this.eventId)
         .then((response) => {
           this.event = response.data
           this.presentToast("Event wurde nicht erstellt!")
@@ -71,7 +71,7 @@ export default {
   mounted() {
     this.eventId = sessionStorage.getItem("addedEvent");
     axios
-      .get("http://localhost:8080/api/event/" + this.eventId)
+      .get("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/event/" + this.eventId)
       .then((response) => {
         console.log(response);
         this.event = response.data

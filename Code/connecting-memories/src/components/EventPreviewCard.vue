@@ -6,7 +6,7 @@
     <img
       alt="Silhouette of mountains"
       class="publish-preview-card-image"
-      :src="'http://localhost:8080/image/' + event?.bannerimg?.id"
+      :src="'https://student.cloud.htl-leonding.ac.at/connecting-memories/image/' + event?.bannerimg?.id"
     />
     <ion-card-header class="publish-event-preview-header">
       <p class="date-event-preview">{{ formatDate(event?.startdate, event?.enddate) }}</p>

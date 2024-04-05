@@ -20,12 +20,8 @@
   
 <script>
 import { IonIcon } from "@ionic/vue";
-import {
-  addCircleOutline,
-  homeOutline,
-  personOutline
-} from "ionicons/icons";
-import { useIonRouter } from '@ionic/vue';
+import { addCircleOutline, homeOutline, personOutline } from "ionicons/icons";
+import { useIonRouter } from "@ionic/vue";
 
 export default {
   components: {
@@ -48,25 +44,25 @@ export default {
   methods: {
     // check method to check if the user is logged in, because if he isnt he is not allowed to access this page
     onCreateEventClicked() {
-      let userToken = sessionStorage.getItem("userToken")
-      if(userToken == null) {
-        sessionStorage.setItem("comeFromWhichPage", "createEvent")
-        this.router.push('/login')
+      let userToken = sessionStorage.getItem("userToken");
+      if (userToken == null) {
+        sessionStorage.setItem("comeFromWhichPage", "createEvent");
+        this.router.push("/login");
       } else {
-        this.router.push('/createevent')
+        this.router.push("/createevent");
       }
     },
 
     // check method to check if the user is logged in, because if he isnt he is not allowed to access this page
     onSubmitToEventClicked() {
-      let userToken = sessionStorage.getItem("userToken")
-      if(userToken == null) {
-        sessionStorage.setItem("comeFromWhichPage", "submitToEvent")
-        this.router.push('/login')
+      let userToken = sessionStorage.getItem("userToken");
+      if (userToken == null) {
+        sessionStorage.setItem("comeFromWhichPage", "submitToEvent");
+        this.router.push("/login");
       } else {
-        this.router.push('/profile')
+        this.router.push("/profile");
       }
-    }
-  }
+    },
+  },
 };
 </script>

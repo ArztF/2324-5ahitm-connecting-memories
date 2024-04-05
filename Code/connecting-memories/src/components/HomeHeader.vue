@@ -15,22 +15,21 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <div class="menu-buttons" @click="onRedirectClicked('mygroups')">Von mir erstellte Gruppen</div><br>
+        <div class="menu-buttons" @click="onRedirectClicked('mygroups')">
+          Von mir erstellte Gruppen
+        </div>
+        <br />
 
-
-        <div
-          @click="onRedirectClicked('createGroup')"
-          class="menu-buttons"
-        >
+        <div @click="onRedirectClicked('createGroup')" class="menu-buttons">
           Gruppe erstellen
         </div>
-          <br />
-          <div
-            @click="onRedirectClicked('profile/' + this.userId)"
-            class="menu-buttons"
-          >
-              Mein Profil
-          </div>
+        <br />
+        <div
+          @click="onRedirectClicked('profile/' + this.userId)"
+          class="menu-buttons"
+        >
+          Mein Profil
+        </div>
         <br />
         <div class="menu-buttons" @click="onClickLogout()">Abmelden</div>
       </ion-content>
@@ -84,7 +83,7 @@ export default {
   },
   data() {
     return {
-      userId: String
+      userId: String,
     };
   },
   methods: {
@@ -94,16 +93,15 @@ export default {
       this.router.push("/");
     },
 
-
     onRedirectClicked(redirectLink) {
-      let userToken = sessionStorage.getItem("userToken")
-      if(userToken == null) {
-        sessionStorage.setItem("comeFromWhichPage", "submitToEvent")
-        this.router.push('/login')
+      let userToken = sessionStorage.getItem("userToken");
+      if (userToken == null) {
+        sessionStorage.setItem("comeFromWhichPage", "submitToEvent");
+        this.router.push("/login");
       } else {
-        this.router.push('/' + redirectLink)
+        this.router.push("/" + redirectLink);
       }
-    }
+    },
   },
 };
 </script>

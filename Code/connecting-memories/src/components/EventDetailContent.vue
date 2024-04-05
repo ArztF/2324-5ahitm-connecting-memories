@@ -1,18 +1,22 @@
 <template>
-    <div class="event-detail-container">
-  <div class="event-detail-header">
-    <h1>{{ event?.eventname }}</h1>
-    <ion-icon :icon="bookmarkOutline"></ion-icon>
-  </div>
-    <img class="img-detail-content"
+  <div class="event-detail-container">
+    <div class="event-detail-header">
+      <h1>{{ event?.eventname }}</h1>
+      <ion-icon :icon="bookmarkOutline"></ion-icon>
+    </div>
+    <img
+      class="img-detail-content"
       alt="Silhouette of mountains"
-      :src="'http://localhost:8080/image/' + this.event?.bannerimg?.id"
+      :src="
+        'https://student.cloud.htl-leonding.ac.at/connecting-memories/image/' +
+        this.event?.bannerimg?.id
+      "
     />
-    
+
     <ion-card-content class="detail-content-event">
       <div class="event-detail-date-content">
         <p>{{ formatDate(event?.startdate, event?.enddate) }}</p>
-    </div>
+      </div>
       <div class="event-preview-content">
         <p id="event-location-detail" @click="setOpen(true)">
           {{ event?.location }}
@@ -33,25 +37,24 @@
           </div>
         </ion-modal>
         <p>{{ event?.veranstalter }}</p>
-      <p style="text-align: left; margin-top: 4vh">{{ event?.beschreibung }}</p>
+        <p style="text-align: left; margin-top: 4vh">
+          {{ event?.beschreibung }}
+        </p>
       </div>
     </ion-card-content>
   </div>
 </template>
 
 <script>
-import {
-  bookmarkOutline,
-  bookmark,
-} from "ionicons/icons";
+import { bookmarkOutline, bookmark } from "ionicons/icons";
 import { IonIcon, IonHeader, IonCardContent } from "@ionic/vue";
 import { IonModal } from "@ionic/vue";
 import SmallMap from "./SmallMap.vue";
 import { useIonRouter } from "@ionic/vue";
 import axios from "axios";
-import { presentToast } from '@/utils/toast.js';
-import { formatDate } from '@/utils/format.js';
-import { copyTextToClipboard } from '@/utils/copyText.js'
+import { presentToast } from "@/utils/toast.js";
+import { formatDate } from "@/utils/format.js";
+import { copyTextToClipboard } from "@/utils/copyText.js";
 
 export default {
   components: {
@@ -115,7 +118,7 @@ export default {
     },
 
     presentToast,
-    formatDate
+    formatDate,
   },
 };
 </script>

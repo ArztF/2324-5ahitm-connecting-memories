@@ -98,7 +98,7 @@ export default {
     getAccessToken() {
       const body = {
         client_id: "cm_client",
-        client_secret: "QssId9M1izZLinOW8QRMXePyrZMcCwDQ",
+        client_secret: "bp5HJf8tPamuekr4wAUuMSTFFxc6nLLS",
         grant_type: "client_credentials",
       };
 
@@ -155,6 +155,7 @@ export default {
     backendErrorToast,
 
     createUser(user, token) {
+      console.log(user);
       let registrationData = {
         username: user.email,
         email: user.email,
@@ -177,9 +178,35 @@ export default {
         })
         .then(() => {
           axios
-            .post("http://localhost:8080/api/user/register", user)
+            .post(
+              "https://student.cloud.htl-leonding.ac.at/connecting-memories/api/user/register",
+              user
+            )
             .then(async (response) => {
+              console.log("beidl123");
               console.log(response);
+
+              console.log(user.email);
+              axios
+                .get("/admin/realms/cmRealm/users?email=" + user.email, {
+                  headers: { Authorization: "Bearer " + token },
+                })
+                .then((response) => {
+                  console.log("beidl");
+                  console.log(response);
+
+                  const options = {
+                    method: "put",
+                    headers: {
+                      Authorization: "Bearer " + token,
+                      "Access-Control-Allow-Origin": "*",
+                    },
+                  };
+                  fetch(
+                    `/admin/realms/cmRealm/users/${response.data[0].id}/execute-actions-email?client_id=cm_client`,
+                    options
+                  );
+                });
               const token2 = await this.submitClickedLogin(user);
               const uid = parseJWT(token2).sub;
 
@@ -187,14 +214,14 @@ export default {
               this.router.push("/login", "forward");
             })
             .catch((res) => {
-              backendErrorToast(res.response.data.message);
+              backendErrorToast(res);
             });
         });
     },
     mapDefaultRole(uid, token) {
       axios
         .get(
-          `/admin/realms/lowco2_realm/clients/6e105bf8-def4-474e-9802-2c2ab869a5b9/roles/default`,
+          `/admin/realms/cmRealm/clients/6e105bf8-def4-474e-9802-2c2ab869a5b9/roles/default`,
           { headers: { authorization: "Bearer " + token } }
         )
         .then((role) => {
@@ -205,7 +232,7 @@ export default {
     mapRole(role, uid, token) {
       axios
         .post(
-          `/admin/realms/lowco2_realm/users/${uid}/role-mappings/clients/6e105bf8-def4-474e-9802-2c2ab869a5b9`,
+          `/admin/realms/cmRealm/users/${uid}/role-mappings/clients/6e105bf8-def4-474e-9802-2c2ab869a5b9`,
           [role],
           { headers: { authorization: "Bearer " + token } }
         )
@@ -213,38 +240,29 @@ export default {
     },
 
     async submitClickedLogin(user) {
-      if (!this.email.length == 0 && !this.password.length == 0) {
-        await axios
-          .post("http://localhost:8080/api/user/login", {
+      await axios
+        .post(
+          "https://student.cloud.htl-leonding.ac.at/connecting-memories/api/user/login",
+          {
             email: user.email,
             password: user.password,
-          })
-          .then(async (response) => {
-            if (response.status == 200) {
-              console.log(response.data);
-              this.getAccessToken();
-              let comeFromWhichPage =
-                sessionStorage.getItem("comeFromWhichPage");
-              if (comeFromWhichPage == "createEvent") {
-                this.router.push("createevent");
-              } else {
-                this.router.push("/");
-              }
-              sessionStorage.setItem("comeFromWhichPage", "");
+          }
+        )
+        .then(async (response) => {
+          if (response.status == 200) {
+            console.log(response.data);
+            this.getAccessToken();
+            let comeFromWhichPage = sessionStorage.getItem("comeFromWhichPage");
+            if (comeFromWhichPage == "createEvent") {
+              this.router.push("createevent");
             } else {
-              backendErrorToast("Login war nicht erfolgreich");
+              this.router.push("/");
             }
-          });
-      }
-      if (this.email.length == 0 && !this.email.includes("@")) {
-        this.invalidInputs.push("Etwas Stimmt nicht mit deiner Email");
-      }
-      if (this.password.length == 0 && this.password.length < 8) {
-        this.invalidInputs.push("Dein Passwort ist zu kurz");
-      }
-      if (this.invalidInputs.length != 0) {
-        this.presentToast();
-      }
+            sessionStorage.setItem("comeFromWhichPage", "");
+          } else {
+            backendErrorToast("Login war nicht erfolgreich");
+          }
+        });
     },
   },
 

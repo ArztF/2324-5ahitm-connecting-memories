@@ -45,7 +45,7 @@ export default {
   mounted () {
 
     axios
-        .get("http://localhost:8080/api/event/" + this.eventId)
+        .get("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/event/" + this.eventId)
         .then((response) => {
           this.event = response.data
         ;})

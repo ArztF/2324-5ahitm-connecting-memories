@@ -1,6 +1,6 @@
 <template style="overflow: scroll">
 <ion-card>
-    <img alt="Silhouette of mountains" :src="'http://localhost:8080/image/' + event?.bannerimg?.id" />
+    <img alt="Silhouette of mountains" :src="'https://student.cloud.htl-leonding.ac.at/connecting-memories/image/' + event?.bannerimg?.id" />
     <ion-card-header>
       <ion-card-title>{{ event?.eventname }}</ion-card-title>
     </ion-card-header>

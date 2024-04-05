@@ -82,15 +82,15 @@ export default {
   async mounted() {
     
   
-    this.id = sessionStorage.getItem("userToken")
+    this.id = sessionStorage.getItem("userId")
    this.groups = await axios
-      .get("http://localhost:8080/api/groupparticipant/getByCustomerId/" + 1)
+      .get("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/groupparticipant/getByCustomerId/" + 1)
       .then((response) => (this.groups = response.data))
       .catch(() => {
         console.log("error");
       });
 
-    this.user = await axios.get("http://localhost:8080/api/user/" + this.id).then((response) => {
+    this.user = await axios.get("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/user/" + this.id).then((response) => {
   
       this.user = response.data;
       this.vorname = this.user.vorname;
@@ -106,14 +106,14 @@ export default {
       this.isCreated = !this.isCreated
       if(this.isCreated) {
        this.groups = await axios
-      .get("http://localhost:8080/api/groupparticipant/getByCustomerId/" + 1)
+      .get("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/groupparticipant/getByCustomerId/" + this.id)
       .then((response) => (this.groups = response.data))
       .catch(() => {
         console.log("error");
       });
       } else {
         await axios
-      .get("http://localhost:8080/api/eventgroup/byOwnerId/" + 1)
+      .get("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/eventgroup/byOwnerId/" + this.id)
       .then((response) => (this.groups = response.data))
       .catch(() => {
         console.log("error");

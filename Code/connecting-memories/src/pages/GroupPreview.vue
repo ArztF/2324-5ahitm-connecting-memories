@@ -85,12 +85,12 @@ export default {
 
         
         addparticipants () {
-            axios.get("http://localhost:8080/api/event/1")
+            axios.get("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/event/1")
                 .then((response) => {
                     this.event = response.data
                 })
             axios
-                .post("http://localhost:8080/api/groupparticipant/signUpToGroup",
+                .post("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/groupparticipant/signUpToGroup",
                     {
                         id: 1,
                         eventgroup_id: this.event,
@@ -104,7 +104,7 @@ export default {
 
     mounted() {
         axios
-            .get("http://localhost:8080/api/event")
+            .get("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/event")
             .then((response) => {
                 console.log(response);
                 this.groups = response.data

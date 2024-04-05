@@ -37,6 +37,7 @@ export default {
 
     data() {
         return {
+            userDetails: 0,
             addCircleOutline,
             enterOutline,
             mapOutline,
@@ -72,14 +73,14 @@ export default {
 
         
         addparticipants () {
-            axios.get("http://localhost:8080/api/event/1")
+            axios.get("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/event/" + this.userDetails)
                 .then((response) => {
                     this.event = response.data
                 })
             axios
-                .post("http://localhost:8080/api/groupparticipant/signUpToGroup",
+                .post("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/groupparticipant/signUpToGroup",
                     {
-                        id: 1,
+                        id: this.userDetails,
                         eventgroup_id: this.event,
                         customer_id: this.groups[0].groupAdmin
                     })
@@ -90,10 +91,9 @@ export default {
     },
 
     mounted() {
-        let userToken = sessionStorage.getItem('userToken')
-        console.log(userToken);
+        this.userDetails = sessionStorage.getItem('userId')
         axios
-            .get("http://localhost:8080/api/groupparticipant/getByCustomerId/" + userToken)
+            .get("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/groupparticipant/getByCustomerId/" + this.userDetails)
             .then((response) => {
                 console.log(response);
                 this.groups = response.data

@@ -19,7 +19,7 @@
 <script>
 import PageLayout from "@/components/PageLayout.vue";
 import { IonButton, useIonRouter } from "@ionic/vue";
-import { presentToast } from '@/utils/toast.js';
+import { presentToast } from "@/utils/toast.js";
 import axios from "axios";
 
 export default {
@@ -40,10 +40,9 @@ export default {
     };
   },
 
-  
   mounted() {
     let userToken = sessionStorage.getItem("userToken");
-    
+
     if (!userToken) {
       this.router.push("/login");
     } else {
@@ -53,38 +52,41 @@ export default {
 
   methods: {
     onClickSubmit() {
-      
       axios
-        .get("http://localhost:8080/api/event/" + this.eventLink)
+        .get(
+          "https://student.cloud.htl-leonding.ac.at/connecting-memories/api/event/" +
+            this.eventLink
+        )
         .then((response) => {
-          
           this.existingEvent = response.data.existingEvent;
           this.userId = sessionStorage.getItem("userToken");
-          
-          for(let participants of this.existingEvent.participants) {
-          
-            if(participants._id == this.userId.user.id) {
+
+          for (let participants of this.existingEvent.participants) {
+            if (participants._id == this.userId.user.id) {
               this.checkIfAlreadySubscribed = true;
             }
           }
-          
-          if(!this.checkIfAlreadySubscribed) {
+
+          if (!this.checkIfAlreadySubscribed) {
             this.existingEvent.participants.push(this.userId.user.id);
             axios
               .put(
-                "http://localhost:8080/api/event/" + this.eventLink,
+                "https://student.cloud.htl-leonding.ac.at/connecting-memories/api/event/" +
+                  this.eventLink,
                 this.existingEvent
               )
               .then(() => {
-                presentToast("Sie haben sich erfolgreich für dieses Event registriert!")
+                presentToast(
+                  "Sie haben sich erfolgreich für dieses Event registriert!"
+                );
               });
-              
           } else {
-            presentToast("Sie haben sich bereits für dieses Event angemeldet!")
+            presentToast("Sie haben sich bereits für dieses Event angemeldet!");
           }
-        }).catch(() => {
-          presentToast("Dieses Event gibt es nicht!")
         })
+        .catch(() => {
+          presentToast("Dieses Event gibt es nicht!");
+        });
     },
 
     presentToast,

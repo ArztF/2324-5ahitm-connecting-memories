@@ -25,7 +25,7 @@ public class CustomerResource {
     @Produces(MediaType.APPLICATION_JSON)
     public URI createUser(Customer customer, @Context UriInfo uriInfo) {
         customerRepository.createUser(customer);
-        return uriInfo.getAbsolutePathBuilder().path(Long.toString(customer.id)).build();
+        return uriInfo.getAbsolutePathBuilder().path(Long.toString(customer.id)).build(customer.id);
     }
 
     @POST

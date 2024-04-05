@@ -49,7 +49,7 @@ export default {
 
   
   mounted() {
-    axios.get("http://localhost:8080/api/user/" + this.id).then((response) => {
+    axios.get("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/user/" + this.id).then((response) => {
   
       this.user = response.data;
       this.vorname = this.user.vorname;

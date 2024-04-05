@@ -23,9 +23,9 @@ export default {
 
   
   mounted() {
-      let id = sessionStorage.getItem("userToken")
+      let id = sessionStorage.getItem("userId")
     axios
-      .get("http://localhost:8080/api/eventgroup/byOwnerId/" + id)
+      .get("https://student.cloud.htl-leonding.ac.at/connecting-memories/api/eventgroup/byOwnerId/" + id)
       .then((response) => (this.groups = response.data))
       .catch(() => {
         console.log("error");

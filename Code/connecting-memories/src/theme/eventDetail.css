@@ -85,7 +85,8 @@ small-map{
     --color: #fff; /* Textfarbe */
     width: 30vw;
     font-weight: bold;
-    margin-top: 25vh; /* Abstand zum oberen Element */
+    position:fixed;
+    bottom: 15vh;
     --border-radius: 20px; /* Abgerundete Ecken */
 
   }

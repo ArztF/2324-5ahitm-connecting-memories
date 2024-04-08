@@ -28,12 +28,14 @@
           placeholder="Beschreibung"
           v-model="groupDescription"
         />
+        
         <ion-button
           @click="onClickSubmit"
           class="create-group-submit-button"
           type="submit"
           >CREATE GROUP</ion-button
         >
+        
       </div>
     </div>
 

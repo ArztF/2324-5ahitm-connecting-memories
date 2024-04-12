@@ -102,7 +102,7 @@ export default {
         grant_type: "client_credentials",
       };
 
-      return axios.post("https://student.cloud.htl-leonding.ac.at/connecting-memories-keycloak/cmRealm/protocol/openid-connect/token", body, {
+      return axios.post("https://student.cloud.htl-leonding.ac.at/connecting-memories-keycloak/realms/cmRealm/protocol/openid-connect/token", body, {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       });
     },
@@ -171,7 +171,7 @@ export default {
 
       // Registrieren
       axios
-        .post("https://student.cloud.htl-leonding.ac.at/connecting-memories-keycloak/realms/cmRealm/users", registrationData, {
+        .post("/admin/realms/cmRealm/users", registrationData, {
           headers: { Authorization: "Bearer " + token },
         })
         .then(() => {
@@ -183,7 +183,7 @@ export default {
             .then(async () => {
 
               axios
-                .get("https://student.cloud.htl-leonding.ac.at/connecting-memories-keycloak/realms/cmRealm/users?email=" + user.email, {
+                .get("https://student.cloud.htl-leonding.ac.at/connecting-memories-keycloak/admin/realms/cmRealm/users?email=" + user.email, {
                   headers: { Authorization: "Bearer " + token },
                 })
                 .then((response) => {
@@ -196,7 +196,7 @@ export default {
                     },
                   };
                   fetch(
-                    `https://student.cloud.htl-leonding.ac.at/connecting-memories-keycloak/realms/cmRealm/users/${response.data[0].id}/execute-actions-email?client_id=cm_client`,
+                    `https://student.cloud.htl-leonding.ac.at/connecting-memories-keycloak/admin/realms/cmRealm/users/${response.data[0].id}/execute-actions-email?client_id=cm_client`,
                     options
                   );
                 });
@@ -214,7 +214,7 @@ export default {
     mapDefaultRole(uid, token) {
       axios
         .get(
-          `https://student.cloud.htl-leonding.ac.at/connecting-memories-keycloak/realms/cmRealm/clients/6e105bf8-def4-474e-9802-2c2ab869a5b9/roles/default`,
+          `https://student.cloud.htl-leonding.ac.at/connecting-memories-keycloak/admin/realms/cmRealm/clients/6e105bf8-def4-474e-9802-2c2ab869a5b9/roles/default`,
           { headers: { authorization: "Bearer " + token } }
         )
         .then((role) => {
@@ -225,7 +225,7 @@ export default {
     mapRole(role, uid, token) {
       axios
         .post(
-          `https://student.cloud.htl-leonding.ac.at/connecting-memories-keycloak/realms/cmRealm/users/${uid}/role-mappings/clients/6e105bf8-def4-474e-9802-2c2ab869a5b9`,
+          `https://student.cloud.htl-leonding.ac.at/connecting-memories-keycloak/admin/realms/cmRealm/users/${uid}/role-mappings/clients/6e105bf8-def4-474e-9802-2c2ab869a5b9`,
           [role],
           { headers: { authorization: "Bearer " + token } }
         )

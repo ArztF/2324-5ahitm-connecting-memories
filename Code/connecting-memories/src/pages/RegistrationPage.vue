@@ -98,11 +98,11 @@ export default {
     getAccessToken() {
       const body = {
         client_id: "cm_client",
-        client_secret: "bp5HJf8tPamuekr4wAUuMSTFFxc6nLLS",
+        client_secret: "oP0MjdWi5ccfCzLEZ4UZvuKlys4VDdJt",
         grant_type: "client_credentials",
       };
 
-      return axios.post("https://student.cloud.htl-leonding.ac.at/connecting-memories-keycloak/realms/cmRealm/protocol/openid-connect/token", body, {
+      return axios.post("/realms/cmRealm/protocol/openid-connect/token", body, {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       });
     },
@@ -183,7 +183,7 @@ export default {
             .then(async () => {
 
               axios
-                .get("https://student.cloud.htl-leonding.ac.at/connecting-memories-keycloak/admin/realms/cmRealm/users?email=" + user.email, {
+                .get("/admin/realms/cmRealm/users?email=" + user.email, {
                   headers: { Authorization: "Bearer " + token },
                 })
                 .then((response) => {
@@ -196,7 +196,7 @@ export default {
                     },
                   };
                   fetch(
-                    `https://student.cloud.htl-leonding.ac.at/connecting-memories-keycloak/admin/realms/cmRealm/users/${response.data[0].id}/execute-actions-email?client_id=cm_client`,
+                    `/admin/realms/cmRealm/users/${response.data[0].id}/execute-actions-email?client_id=cm_client`,
                     options
                   );
                 });
@@ -206,15 +206,12 @@ export default {
               this.mapDefaultRole(uid, token);
               this.router.push("/login", "forward");
             })
-            .catch((res) => {
-              backendErrorToast(res);
-            });
         });
     },
     mapDefaultRole(uid, token) {
       axios
         .get(
-          `https://student.cloud.htl-leonding.ac.at/connecting-memories-keycloak/admin/realms/cmRealm/clients/6e105bf8-def4-474e-9802-2c2ab869a5b9/roles/default`,
+          `/admin/realms/cmRealm/clients/6e105bf8-def4-474e-9802-2c2ab869a5b9/roles/default`,
           { headers: { authorization: "Bearer " + token } }
         )
         .then((role) => {
@@ -225,7 +222,7 @@ export default {
     mapRole(role, uid, token) {
       axios
         .post(
-          `https://student.cloud.htl-leonding.ac.at/connecting-memories-keycloak/admin/realms/cmRealm/users/${uid}/role-mappings/clients/6e105bf8-def4-474e-9802-2c2ab869a5b9`,
+          `/admin/realms/cmRealm/users/${uid}/role-mappings/clients/6e105bf8-def4-474e-9802-2c2ab869a5b9`,
           [role],
           { headers: { authorization: "Bearer " + token } }
         )

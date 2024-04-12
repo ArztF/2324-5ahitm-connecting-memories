@@ -115,12 +115,12 @@ export default {
     getAccessToken() {
       const body = {
         client_id: "cm_client",
-        client_secret: "bp5HJf8tPamuekr4wAUuMSTFFxc6nLLS",
+        client_secret: "oP0MjdWi5ccfCzLEZ4UZvuKlys4VDdJt",
         grant_type: "client_credentials",
       };
 
       axios
-        .post("https://student.cloud.htl-leonding.ac.at/connecting-memories-keycloak/cmRealm/protocol/openid-connect/token", body, {
+        .post("/realms/cmRealm/protocol/openid-connect/token", body, {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
         })
         .then((response) => {
@@ -136,14 +136,14 @@ export default {
     getUserToken(token) {
       const body = {
         client_id: "cm_client",
-        client_secret: "bp5HJf8tPamuekr4wAUuMSTFFxc6nLLS",
+        client_secret: "oP0MjdWi5ccfCzLEZ4UZvuKlys4VDdJt",
         grant_type: "password",
         username: this.email,
         password: this.password,
       };
 
       axios
-        .get("https://student.cloud.htl-leonding.ac.at/connecting-memories-keycloak/admin/realms/cmRealm/users?email=" + this.email, {
+        .get("/admin/realms/cmRealm/users?email=" + this.email, {
           headers: { Authorization: "Bearer " + token },
         })
         .then((response) => {
@@ -152,7 +152,7 @@ export default {
             return;
           } else {
             axios
-              .post("https://student.cloud.htl-leonding.ac.at/connecting-memories-keycloak/realms/cmRealm/protocol/openid-connect/token", body, {
+              .post("/realms/cmRealm/protocol/openid-connect/token", body, {
                 headers: {
                   "Content-Type": "application/x-www-form-urlencoded",
                 },

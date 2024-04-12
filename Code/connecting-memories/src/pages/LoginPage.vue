@@ -120,7 +120,7 @@ export default {
       };
 
       axios
-        .post("/realms/cmRealm/protocol/openid-connect/token", body, {
+        .post("https://student.cloud.htl-leonding.ac.at/connecting-memories-keycloak/cmRealm/protocol/openid-connect/token", body, {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
         })
         .then((response) => {
@@ -143,7 +143,7 @@ export default {
       };
 
       axios
-        .get("/admin/realms/cmRealm/users?email=" + this.email, {
+        .get("https://student.cloud.htl-leonding.ac.at/connecting-memories-keycloak/realms/cmRealm/users?email=" + this.email, {
           headers: { Authorization: "Bearer " + token },
         })
         .then((response) => {

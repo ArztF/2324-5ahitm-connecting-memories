@@ -32,9 +32,10 @@
     --background-focused: #9747e2; /* Hintergrundfarbe bei Fokus */
     --border-color: #8C43D0; /* Rahmenfarbe */
     --color: #fff; /* Textfarbe */
-    width: 60%;
+    width: 40%;
     font-weight: bold;
-    margin-top: 15px; /* Abstand zum oberen Element */
+    position:fixed;
+    bottom: 15vh;
     border-radius: 8px; /* Abgerundete Ecken */
   }
   .profil-edit-heading{

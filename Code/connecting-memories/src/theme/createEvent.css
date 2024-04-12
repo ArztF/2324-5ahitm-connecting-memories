@@ -50,9 +50,12 @@
     --background-focused: #9747e2; /* Hintergrundfarbe bei Fokus */
     --border-color: #8C43D0; /* Rahmenfarbe */
     --color: #fff; /* Textfarbe */
-    width: 50%;
+    width: 40%;
     font-weight: bold;
-    margin: 15px auto 0 auto; /* Abstand zum oberen Element */
+    position: fixed; /* Position festlegen */
+    bottom: 15vh; /* Über dem Footer */
+    left: 50%; /* Zentrierung auf der X-Achse */
+    transform: translateX(-50%); /* Präzise Zentrierung */
     border-radius: 8px; /* Abgerundete Ecken */
   }
   .radio-group{
@@ -94,7 +97,6 @@
     padding: 12px 20px;
     color: white;
     background-color: #333;
-
     margin-bottom: 10px;
     border-radius: 8px;
     cursor: pointer;
